@@ -23,7 +23,7 @@ function createServer(connection) {
   var logController = new LogController();
   var app = express();
 
-  var route = path.join(__dirname, '..', 'public');
+  var route = path.join(__dirname, '..', 'client');
 
   passport.use(new Strategy(config.PASSPORT_CONFIG, userController.authenticateUser));
   passport.serializeUser(userController.serialize);
