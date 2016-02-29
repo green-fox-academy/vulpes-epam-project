@@ -26,7 +26,7 @@ describe('User query', function () {
       expect(connection.sendQuery).toHaveBeenCalledWith(SQL`
       INSERT INTO users (email, password)
       VALUES (${params.email}, ${params.password})
-      RETURNING id, email, admin`,
+      RETURNING user_id, email, isadmin`,
       callback);
     });
   });
@@ -36,7 +36,7 @@ describe('User query', function () {
       userQueries.getUsers(callback);
 
       expect(connection.sendQuery).toHaveBeenCalledWith(
-      'SELECT id, email, admin FROM USERS',
+      'SELECT user_id, email, isadmin FROM USERS',
       callback);
     });
   });
@@ -47,9 +47,9 @@ describe('User query', function () {
       userQueries.updateUserAdminStatus(params, callback);
 
       expect(connection.sendQuery).toHaveBeenCalledWith(SQL`
-      UPDATE users SET admin = ${params.admin}
+      UPDATE users SET isadmin = ${params.admin}
       WHERE email = ${params.email}
-      RETURNING email, admin`,
+      RETURNING email, isadmin`,
       callback);
     });
   });
