@@ -1,4 +1,4 @@
-# epam2-project
+# Epam Interviewer
 install node, postgres
 npm install -g jasmine
 
