@@ -9,7 +9,7 @@ function UserQueries(connection) {
       SQL`
       INSERT INTO users (email, password)
       VALUES (${params.email}, ${params.password})
-      RETURNING id, email, admin`,
+      RETURNING user_id, email, isadmin`,
       callback
     );
   };
@@ -17,7 +17,7 @@ function UserQueries(connection) {
   this.findUser = function (param, callback) {
     connection.sendQuery(
       SQL`
-      SELECT id, email, password, admin FROM users
+      SELECT user_id, email, password, isadmin FROM users
       WHERE email=${param}`,
       callback
     );
@@ -26,15 +26,15 @@ function UserQueries(connection) {
   this.updateUserAdminStatus = function (params, callback) {
     connection.sendQuery(
       SQL`
-      UPDATE users SET admin = ${params.admin}
+      UPDATE users SET isadmin = ${params.admin}
       WHERE email = ${params.email}
-      RETURNING email, admin`,
+      RETURNING email, isadmin`,
       callback
     );
   };
 
   this.getUsers = function (callback) {
-    connection.sendQuery('SELECT id, email, admin FROM USERS', callback);
+    connection.sendQuery('SELECT user_id, email, isadmin FROM USERS', callback);
   };
 }
 
