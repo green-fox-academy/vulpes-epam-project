@@ -23,7 +23,6 @@
     "gulp-jasmine": "^2.2.1",
     "gulp-jscs": "^3.0.2",
     "gulp-jshint": "^2.0.0",
-    "gulp-karma": "0.0.5",
     "gulp-sass": "^2.2.0",
     "gulp-test": "0.0.6",
     "gulp-watch": "^4.3.5",
@@ -33,6 +32,7 @@
     "jshint-stylish": "^2.1.0",
     "karma": "^0.13.21",
     "karma-chrome-launcher": "^0.2.2",
+    "karma-cli": "^0.1.2",
     "karma-jasmine": "^0.3.7",
     "supertest": "^1.2.0"
   },
