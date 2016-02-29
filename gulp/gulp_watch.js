@@ -7,7 +7,7 @@ var watch = require('gulp-watch');
 gulp.task('watch', function () {
   watch('**/*.js', batch(function (events, done) {
     gulp.start('jasmine', done);
-    gulp.start('lint', done);
+    gulp.start('jshint', done);
     gulp.start('jscsLint', done);
   }));
 
