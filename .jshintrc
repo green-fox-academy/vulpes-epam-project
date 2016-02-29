@@ -17,6 +17,7 @@
  "esnext": true,
  "expr": true,
  "globals": {
+   "angular": true,
    "it": true,
    "expect": true,
    "describe": true,
