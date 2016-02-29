@@ -54,13 +54,8 @@ angular.module('myapp')
       });
     }
 
-    function loginUser(user, handleResponse) {
-      $http.post('/api/login', user).then(function (response) {
-        handleResponse(response);
-      }, function (error) {
-
-        handleResponse(error);
-      });
+    function loginUser(user, handleSucces, handleError) {
+      $http.post('/api/login', user).then(handleSucces, handleError);
     }
 
     function logoutUser(done) {
