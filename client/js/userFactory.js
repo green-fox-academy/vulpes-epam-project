@@ -11,8 +11,9 @@ angular.module('myapp')
     };
 
     function setUserValues(values, isLoggedIn) {
+      console.log(values);
       currentUser.email = values.email;
-      currentUser.isAdmin = values.admin;
+      currentUser.isAdmin = values.isadmin;
       currentUser.isLoggedIn = isLoggedIn;
     }
 

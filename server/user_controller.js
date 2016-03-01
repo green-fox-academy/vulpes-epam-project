@@ -63,7 +63,7 @@ function UserController(queries) {
           if (err) return next(err);
           return res.status(200).json({
             email: user.email,
-            admin: user.admin,
+            isadmin: user.isadmin,
           });
         });
       } else {
@@ -104,7 +104,7 @@ function UserController(queries) {
     if (req.isAuthenticated()) {
       res.status(200).send({
         email: req.user.email,
-        admin: req.user.admin,
+        isadmin: req.user.isadmin,
       });
     } else {
       res.status(204).send('No user in session');
