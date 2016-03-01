@@ -3,35 +3,33 @@
 var logger = require('./log.js')();
 var passport = require('passport');
 
-function UserController(queries) {
-  var _this = this;
-  this.logger = logger;
+function createUserController(queries) {
 
-  this.registerUser = function (request, response) {
+  function registerUser(request, response) {
     queries.registNewUser(request.body, function (err, result) {
       if (err) {
-        _this.handleResponse(err, result, response);
+        handleResponse(err, result, response);
       } else {
-        _this.loginUser(request, response);
+        loginUser(request, response);
       }
     });
-  };
+  }
 
-  this.updateUserAdmin = function (request, response) {
+  function updateUserAdmin(request, response) {
     queries.updateUserAdminStatus(request.body, function (err, result) {
-      _this.handleResponse(err, result, response);
+      handleResponse(err, result, response);
     });
-  };
+  }
 
-  this.getAllUser = function (request, response) {
+  function getAllUser(request, response) {
     queries.getUsers(function (err, result) {
-      _this.handleResponse(err, result, response);
+      handleResponse(err, result, response);
     });
-  };
+  }
 
-  this.handleResponse = function (err, result, response) {
+  function handleResponse(err, result, response) {
     if (err) {
-      this.logger.message('error', err.toString());
+      logger.message('error', err.toString());
       if (err.code === '23505') {
         response.status(503).json({
           errorMessage: 'This email already exists!',
@@ -43,17 +41,17 @@ function UserController(queries) {
       }
     } else {
       if (result.rows.length === 0) {
-        this.logger.message('warn', 'ITEM NOT FOUND IN DATABASE');
+        logger.message('warn', 'ITEM NOT FOUND IN DATABASE');
         response.status(404).json(result.rows);
       } else {
-        this.logger.message('info', 'SUCCESSFUL DATABASE QUERY');
+        logger.message('info', 'SUCCESSFUL DATABASE QUERY');
         response.status(200).json(result.rows);
       }
     }
-  };
+  }
 
-  this.authenticateUser = function (username, password, done) {
-    _this.findUser(username, function (err, user) {
+  function authenticateUser(username, password, done) {
+    findUser(username, function (err, user) {
       if (err) {
         return done(err, false, 'Connection error');
       } else if (!user) {
@@ -64,9 +62,9 @@ function UserController(queries) {
         return done(null, user);
       }
     });
-  };
+  }
 
-  this.loginUser = function (req, res, next) {
+  function loginUser(req, res, next) {
     passport.authenticate('local', function (err, user, info) {
       if (err) {
         res.status(503).send(info);
@@ -82,37 +80,37 @@ function UserController(queries) {
         res.status(401).send(info);
       }
     })(req, res, next);
-  };
+  }
 
-  this.findUser = function (email, cb) {
+  function findUser(email, cb) {
     queries.findUser(email, function (err, result) {
       if (err) return cb(err);
       var foundUser = result.rows[0];
       if (foundUser) return cb(null, foundUser);
       return cb(null, null);
     });
-  };
+  }
 
-  this.serialize = function (user, cb) {
+  function serialize(user, cb) {
     cb(null, user.email);
-  };
+  }
 
-  this.deserialize = function (email, done) {
-    _this.findUser(email, function (err, user) {
+  function deserialize(email, done) {
+    findUser(email, function (err, user) {
       done(err, user);
     });
-  };
+  }
 
-  this.sessionLogout = function (req, res) {
+  function sessionLogout(req, res) {
     if (!req.isAuthenticated()) {
       res.status(500).send('Nobody logged in');
     } else {
       req.logout();
       res.status(200).send('Successful logout');
     }
-  };
+  }
 
-  this.getLoggedInUser = function (req, res) {
+  function getLoggedInUser(req, res) {
     if (req.isAuthenticated()) {
       res.status(200).send({
         email: req.user.email,
@@ -121,8 +119,20 @@ function UserController(queries) {
     } else {
       res.status(204).send('No user in session');
     }
+  }
+
+  return {
+    registerUser: registerUser,
+    updateUserAdmin: updateUserAdmin,
+    getAllUser: getAllUser,
+    authenticateUser: authenticateUser,
+    loginUser: loginUser,
+    serialize: serialize,
+    deserialize: deserialize,
+    sessionLogout: sessionLogout,
+    getLoggedInUser: getLoggedInUser,
   };
 
 }
 
-module.exports = UserController;
+module.exports = createUserController;
