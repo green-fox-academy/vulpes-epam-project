@@ -1,6 +1,6 @@
 'use strict';
 
-function createHeartbeat(connection) {
+function createHeartbeatQuery(connection) {
   return {
     get: function (callback) {
       connection.sendQuery('SELECT ok FROM heartbeat', callback);
@@ -8,4 +8,4 @@ function createHeartbeat(connection) {
   };
 }
 
-module.exports = createHeartbeat;
+module.exports = createHeartbeatQuery;
