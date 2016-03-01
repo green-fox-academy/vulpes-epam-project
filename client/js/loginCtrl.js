@@ -7,19 +7,20 @@ angular.module('myapp')
     }
 
     $scope.userLogin = function () {
-      var handleSucces = function (response) {
-        user.setUserValues(response.data, true);
-        $state.go('home');
-      };
-
-      var handleError = function (response) {
-        $scope.Error = response.data;
-        $scope.password = '';
-      };
-
       user.loginUser({
         email: $scope.email,
-        password: $scope.password,
-      }, handleSucces, handleError);
+        password: $scope.password, })
+        .then(handleSuccess)
+        .catch(handleError);
     };
+
+    function handleSuccess(response) {
+      user.setUserValues(response.data, true);
+      $state.go('home');
+    }
+
+    function handleError(error) {
+      $scope.Error = error.data;
+      $scope.password = '';
+    }
   });
