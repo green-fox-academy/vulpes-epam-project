@@ -10,7 +10,7 @@ var expressSession = require('express-session');
 
 var config = require('./config.js');
 var createHeartbeatQuery = require('./heartbeat/heartbeat-query.js');
-var HeartBeat = require('./heartbeat/heartbeat.js');
+var createHeartbeat = require('./heartbeat/heartbeat.js');
 var UserController = require('./user_controller.js');
 var UserQueries = require('./user_queries.js');
 var LogController = require('./log_controller.js');
@@ -18,7 +18,7 @@ var LogController = require('./log_controller.js');
 function createServer(connection) {
   var heartQuery = createHeartbeatQuery(connection);
   var userQueries = new UserQueries(connection);
-  var heartController = new HeartBeat(heartQuery);
+  var heartbeat = createHeartbeat(heartQuery);
   var userController = new UserController(userQueries);
   var logController = new LogController();
   var app = express();
@@ -37,7 +37,7 @@ function createServer(connection) {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.get('/heartbeat', heartController.getStatus);
+  app.get('/heartbeat', heartbeat.getStatus);
   app.post('/api/log', logController.logFrontendEvent);
   app.get('/api/users', userController.getAllUser);
   app.put('/api/users', userController.updateUserAdmin);
