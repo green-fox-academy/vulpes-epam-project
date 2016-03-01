@@ -9,7 +9,11 @@ function UserController(queries) {
 
   this.registerUser = function (request, response) {
     queries.registNewUser(request.body, function (err, result) {
-      _this.handleResponse(err, result, response);
+      if (err) {
+        _this.handleResponse(err, result, response);
+      } else {
+        _this.loginUser(request, response);
+      }
     });
   };
 
