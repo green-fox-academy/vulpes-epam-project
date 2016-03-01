@@ -6,7 +6,8 @@ angular.module('myapp')
 
     $scope.logoutUser = function () {
       user.logoutUser()
-          .then(onSuccess, onError);
+          .then(onSuccess)
+          .catch(onError);
     };
 
     function onSuccess() {

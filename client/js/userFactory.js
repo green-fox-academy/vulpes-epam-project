@@ -44,18 +44,12 @@ angular.module('myapp')
       return currentUser.email;
     }
 
-    function addNewUser(newUser, handleResponse) {
-      $http.post('/api/register', newUser).then(function (response) {
-        handleResponse(response);
-
-      }, function (error) {
-
-        handleResponse(error);
-      });
+    function addNewUser(newUser) {
+      return $http.post('/api/register', newUser);
     }
 
-    function loginUser(user, handleSucces, handleError) {
-      $http.post('/api/login', user).then(handleSucces, handleError);
+    function loginUser(user) {
+      return $http.post('/api/login', user);
     }
 
     function logoutUser() {
