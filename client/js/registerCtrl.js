@@ -14,12 +14,12 @@ angular.module('myapp')
         .catch(handleError);
     };
 
-    function handleSuccess() {
-      $state.go('login');
+    function handleSuccess(response) {
+      user.setUserValues(response.data, true);
+      $state.go('home');
     }
 
     function handleError(error) {
-      console.log(error);
       $scope.Error = error.data.errorMessage;
       $scope.password = '';
     }
