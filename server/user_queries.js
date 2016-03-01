@@ -2,9 +2,9 @@
 
 var SQL = require('sql-template-strings');
 
-function UserQueries(connection) {
+function createUserQueries(connection) {
 
-  this.registNewUser = function (params, callback) {
+  function registNewUser(params, callback) {
     connection.sendQuery(
       SQL`
       INSERT INTO users (email, password)
@@ -12,18 +12,18 @@ function UserQueries(connection) {
       RETURNING user_id, email, isadmin`,
       callback
     );
-  };
+  }
 
-  this.findUser = function (param, callback) {
+  function findUser(param, callback) {
     connection.sendQuery(
       SQL`
       SELECT user_id, email, password, isadmin FROM users
       WHERE email=${param}`,
       callback
     );
-  };
+  }
 
-  this.updateUserAdminStatus = function (params, callback) {
+  function updateUserAdminStatus(params, callback) {
     connection.sendQuery(
       SQL`
       UPDATE users SET isadmin = ${params.admin}
@@ -31,11 +31,18 @@ function UserQueries(connection) {
       RETURNING email, isadmin`,
       callback
     );
-  };
+  }
 
-  this.getUsers = function (callback) {
+  function getUsers(callback) {
     connection.sendQuery('SELECT user_id, email, isadmin FROM USERS', callback);
+  }
+
+  return {
+    registNewUser: registNewUser,
+    findUser: findUser,
+    updateUserAdminStatus: updateUserAdminStatus,
+    getUsers: getUsers,
   };
 }
 
-module.exports = UserQueries;
+module.exports = createUserQueries;

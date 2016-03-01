@@ -12,12 +12,12 @@ var config = require('./config.js');
 var createHeartbeatQuery = require('./heartbeat/heartbeat-query.js');
 var createHeartbeat = require('./heartbeat/heartbeat.js');
 var UserController = require('./user_controller.js');
-var UserQueries = require('./user_queries.js');
+var createUserQueries = require('./user_queries.js');
 var logController = require('./log_controller.js')();
 
 function createServer(connection) {
   var heartQuery = createHeartbeatQuery(connection);
-  var userQueries = new UserQueries(connection);
+  var userQueries = createUserQueries(connection);
   var heartbeat = createHeartbeat(heartQuery);
   var userController = new UserController(userQueries);
   var app = express();
