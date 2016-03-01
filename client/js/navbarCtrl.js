@@ -5,14 +5,18 @@ angular.module('myapp')
     $scope.user = user;
 
     $scope.logoutUser = function () {
-      user.logoutUser(whenLogout);
+      user.logoutUser()
+          .then(onSuccess, onError);
     };
 
-    function whenLogout(error) {
-      if (error) {
-        window.alert(error.data);
-      } else {
-        $state.go('frontpage');
-      }
+    function onSuccess() {
+      user.resetUser();
+      $state.go('frontpage');
+    }
+
+    function onError(res) {
+      user.resetUser();
+      window.alert(res.data);
+      $state.go('frontpage');
     }
   });

@@ -58,14 +58,8 @@ angular.module('myapp')
       $http.post('/api/login', user).then(handleSucces, handleError);
     }
 
-    function logoutUser(done) {
-      $http.get('/api/logout').then(function () {
-        resetUser();
-        done(null);
-      }, function (error) {
-
-        done(error);
-      });
+    function logoutUser() {
+      return $http.get('/api/logout');
     }
 
     function authenticateUser() {
