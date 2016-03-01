@@ -13,17 +13,16 @@ var createHeartbeatQuery = require('./heartbeat/heartbeat-query.js');
 var createHeartbeat = require('./heartbeat/heartbeat.js');
 var UserController = require('./user_controller.js');
 var UserQueries = require('./user_queries.js');
-var createLogController = require('./log_controller.js');
+var logController = require('./log_controller.js')();
 
 function createServer(connection) {
   var heartQuery = createHeartbeatQuery(connection);
   var userQueries = new UserQueries(connection);
   var heartbeat = createHeartbeat(heartQuery);
   var userController = new UserController(userQueries);
-  var logController = createLogController();
   var app = express();
 
-  var route = path.join(__dirname, '..', 'client');
+  var route = path.join(__dirname, '..', config.PUBLIC_FOLDER_NAME);
 
   passport.use(new Strategy(config.PASSPORT_CONFIG, userController.authenticateUser));
   passport.serializeUser(userController.serialize);
