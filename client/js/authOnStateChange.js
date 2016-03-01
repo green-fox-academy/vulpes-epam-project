@@ -8,7 +8,8 @@ angular.module('myapp')
         if (!user.isAuthenticated()) {
           stopStateChange();
           user.authenticateUser()
-              .then(onSuccess, onError);
+              .then(onSuccess)
+              .catch(onError);
         }
 
         function onSuccess(res) {

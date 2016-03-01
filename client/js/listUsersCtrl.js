@@ -12,7 +12,9 @@ angular.module('myapp')
       return usersList.getAllUser();
     };
 
-    $scope.currentUser = user.getEmail();
+    $scope.currentUser = {
+      email: user.getEmail(),
+    };
 
     usersList.fetchAllUsers();
   });
