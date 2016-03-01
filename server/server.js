@@ -9,14 +9,14 @@ var cookieParser = require('cookie-parser');
 var expressSession = require('express-session');
 
 var config = require('./config.js');
-var HeartQuery = require('./heartbeat/heartbeat-query.js');
+var createHeartbeatQuery = require('./heartbeat/heartbeat-query.js');
 var HeartBeat = require('./heartbeat/heartbeat.js');
 var UserController = require('./user_controller.js');
 var UserQueries = require('./user_queries.js');
 var LogController = require('./log_controller.js');
 
 function createServer(connection) {
-  var heartQuery = new HeartQuery(connection);
+  var heartQuery = createHeartbeatQuery(connection);
   var userQueries = new UserQueries(connection);
   var heartController = new HeartBeat(heartQuery);
   var userController = new UserController(userQueries);

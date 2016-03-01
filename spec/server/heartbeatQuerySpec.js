@@ -2,8 +2,8 @@
 
 describe('heartbeat query', function () {
   var connection = {};
-  var Beat = require('../../server/heartbeat/heartbeat-query.js');
-  var heartbeat = new Beat(connection);
+  var createHeartbeatQuery = require('../../server/heartbeat/heartbeat-query.js');
+  var heartbeatQuery = createHeartbeatQuery(connection);
   var callback;
 
   beforeEach(function () {
@@ -18,7 +18,7 @@ describe('heartbeat query', function () {
 
   describe('get query', function () {
     it('tracks all the arguments of its calls', function () {
-      heartbeat.get(callback);
+      heartbeatQuery.get(callback);
       expect(connection.sendQuery).toHaveBeenCalledWith(
         'SELECT ok FROM heartbeat', callback
       );
