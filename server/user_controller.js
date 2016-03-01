@@ -27,8 +27,16 @@ function UserController(queries) {
 
   this.handleResponse = function (err, result, response) {
     if (err) {
-      this.logger.message('error', 'DATABASE CONNECTION ERROR');
-      response.status(503).json({ 'Connection Error:': err });
+      this.logger.message('error', err.toString());
+      if (err.code === '23505') {
+        response.status(503).json({
+          errorMessage: 'This email already exists!',
+        });
+      } else {
+        response.status(503).json({
+          errorMessage: 'Database error. Please try again later.',
+        });
+      }
     } else {
       if (result.rows.length === 0) {
         this.logger.message('warn', 'ITEM NOT FOUND IN DATABASE');

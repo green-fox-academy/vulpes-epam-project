@@ -19,7 +19,8 @@ angular.module('myapp')
     }
 
     function handleError(error) {
-      $scope.Error = error.statusText;
+      console.log(error);
+      $scope.Error = error.data.errorMessage;
       $scope.password = '';
     }
   });
