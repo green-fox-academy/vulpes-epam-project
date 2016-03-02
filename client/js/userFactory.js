@@ -48,7 +48,7 @@ angular.module('myapp')
       return $http.post('/api/register', newUser);
     }
 
-    function loginUser(user) {
+    function login(user) {
       return $http.post('/api/login', user);
     }
 
@@ -70,7 +70,7 @@ angular.module('myapp')
       getEmail: getEmail,
       authenticateUser: authenticateUser,
       addNewUser: addNewUser,
-      loginUser: loginUser,
+      login: login,
       logoutUser: logoutUser,
     };
   });
