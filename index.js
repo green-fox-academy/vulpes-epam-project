@@ -3,8 +3,8 @@
 require('newrelic');
 var config = require('./server/config.js');
 var createServer = require('./server/server.js');
-var Connection = require('./server/connection.js');
-var connection = new Connection();
+var createConnection = require('./server/connection.js');
+var connection = createConnection();
 
 var app = createServer(connection);
 

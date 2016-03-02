@@ -1,5 +1,5 @@
 <div class="login" ng-controller="LogInCtrl">
-  <form class="loginForm" ng-submit="userLogin()">
+  <form class="loginForm" ng-submit="userLogin(email, password)">
     <div ng-show="Error" class="error-msg-container"><p class="error-msg">{{Error}}</p></div>
     <input type="email" placeholder="Type your email address" ng-model="email" required>
     <input type="password" placeholder="Type your password" ng-model="password" required>
