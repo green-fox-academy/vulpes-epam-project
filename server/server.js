@@ -11,19 +11,19 @@ var expressSession = require('express-session');
 var config = require('./config.js');
 var createHeartbeatQuery = require('./heartbeat/heartbeat-query.js'); //miért is?-----
 var createHeartbeat = require('./heartbeat/heartbeat.js');
-var createQuestion = require('./question/question.js');
-var createQuestionQuery = require('./question/question_query.js');
-var UserController = require('./user_controller.js');
-var UserQueries = require('./user_queries.js');
+var createUserController = require('./user/user_controller.js');
+var createUserQueries = require('./user/user_queries.js');
+var createQuestion = require('./question/question');
+var createQuestionQuery = require('./question/question_query');
 var logController = require('./log_controller.js')();
 
 function createServer(connection) {
   var heartQuery = createHeartbeatQuery(connection);
+  var userQueries = createUserQueries(connection);
   var heartbeat = createHeartbeat(heartQuery);
+  var userController = createUserController(userQueries);
   var questionQuery = createQuestionQuery(connection);
   var question = createQuestion(questionQuery);
-  var userQueries = new UserQueries(connection);
-  var userController = new UserController(userQueries);
   var app = express();
 
   var route = path.join(__dirname, '..', config.PUBLIC_FOLDER_NAME);
