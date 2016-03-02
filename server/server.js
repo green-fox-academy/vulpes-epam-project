@@ -51,6 +51,8 @@ function createServer(connection) {
   app.get('/api/user', userController.getLoggedInUser);
   app.get('/api/questions', question.getAllQuestion);
   app.post('/api/questions', question.postQuestion);
+  app.put('/api/questions/:id', question.putQuestion);
+  app.delete('/api/questions/:id', question.deleteQuestion);
 
   return app;
 }
