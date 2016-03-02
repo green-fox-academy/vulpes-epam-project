@@ -2,7 +2,7 @@
 
 describe('heartbeat query', function () {
   var connection = {};
-  var createHeartbeatQuery = require('../../server/heartbeat/heartbeat-query.js');
+  var createHeartbeatQuery = require('../../server/heartbeat/heartbeat_query.js');
   var heartbeatQuery = createHeartbeatQuery(connection);
   var callback;
 

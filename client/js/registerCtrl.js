@@ -15,8 +15,7 @@ angular.module('myapp')
       .catch(handleError);
     };
 
-    function handleSuccess(response) {
-      user.setUserValues(response.data, true);
+    function handleSuccess() {
       $state.go('home');
     }
 
