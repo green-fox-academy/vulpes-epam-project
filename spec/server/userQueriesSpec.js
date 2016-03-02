@@ -4,7 +4,7 @@ var SQL = require('sql-template-strings');
 
 describe('User query', function () {
   var connection = {};
-  var createUserQueries = require('../../server/user_queries.js');
+  var createUserQueries = require('../../server/user/user_queries.js');
   var userQueries = createUserQueries(connection);
   var callback;
 

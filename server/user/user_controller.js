@@ -1,6 +1,6 @@
 'use strict';
 
-var logger = require('./log.js')();
+var logger = require('../log.js')();
 var passport = require('passport');
 
 function createUserController(queries) {
