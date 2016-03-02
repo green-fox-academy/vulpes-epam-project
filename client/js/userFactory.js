@@ -52,7 +52,7 @@ angular.module('myapp')
     }
 
     function logoutUser() {
-      return $http.get('/api/logout');
+      return $http.get('/api/logout').then(resetUser);
     }
 
     function authenticateUser() {
@@ -64,7 +64,6 @@ angular.module('myapp')
     }
 
     return {
-      resetUser: resetUser,
       isAuthenticated: isAuthenticated,
       isAdmin: isAdmin,
       isLoggedIn: isLoggedIn,

@@ -11,13 +11,10 @@ angular.module('myapp')
     };
 
     function onSuccess() {
-      user.resetUser();
       $state.go('frontpage');
     }
 
-    function onError(res) {
-      user.resetUser();
-      window.alert(res.data);
+    function onError() {
       $state.go('frontpage');
     }
   });
