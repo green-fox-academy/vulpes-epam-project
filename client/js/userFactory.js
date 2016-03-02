@@ -45,7 +45,9 @@ angular.module('myapp')
     }
 
     function addNewUser(newUser) {
-      return $http.post('/api/register', newUser);
+      return $http.post('/api/register', newUser).then(function (response) {
+        setUserValues(response.data, true);
+      });
     }
 
     function login(user) {
