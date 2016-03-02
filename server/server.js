@@ -9,10 +9,12 @@ var cookieParser = require('cookie-parser');
 var expressSession = require('express-session');
 
 var config = require('./config.js');
-var createHeartbeatQuery = require('./heartbeat/heartbeat-query.js');
+var createHeartbeatQuery = require('./heartbeat/heartbeat-query.js'); //miért is?-----
 var createHeartbeat = require('./heartbeat/heartbeat.js');
 var createUserController = require('./user_controller.js');
 var createUserQueries = require('./user_queries.js');
+var createQuestion = require('./question/question');
+var createQuestionQuery = require('./question/question_query');
 var logController = require('./log_controller.js')();
 
 function createServer(connection) {
@@ -20,6 +22,8 @@ function createServer(connection) {
   var userQueries = createUserQueries(connection);
   var heartbeat = createHeartbeat(heartQuery);
   var userController = createUserController(userQueries);
+  var questionQuery = createQuestionQuery(connection);
+  var question = createQuestion(questionQuery);
   var app = express();
 
   var route = path.join(__dirname, '..', config.PUBLIC_FOLDER_NAME);
@@ -45,6 +49,7 @@ function createServer(connection) {
   app.post('/api/login', userController.loginUser);
   app.get('/api/logout', userController.sessionLogout);
   app.get('/api/user', userController.getLoggedInUser);
+  app.get('/api/questions', question.getAllQuestion);
 
   return app;
 }
