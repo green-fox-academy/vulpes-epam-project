@@ -8,21 +8,7 @@ angular.module('myapp')
         if (!user.isAuthenticated()) {
           stopStateChange();
           user.authenticateUser()
-              .then(onSuccess)
-              .catch(onError);
-        }
-
-        function onSuccess(res) {
-          res.status === 200 ? user.setUserValues(res.data, true)
-                             : user.resetUser();
-          user.setAuthenticated();
-          continueStateChange();
-        }
-
-        function onError() {
-          user.resetUser();
-          user.setAuthenticated();
-          continueStateChange();
+              .then(continueStateChange);
         }
 
         function stopStateChange() {
