@@ -11,8 +11,8 @@ var expressSession = require('express-session');
 var config = require('./config.js');
 var createHeartbeatQuery = require('./heartbeat/heartbeat-query.js'); //miért is?-----
 var createHeartbeat = require('./heartbeat/heartbeat.js');
-var createQuestion = require('./question/question');
-var createQuestionQuery = require('./question/question_query');
+var createQuestion = require('./question/question.js');
+var createQuestionQuery = require('./question/question_query.js');
 var UserController = require('./user_controller.js');
 var UserQueries = require('./user_queries.js');
 var logController = require('./log_controller.js')();
@@ -50,6 +50,7 @@ function createServer(connection) {
   app.get('/api/logout', userController.sessionLogout);
   app.get('/api/user', userController.getLoggedInUser);
   app.get('/api/questions', question.getAllQuestion);
+  app.post('/api/questions', question.postQuestion);
 
   return app;
 }
