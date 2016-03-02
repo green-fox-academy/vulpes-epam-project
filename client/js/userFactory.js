@@ -49,7 +49,9 @@ angular.module('myapp')
     }
 
     function login(user) {
-      return $http.post('/api/login', user);
+      return $http.post('/api/login', user).then(function (response) {
+        setUserValues(response.data, true);
+      });
     }
 
     function logoutUser() {
