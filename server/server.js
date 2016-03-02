@@ -9,7 +9,7 @@ var cookieParser = require('cookie-parser');
 var expressSession = require('express-session');
 
 var config = require('./config.js');
-var createHeartbeatQuery = require('./heartbeat/heartbeat-query.js'); //miért is?-----
+var createHeartbeatQuery = require('./heartbeat/heartbeat_query.js');
 var createHeartbeat = require('./heartbeat/heartbeat.js');
 var createUserController = require('./user/user_controller.js');
 var createUserQueries = require('./user/user_queries.js');
@@ -50,6 +50,7 @@ function createServer(connection) {
   app.get('/api/logout', userController.sessionLogout);
   app.get('/api/user', userController.getLoggedInUser);
   app.get('/api/questions', question.getAllQuestion);
+  app.post('/api/questions', question.postQuestion);
 
   return app;
 }
