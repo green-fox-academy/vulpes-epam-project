@@ -14,4 +14,5 @@ module.exports = {
     usernameField: 'email',
     passwordField: 'password',
   },
+  PUBLIC_FOLDER_NAME: 'client',
 };

@@ -9,21 +9,24 @@ var cookieParser = require('cookie-parser');
 var expressSession = require('express-session');
 
 var config = require('./config.js');
-var HeartQuery = require('./heartbeat/heartbeat-query.js');
-var HeartBeat = require('./heartbeat/heartbeat.js');
-var UserController = require('./user_controller.js');
-var UserQueries = require('./user_queries.js');
-var LogController = require('./log_controller.js');
+var createHeartbeatQuery = require('./heartbeat/heartbeat-query.js'); //miért is?-----
+var createHeartbeat = require('./heartbeat/heartbeat.js');
+var createUserController = require('./user/user_controller.js');
+var createUserQueries = require('./user/user_queries.js');
+var createQuestion = require('./question/question');
+var createQuestionQuery = require('./question/question_query');
+var logController = require('./log_controller.js')();
 
 function createServer(connection) {
-  var heartQuery = new HeartQuery(connection);
-  var userQueries = new UserQueries(connection);
-  var heartController = new HeartBeat(heartQuery);
-  var userController = new UserController(userQueries);
-  var logController = new LogController();
+  var heartQuery = createHeartbeatQuery(connection);
+  var userQueries = createUserQueries(connection);
+  var heartbeat = createHeartbeat(heartQuery);
+  var userController = createUserController(userQueries);
+  var questionQuery = createQuestionQuery(connection);
+  var question = createQuestion(questionQuery);
   var app = express();
 
-  var route = path.join(__dirname, '..', 'client');
+  var route = path.join(__dirname, '..', config.PUBLIC_FOLDER_NAME);
 
   passport.use(new Strategy(config.PASSPORT_CONFIG, userController.authenticateUser));
   passport.serializeUser(userController.serialize);
@@ -36,8 +39,9 @@ function createServer(connection) {
   app.use(expressSession(config.EXPRESS_SESSION_CONFIG));
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use(passport.session());
 
-  app.get('/heartbeat', heartController.getStatus);
+  app.get('/heartbeat', heartbeat.getStatus);
   app.post('/api/log', logController.logFrontendEvent);
   app.get('/api/users', userController.getAllUser);
   app.put('/api/users', userController.updateUserAdmin);
@@ -45,6 +49,7 @@ function createServer(connection) {
   app.post('/api/login', userController.loginUser);
   app.get('/api/logout', userController.sessionLogout);
   app.get('/api/user', userController.getLoggedInUser);
+  app.get('/api/questions', question.getAllQuestion);
 
   return app;
 }

@@ -2,10 +2,11 @@
 
 var logger = require('../log.js')();
 
-function createHeartbeat(query) {
+function createQuestion(query) {
 
-  function getStatus(request, response) {
-    query.get(function (err, result) {
+  function getAllQuestion(request, response) {
+    console.log('mi a szar');
+    query.getAll(function (err, result) {
       handleResponse(err, result, response);
     });
   }
@@ -26,9 +27,9 @@ function createHeartbeat(query) {
   }
 
   return {
-    getStatus: getStatus,
+    getAllQuestion: getAllQuestion,
     handleResponse: handleResponse,
   };
 }
 
-module.exports = createHeartbeat;
+module.exports = createQuestion;
