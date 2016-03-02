@@ -9,18 +9,20 @@ var cookieParser = require('cookie-parser');
 var expressSession = require('express-session');
 
 var config = require('./config.js');
-var createHeartbeatQuery = require('./heartbeat/heartbeat-query.js');
+var createHeartbeatQuery = require('./heartbeat/heartbeat-query.js'); //miért is?-----
 var createHeartbeat = require('./heartbeat/heartbeat.js');
-var createQuestionController = require('./question/question');
+var createQuestion = require('./question/question');
+var createQuestionQuery = require('./question/question_query');
 var UserController = require('./user_controller.js');
 var UserQueries = require('./user_queries.js');
 var logController = require('./log_controller.js')();
 
 function createServer(connection) {
   var heartQuery = createHeartbeatQuery(connection);
-  var userQueries = new UserQueries(connection);
   var heartbeat = createHeartbeat(heartQuery);
-  var questionController = createQuestionController(connection);
+  var questionQuery = createQuestionQuery(connection);
+  var question = createQuestion(questionQuery);
+  var userQueries = new UserQueries(connection);
   var userController = new UserController(userQueries);
   var app = express();
 
@@ -47,10 +49,7 @@ function createServer(connection) {
   app.post('/api/login', userController.loginUser);
   app.get('/api/logout', userController.sessionLogout);
   app.get('/api/user', userController.getLoggedInUser);
-  app.get('api/questions', questionController.getAllQuestion);
-  app.post('api/questions', questionController.postQuestion);
-  app.put('api/questions/:id', questionController.putQuestion);
-  app.delete('api/questions/:id', questionController.deleteQuestion);
+  app.get('/api/questions', question.getAllQuestion);
 
   return app;
 }
