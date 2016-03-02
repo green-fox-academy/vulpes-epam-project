@@ -6,16 +6,16 @@ angular.module('myapp')
       $state.go('home');
     }
 
-    $scope.userLogin = function () {
-      user.loginUser({
-        email: $scope.email,
-        password: $scope.password, })
-        .then(handleSuccess)
-        .catch(handleError);
+    $scope.userLogin = function (email, password) {
+      user.login({
+        email: email,
+        password: password,
+      })
+      .then(handleSuccess)
+      .catch(handleError);
     };
 
-    function handleSuccess(response) {
-      user.setUserValues(response.data, true);
+    function handleSuccess() {
       $state.go('home');
     }
 

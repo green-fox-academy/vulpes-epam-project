@@ -5,8 +5,13 @@ var logger = require('../log.js')();
 function createQuestion(query) {
 
   function getAllQuestion(request, response) {
-    console.log('mi a szar');
-    query.getAll(function (err, result) {
+    query.getAllQuestion(function (err, result) {
+      handleResponse(err, result, response);
+    });
+  }
+
+  function postQuestion(request, response) {
+    query.postQuestion(request.body, function (err, result) {
       handleResponse(err, result, response);
     });
   }
@@ -28,6 +33,7 @@ function createQuestion(query) {
 
   return {
     getAllQuestion: getAllQuestion,
+    postQuestion: postQuestion,
     handleResponse: handleResponse,
   };
 }
