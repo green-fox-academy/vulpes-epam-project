@@ -50,5 +50,12 @@ EPAM.config(function ($stateProvider, $urlRouterProvider) {
         data: {
           pageTitle: 'Users',
         },
+      })
+      .state('questions', {
+        url: '/questions',
+        templateUrl: './templates/questionsList.html',
+        data: {
+          pageTitle: 'Questions',
+        },
       });
   });

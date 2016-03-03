@@ -1,0 +1,13 @@
+<div class="questionsTable">
+  <table class="questionListTable" ng-controller="ListQuestionsCtrl">
+    <tr>
+      <th class="tableHeadQuestion">Question</th>
+      <th class="tableHeadType">type</th>
+    </tr>
+    <tr ng-repeat="question in getQuestions()">
+      <td class="questionContent"> {{question.content}} </td>
+      <td class="questionType"> {{question.type}} </td>
+      <td><img ng-if="user.isadmin" class="pen" src="style/images/pen.svg"></td>
+    </tr>
+  </table>
+</div>

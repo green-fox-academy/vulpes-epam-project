@@ -24,7 +24,7 @@ EPAM.run(function ($rootScope, $http, $state, user) {
       });
   });
 
-},{"./main":8}],2:[function(require,module,exports){
+},{"./main":9}],2:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -35,7 +35,7 @@ EPAM.controller('FrontpageCtrl', function ($scope, $state, usersList, user) {
     }
   });
 
-},{"./main":8}],3:[function(require,module,exports){
+},{"./main":9}],3:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -48,23 +48,44 @@ EPAM.controller('HomeCtrl', function ($scope, $state, user) {
     $scope.user = user;
   });
 
-},{"./main":8}],4:[function(require,module,exports){
+},{"./main":9}],4:[function(require,module,exports){
 'use strict';
 
 require('./main.js');
 require('./userFactory.js');
 require('./userListFactory.js');
+require('./questionFactory.js');
+require('./questionListFactory.js');
 require('./frontpageCtrl.js');
 require('./listUsersCtrl.js');
 require('./loginCtrl.js');
 require('./registerCtrl.js');
+require('./questionAddCtrl.js');
 require('./homeCtrl.js');
 require('./navbarCtrl.js');
+require('./listQuestionsCtrl.js');
 require('./router.js');
 require('./authOnStateChange.js');
 require('./logOnStateChange.js');
 
-},{"./authOnStateChange.js":1,"./frontpageCtrl.js":2,"./homeCtrl.js":3,"./listUsersCtrl.js":5,"./logOnStateChange.js":6,"./loginCtrl.js":7,"./main.js":8,"./navbarCtrl.js":9,"./registerCtrl.js":10,"./router.js":11,"./userFactory.js":12,"./userListFactory.js":13}],5:[function(require,module,exports){
+},{"./authOnStateChange.js":1,"./frontpageCtrl.js":2,"./homeCtrl.js":3,"./listQuestionsCtrl.js":5,"./listUsersCtrl.js":6,"./logOnStateChange.js":7,"./loginCtrl.js":8,"./main.js":9,"./navbarCtrl.js":10,"./questionAddCtrl.js":11,"./questionFactory.js":12,"./questionListFactory.js":13,"./registerCtrl.js":14,"./router.js":15,"./userFactory.js":16,"./userListFactory.js":17}],5:[function(require,module,exports){
+'use strict';
+
+var EPAM = require('./main');
+
+EPAM.controller('ListQuestionsCtrl', function ($scope, $state, questionsList, user) {
+    if (!user.isLoggedIn()) {
+      $state.go('login');
+    }
+
+    $scope.getQuestions = function () {
+      return questionsList.getAllQuestions();
+    };
+
+    questionsList.fetchAllQuestions();
+  });
+
+},{"./main":9}],6:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -87,7 +108,7 @@ EPAM.controller('ListUsersCtrl', function ($scope, $state, usersList, user) {
     usersList.fetchAllUsers();
   });
 
-},{"./main":8}],6:[function(require,module,exports){
+},{"./main":9}],7:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -101,7 +122,7 @@ EPAM.run(function ($rootScope, $http) {
     });
 });
 
-},{"./main":8}],7:[function(require,module,exports){
+},{"./main":9}],8:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -130,14 +151,14 @@ EPAM.controller('LogInCtrl', function ($scope, $state, user) {
     }
   });
 
-},{"./main":8}],8:[function(require,module,exports){
+},{"./main":9}],9:[function(require,module,exports){
 'use strict';
 
 var EPAM = angular.module('epamInterviewer', ['ui.router']);
 
 module.exports = EPAM;
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -160,7 +181,79 @@ EPAM.controller('NavbarCtrl', function ($scope, $state, user) {
     }
   });
 
-},{"./main":8}],10:[function(require,module,exports){
+},{"./main":9}],11:[function(require,module,exports){
+'use strict';
+
+var EPAM = require('./main');
+
+EPAM.controller('QuestionCtrl', function ($scope, $state, question, user) {
+    if (!user.isLoggedIn() || !user.isAdmin()) {
+      $state.go('login');
+    }
+
+    $scope.questionSend = function (content, type) {
+      question.addNewQuestion({
+        content: content,
+        type: type,
+      })
+      .then(handleSuccess)
+      .catch(handleError);
+    };
+
+    function handleSuccess() {
+      $state.go('questions');
+    }
+
+    function handleError(error) {
+      $scope.Error = error.data;
+    }
+  });
+
+},{"./main":9}],12:[function(require,module,exports){
+'use strict';
+
+var EPAM = require('./main');
+
+EPAM.factory('question', function ($http) {
+    var question = {
+      content: '',
+      type: '',
+    };
+
+    function addNewQuestion(newQuestion) {
+      return $http.post('/api/questions', newQuestion);
+    }
+
+    return {
+      addNewQuestion: addNewQuestion,
+    };
+  });
+
+},{"./main":9}],13:[function(require,module,exports){
+'use strict';
+
+var EPAM = require('./main');
+
+EPAM.factory('questionsList', function ($http) {
+    var listOfQuestions = [];
+
+    function getAllQuestions() {
+      return listOfQuestions;
+    }
+
+    function fetchAllQuestions() {
+      $http.get('/api/questions').then(function (response) {
+        listOfQuestions = response.data;
+      });
+    }
+
+    return {
+      getAllQuestions: getAllQuestions,
+      fetchAllQuestions: fetchAllQuestions,
+    };
+  });
+
+},{"./main":9}],14:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -189,7 +282,7 @@ EPAM.controller('RegisterCtrl', function ($scope, $state, user) {
     }
   });
 
-},{"./main":8}],11:[function(require,module,exports){
+},{"./main":9}],15:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -228,16 +321,31 @@ EPAM.config(function ($stateProvider, $urlRouterProvider) {
           pageTitle: 'Home',
         },
       })
+      .state('questionadd', {
+        url: '/questions/new',
+        templateUrl: './templates/questionadd.html',
+        controller: 'QuestionCtrl',
+        data: {
+          pageTitle: 'Add Question',
+        },
+      })
       .state('users', {
         url: '/users',
         templateUrl: './templates/users.html',
         data: {
           pageTitle: 'Users',
         },
+      })
+      .state('questions', {
+        url: '/questions',
+        templateUrl: './templates/questionsList.html',
+        data: {
+          pageTitle: 'Questions',
+        },
       });
   });
 
-},{"./main":8}],12:[function(require,module,exports){
+},{"./main":9}],16:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -315,7 +423,7 @@ EPAM.factory('user', function ($http) {
     };
   });
 
-},{"./main":8}],13:[function(require,module,exports){
+},{"./main":9}],17:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -339,4 +447,4 @@ EPAM.factory('usersList', function ($http) {
     };
   });
 
-},{"./main":8}]},{},[4]);
+},{"./main":9}]},{},[4]);
