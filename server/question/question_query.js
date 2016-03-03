@@ -5,7 +5,11 @@ var SQL = require('sql-template-strings');
 function createQuestionQuery(connection) {
   return {
     getAllQuestion: function (callback) {
-      connection.sendQuery('SELECT question_id, type, content FROM questions', callback);
+      connection.sendQuery(
+        SQL`
+        SELECT question_id, type, content
+        FROM questions`,
+        callback);
     },
 
     postQuestion: function (params, callback) {
@@ -18,7 +22,6 @@ function createQuestionQuery(connection) {
     },
 
     putQuestion: function (params, id, callback) {
-      console.log('PUTPUTPUT');
       connection.sendQuery(
         SQL`
         UPDATE questions SET type = ${params.type}, content = ${params.content}

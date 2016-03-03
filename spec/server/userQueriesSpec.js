@@ -43,7 +43,7 @@ describe('User query', function () {
       userQueries.updateUserAdminStatus(params, callback);
 
       expect(connection.sendQuery).toHaveBeenCalledWith(SQL`
-      UPDATE users SET isadmin = ${params.admin}
+      UPDATE users SET isadmin = ${params.isAdmin}
       WHERE email = ${params.email}
       RETURNING email, isadmin`,
       callback);

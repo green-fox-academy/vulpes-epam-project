@@ -26,7 +26,7 @@ function createUserQueries(connection) {
   function updateUserAdminStatus(params, callback) {
     connection.sendQuery(
       SQL`
-      UPDATE users SET isadmin = ${params.admin}
+      UPDATE users SET isadmin = ${params.isAdmin}
       WHERE email = ${params.email}
       RETURNING email, isadmin`,
       callback
