@@ -233,10 +233,23 @@ html {
   }
 
   .pen {
-    visibility: hidden;;
+    visibility: hidden;
   }
 
   tr:hover .pen {
     visibility: visible;
+  }
+
+  .penButton {
+    background-color: white;
+    border: none;
+  }
+
+  select {
+    height: 20px;
+    color: $blue;
+    border-color: $blue;
+    font-size: $fontSize;
+    font-family: $fontFamilySecondary;
   }
 }
