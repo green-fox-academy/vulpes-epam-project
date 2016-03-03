@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('myapp')
-  .run(function ($rootScope, $http, $state, user) {
+var EPAM = require('./main');
+
+EPAM.run(function ($rootScope, $http, $state, user) {
     $rootScope.$on('$stateChangeStart',
       function (event, toState) {
 

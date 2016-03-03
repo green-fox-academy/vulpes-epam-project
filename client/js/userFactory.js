@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('myapp')
-  .factory('user', function ($http) {
+var EPAM = require('./main');
 
+EPAM.factory('user', function ($http) {
     var currentUser = {
       isAuthenticated: false,
       email: '',

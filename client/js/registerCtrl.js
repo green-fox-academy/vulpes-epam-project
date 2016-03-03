@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('myapp')
-  .controller('RegisterCtrl', function ($scope, $state, user) {
+var EPAM = require('./main');
+
+EPAM.controller('RegisterCtrl', function ($scope, $state, user) {
     if (user.isLoggedIn()) {
       $state.go('home');
     }
