@@ -24,7 +24,7 @@ EPAM.run(function ($rootScope, $http, $state, user) {
       });
   });
 
-},{"./main":9}],2:[function(require,module,exports){
+},{"./main":10}],2:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -35,7 +35,7 @@ EPAM.controller('FrontpageCtrl', function ($scope, $state, usersList, user) {
     }
   });
 
-},{"./main":9}],3:[function(require,module,exports){
+},{"./main":10}],3:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -48,7 +48,7 @@ EPAM.controller('HomeCtrl', function ($scope, $state, user) {
     $scope.user = user;
   });
 
-},{"./main":9}],4:[function(require,module,exports){
+},{"./main":10}],4:[function(require,module,exports){
 'use strict';
 
 require('./main.js');
@@ -56,6 +56,7 @@ require('./userFactory.js');
 require('./userListFactory.js');
 require('./questionFactory.js');
 require('./questionListFactory.js');
+require('./logFactory.js');
 require('./frontpageCtrl.js');
 require('./listUsersCtrl.js');
 require('./loginCtrl.js');
@@ -68,7 +69,7 @@ require('./router.js');
 require('./authOnStateChange.js');
 require('./logOnStateChange.js');
 
-},{"./authOnStateChange.js":1,"./frontpageCtrl.js":2,"./homeCtrl.js":3,"./listQuestionsCtrl.js":5,"./listUsersCtrl.js":6,"./logOnStateChange.js":7,"./loginCtrl.js":8,"./main.js":9,"./navbarCtrl.js":10,"./questionAddCtrl.js":11,"./questionFactory.js":12,"./questionListFactory.js":13,"./registerCtrl.js":14,"./router.js":15,"./userFactory.js":16,"./userListFactory.js":17}],5:[function(require,module,exports){
+},{"./authOnStateChange.js":1,"./frontpageCtrl.js":2,"./homeCtrl.js":3,"./listQuestionsCtrl.js":5,"./listUsersCtrl.js":6,"./logFactory.js":7,"./logOnStateChange.js":8,"./loginCtrl.js":9,"./main.js":10,"./navbarCtrl.js":11,"./questionAddCtrl.js":12,"./questionFactory.js":13,"./questionListFactory.js":14,"./registerCtrl.js":15,"./router.js":16,"./userFactory.js":17,"./userListFactory.js":18}],5:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -85,7 +86,7 @@ EPAM.controller('ListQuestionsCtrl', function ($scope, $state, questionsList, us
     questionsList.fetchAllQuestions();
   });
 
-},{"./main":9}],6:[function(require,module,exports){
+},{"./main":10}],6:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -106,23 +107,55 @@ EPAM.controller('ListUsersCtrl', function ($scope, $state, usersList, user) {
     };
 
     usersList.fetchAllUsers();
+
+    $scope.isEdit = 0;
+
+    $scope.statuses = [
+      { role: 'admin', isAdmin: true, },
+      { role: 'user', isAdmin: false, },
+    ];
+
+    $scope.changeUserRole = function (isAdmin, email) {
+      usersList.changeUserStatus({
+        isAdmin: isAdmin,
+        email: email,
+      });
+    };
   });
 
-},{"./main":9}],7:[function(require,module,exports){
+},{"./main":10}],7:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
 
-EPAM.run(function ($rootScope, $http) {
-  $rootScope.$on('$stateChangeStart',
-    function (event, toState) {
-      window.document.title = toState.data.pageTitle;
-      var logMessage = { level: 'info', toState: toState.url };
-      $http.post('/api/log', logMessage);
-    });
+EPAM.factory('logger', function ($http) {
+
+  function stateChangeLogger(event, toState) {
+    window.document.title = toState.data.pageTitle;
+    var logMessage = { level: 'info', message: `ROUTE CHANGED TO: ${toState.url}` };
+    sendLog(logMessage);
+  }
+
+  function sendLog(logMessage) {
+    $http.post('/api/log', logMessage);
+  }
+
+  return {
+    sendLog: sendLog,
+    stateChangeLogger: stateChangeLogger,
+  };
 });
 
-},{"./main":9}],8:[function(require,module,exports){
+},{"./main":10}],8:[function(require,module,exports){
+'use strict';
+
+var EPAM = require('./main');
+
+EPAM.run(function ($rootScope, $http, logger) {
+  $rootScope.$on('$stateChangeStart', logger.stateChangeLogger);
+});
+
+},{"./main":10}],9:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -151,14 +184,14 @@ EPAM.controller('LogInCtrl', function ($scope, $state, user) {
     }
   });
 
-},{"./main":9}],9:[function(require,module,exports){
+},{"./main":10}],10:[function(require,module,exports){
 'use strict';
 
 var EPAM = angular.module('epamInterviewer', ['ui.router']);
 
 module.exports = EPAM;
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -181,7 +214,7 @@ EPAM.controller('NavbarCtrl', function ($scope, $state, user) {
     }
   });
 
-},{"./main":9}],11:[function(require,module,exports){
+},{"./main":10}],12:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -209,7 +242,7 @@ EPAM.controller('QuestionCtrl', function ($scope, $state, question, user) {
     }
   });
 
-},{"./main":9}],12:[function(require,module,exports){
+},{"./main":10}],13:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -229,7 +262,7 @@ EPAM.factory('question', function ($http) {
     };
   });
 
-},{"./main":9}],13:[function(require,module,exports){
+},{"./main":10}],14:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -253,7 +286,7 @@ EPAM.factory('questionsList', function ($http) {
     };
   });
 
-},{"./main":9}],14:[function(require,module,exports){
+},{"./main":10}],15:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -282,7 +315,7 @@ EPAM.controller('RegisterCtrl', function ($scope, $state, user) {
     }
   });
 
-},{"./main":9}],15:[function(require,module,exports){
+},{"./main":10}],16:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -345,7 +378,7 @@ EPAM.config(function ($stateProvider, $urlRouterProvider) {
       });
   });
 
-},{"./main":9}],16:[function(require,module,exports){
+},{"./main":10}],17:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -423,7 +456,7 @@ EPAM.factory('user', function ($http) {
     };
   });
 
-},{"./main":9}],17:[function(require,module,exports){
+},{"./main":10}],18:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -441,10 +474,16 @@ EPAM.factory('usersList', function ($http) {
       });
     }
 
+    function changeUserStatus(updatedUser) {
+      console.log(updatedUser);
+      $http.put('api/users', updatedUser).then(fetchAllUsers);
+    }
+
     return {
       getAllUser: getAllUser,
       fetchAllUsers: fetchAllUsers,
+      changeUserStatus: changeUserStatus,
     };
   });
 
-},{"./main":9}]},{},[4]);
+},{"./main":10}]},{},[4]);
