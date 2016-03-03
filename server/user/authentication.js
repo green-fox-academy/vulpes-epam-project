@@ -1,40 +1,10 @@
 'use strict';
 
-var config = require('../config.js');
 var passport = require('passport');
-var Strategy = require('passport-local').Strategy;
-var bcrypt = require('bcryptjs');
 
 function authentication(userController) {
 
-  function createStrategy() {
-    return new Strategy(
-      config.PASSPORT_CONFIG,
-      function (email, password, done) {
-        userController.findUser(email, function (err, user) {
-          if (err) {
-            return done(err, false, 'Connection error');
-          } else if (!user) {
-            return done(null, false, 'Incorrect username');
-          } else if (!isMatch(password, user.password)) {
-            return done(null, false, 'Incorrect password');
-          } else {
-            return done(null, user);
-          }
-        });
-      });
-  }
-
-  function generateHash(password) {
-    var salt = config.ENCRYPT_SALT;
-    return bcrypt.hashSync(password, salt);
-  }
-
-  function isMatch(password, hash) {
-    return bcrypt.compareSync(password, hash);
-  }
-
-  function authenticateUser(req, res, next) {
+  function authenticateUser(req, res) {
     passport.authenticate('local', function (err, user, info) {
       if (err) {
         res.status(503).send(info);
@@ -43,17 +13,7 @@ function authentication(userController) {
       } else {
         res.status(401).send(info);
       }
-    })(req, res, next);
-  }
-
-  function serialize(user, cb) {
-    cb(null, user.email);
-  }
-
-  function deserialize(email, done) {
-    userController.findUser(email, function (err, user) {
-      done(err, user);
-    });
+    })(req, res);
   }
 
   function sessionLogout(req, res) {
@@ -77,11 +37,7 @@ function authentication(userController) {
   }
 
   return {
-    createStrategy: createStrategy,
     authenticateUser: authenticateUser,
-    generateHash: generateHash,
-    serialize: serialize,
-    deserialize: deserialize,
     sessionLogout: sessionLogout,
     getLoggedInUser: getLoggedInUser,
   };

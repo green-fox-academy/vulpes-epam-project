@@ -1,18 +1,14 @@
 'use strict';
 
 var logger = require('../log.js')();
-var config = require('../config.js');
-var bcrypt = require('bcryptjs');
+var createAuthService = require('./auth_service.js');
 
 function createUserController(queries) {
 
-  function generateHash(password) {
-    var salt = config.ENCRYPT_SALT;
-    return bcrypt.hashSync(password, salt);
-  }
+  var authService = createAuthService(queries);
 
   function newUser(req) {
-    var hash = generateHash(req.body.password);
+    var hash = authService.generateHash(req.body.password);
     return {
       email: req.body.email,
       password: hash,
