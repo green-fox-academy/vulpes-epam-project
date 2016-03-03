@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('myapp')
-  .controller('RegisterCtrl', function ($scope, $state, user) {
+var EPAM = require('./main');
+
+EPAM.controller('RegisterCtrl', function ($scope, $state, user) {
     if (user.isLoggedIn()) {
       $state.go('home');
     }
@@ -15,8 +16,7 @@ angular.module('myapp')
       .catch(handleError);
     };
 
-    function handleSuccess(response) {
-      user.setUserValues(response.data, true);
+    function handleSuccess() {
       $state.go('home');
     }
 

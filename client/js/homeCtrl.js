@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('myapp')
-  .controller('HomeCtrl', function ($scope, $state, user) {
+var EPAM = require('./main');
+
+EPAM.controller('HomeCtrl', function ($scope, $state, user) {
     if (!user.isLoggedIn()) {
       $state.go('login');
     }

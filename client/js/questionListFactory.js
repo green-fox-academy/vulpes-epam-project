@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('myapp')
-  .factory('questionsList', function ($http) {
+var EPAM = require('./main');
+
+EPAM.factory('questionsList', function ($http) {
     var listOfQuestions = [];
 
     function getAllQuestions() {

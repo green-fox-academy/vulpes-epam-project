@@ -6,12 +6,13 @@ require('./gulp/gulp_jshint.js');
 require('./gulp/gulp_watch.js');
 require('./gulp/gulp_sass.js');
 require('./gulp/gulp_jscs.js');
+require('./gulp/gulp_browserify.js');
 
 var gulp = require('gulp');
 var gulpUtil = require('gulp-util');
 
-gulp.task('build', function() { console.log('Working!'); });
+gulp.task('build', function () { console.log('Working!'); });
 
-gulp.task('default', function() {
+gulp.task('default', function () {
   return gulpUtil.log('gulp is ready');
 });

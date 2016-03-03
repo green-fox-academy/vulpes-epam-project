@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('myapp')
-  .factory('usersList', function ($http) {
+var EPAM = require('./main');
+
+EPAM.factory('usersList', function ($http) {
     var listOfUsers = [];
 
     function getAllUser() {

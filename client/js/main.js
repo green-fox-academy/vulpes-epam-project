@@ -1,3 +1,5 @@
 'use strict';
 
-angular.module('myapp', ['ui.router']);
+var EPAM = angular.module('epamInterviewer', ['ui.router']);
+
+module.exports = EPAM;
