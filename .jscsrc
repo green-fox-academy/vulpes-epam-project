@@ -74,4 +74,5 @@
     "validateQuoteMarks": { "mark": "'", "escape": true, "ignoreJSX": true },
     "validateIndentation": 2,
     "maximumLineLength": 100,
+    "validateLineBreaks": false
 }
