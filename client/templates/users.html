@@ -4,7 +4,8 @@
       <th class="tableHeadEmail">email address</th>
       <th class="tableHeadRole">role</th>
     </tr>
-    <tr ng-if="!(currentUser.email === user.email)" ng-repeat='user in getUsers()'>
+    <tr ng-if="!(currentUser.email === user.email)"
+        ng-repeat="user in getUsers() | orderBy:'email'">
       <td class="userEmail"> {{user.email}} </td>
       <td class="userStatus">
         <span ng-if="user.isadmin">admin</span>
