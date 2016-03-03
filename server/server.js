@@ -12,7 +12,7 @@ var createHeartbeatQuery = require('./heartbeat/heartbeat_query.js');
 var createHeartbeat = require('./heartbeat/heartbeat.js');
 var createUserController = require('./user/user_controller.js');
 var createUserQueries = require('./user/user_queries.js');
-var createAuthentication = require('./user/authentication.js');
+var authentication = require('./user/authentication.js')();
 var createAuthService = require('./user/auth_service.js');
 var createQuestion = require('./question/question');
 var createQuestionQuery = require('./question/question_query');
@@ -23,7 +23,6 @@ function createServer(connection) {
   var userQueries = createUserQueries(connection);
   var heartbeat = createHeartbeat(heartQuery);
   var userController = createUserController(userQueries);
-  var authentication = createAuthentication(userController);
   var authService = createAuthService(userQueries);
   var questionQuery = createQuestionQuery(connection);
   var question = createQuestion(questionQuery);

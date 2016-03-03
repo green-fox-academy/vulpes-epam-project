@@ -2,27 +2,28 @@
 
 var passport = require('passport');
 
-function authentication(userController) {
+function authentication() {
 
   function authenticateUser(req, res) {
     passport.authenticate('local', function (err, user, info) {
       if (err) {
         res.status(503).send(info);
       } else if (user) {
-        userController.loginUser(req, res, user);
+        loginUser(req, res, user);
       } else {
         res.status(401).send(info);
       }
     })(req, res);
   }
 
-  function sessionLogout(req, res) {
-    if (req.isAuthenticated()) {
-      req.logout();
-      res.status(200).send('Successful logout');
-    } else {
-      res.status(500).send('Nobody logged in');
-    }
+  function loginUser(req, res, user) {
+    req.logIn(user, function (err) {
+      if (err) return res.status(500);
+      return res.status(200).json({
+        email: user.email,
+        isadmin: user.isadmin,
+      });
+    });
   }
 
   function getLoggedInUser(req, res) {
@@ -36,10 +37,20 @@ function authentication(userController) {
     }
   }
 
+  function sessionLogout(req, res) {
+    if (req.isAuthenticated()) {
+      req.logout();
+      res.status(200).send('Successful logout');
+    } else {
+      res.status(500).send('Nobody logged in');
+    }
+  }
+
   return {
     authenticateUser: authenticateUser,
-    sessionLogout: sessionLogout,
+    loginUser: loginUser,
     getLoggedInUser: getLoggedInUser,
+    sessionLogout: sessionLogout,
   };
 
 }

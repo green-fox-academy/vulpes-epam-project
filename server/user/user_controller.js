@@ -2,6 +2,7 @@
 
 var logger = require('../log.js')();
 var createAuthService = require('./auth_service.js');
+var authentication = require('./authentication.js')();
 
 function createUserController(queries) {
 
@@ -19,17 +20,7 @@ function createUserController(queries) {
     var user = newUser(req);
     queries.registNewUser(user, function (err, registeredUser) {
       err ? handleResponse(err, null, res)
-          : loginUser(req, res, registeredUser);
-    });
-  }
-
-  function loginUser(req, res, user) {
-    req.logIn(user, function (err) {
-      if (err) return res.status(500);
-      return res.status(200).json({
-        email: user.email,
-        isadmin: user.isadmin,
-      });
+          : authentication.loginUser(req, res, registeredUser);
     });
   }
 
@@ -78,7 +69,6 @@ function createUserController(queries) {
 
   return {
     registerUser: registerUser,
-    loginUser: loginUser,
     updateUserAdmin: updateUserAdmin,
     getAllUser: getAllUser,
     findUser: findUser,
