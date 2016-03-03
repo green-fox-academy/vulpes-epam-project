@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('myapp')
-  .controller('ListUsersCtrl', function ($scope, $state, usersList, user) {
+var EPAM = require('./main');
+
+EPAM.controller('ListUsersCtrl', function ($scope, $state, usersList, user) {
     if (!user.isLoggedIn()) {
       $state.go('login');
     } else if (!user.isAdmin()) {

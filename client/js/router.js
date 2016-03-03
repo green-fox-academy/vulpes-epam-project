@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('myapp')
-  .config(function ($stateProvider, $urlRouterProvider) {
+var EPAM = require('./main');
+
+EPAM.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
     $stateProvider
       .state('frontpage', {
@@ -41,13 +42,5 @@ angular.module('myapp')
         data: {
           pageTitle: 'Users',
         },
-      });
-  })
-  .run(function ($rootScope, $http) {
-    $rootScope.$on('$stateChangeStart',
-      function (event, toState) {
-        window.document.title = toState.data.pageTitle;
-        var logMessage = { level: 'info', toState: toState.url };
-        $http.post('/api/log', logMessage);
       });
   });

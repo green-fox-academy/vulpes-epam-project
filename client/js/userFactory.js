@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('myapp')
-  .factory('user', function ($http) {
+var EPAM = require('./main');
 
+EPAM.factory('user', function ($http) {
     var currentUser = {
       isAuthenticated: false,
       email: '',
@@ -10,18 +10,17 @@ angular.module('myapp')
       isLoggedIn: false,
     };
 
-    function setUserValues(values, isLoggedIn) {
-      currentUser.email = values.email;
-      currentUser.isAdmin = values.isadmin;
+    function setLoggedInUser(response) {
+      var user = response.data;
+      currentUser.email = user.email;
+      currentUser.isAdmin = user.isadmin;
       currentUser.isLoggedIn = isLoggedIn;
     }
 
     function resetUser() {
-      setUserValues({
-        email: '',
-        isAdmin: false,
-      },
-      false);
+      currentUser.email = '';
+      currentUser.isAdmin = false;
+      currentUser.isLoggedIn = false;
     }
 
     function isAuthenticated() {
@@ -45,32 +44,29 @@ angular.module('myapp')
     }
 
     function addNewUser(newUser) {
-      return $http.post('/api/register', newUser).then(function (response) {
-        setUserValues(response.data, true);
-      });
+      return $http.post('/api/register', newUser).then(setLoggedInUser);
     }
 
     function login(user) {
-      return $http.post('/api/login', user).then(function (response) {
-        setUserValues(response.data, true);
-      });
+      return $http.post('/api/login', user).then(setLoggedInUser);
     }
 
     function logoutUser() {
-      return $http.get('/api/logout');
+      return $http.get('/api/logout').then(resetUser);
     }
 
     function authenticateUser() {
-      return $http.get('/api/user');
+      return $http.get('/api/user').then(function (res) {
+          res.status === 200 ? setLoggedInUser(res)
+                             : resetUser();
+          setAuthenticated();
+        });
     }
 
     return {
-      setUserValues: setUserValues,
-      resetUser: resetUser,
       isAuthenticated: isAuthenticated,
       isAdmin: isAdmin,
       isLoggedIn: isLoggedIn,
-      setAuthenticated: setAuthenticated,
       getEmail: getEmail,
       authenticateUser: authenticateUser,
       addNewUser: addNewUser,
