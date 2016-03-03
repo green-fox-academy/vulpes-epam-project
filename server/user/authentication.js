@@ -3,6 +3,7 @@
 var config = require('../config.js');
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
+var bcrypt = require('bcryptjs');
 
 function authentication(userController) {
 
@@ -15,13 +16,22 @@ function authentication(userController) {
             return done(err, false, 'Connection error');
           } else if (!user) {
             return done(null, false, 'Incorrect username');
-          } else if (user.password !== password) {
+          } else if (!isMatch(password, user.password)) {
             return done(null, false, 'Incorrect password');
           } else {
             return done(null, user);
           }
         });
       });
+  }
+
+  function generateHash(password) {
+    var salt = config.ENCRYPT_SALT;
+    return bcrypt.hashSync(password, salt);
+  }
+
+  function isMatch(password, hash) {
+    return bcrypt.compareSync(password, hash);
   }
 
   function authenticateUser(req, res, next) {
@@ -69,6 +79,7 @@ function authentication(userController) {
   return {
     createStrategy: createStrategy,
     authenticateUser: authenticateUser,
+    generateHash: generateHash,
     serialize: serialize,
     deserialize: deserialize,
     sessionLogout: sessionLogout,

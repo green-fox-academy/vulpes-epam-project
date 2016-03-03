@@ -1,13 +1,29 @@
 'use strict';
 
 var logger = require('../log.js')();
+var config = require('../config.js');
+var bcrypt = require('bcryptjs');
 
 function createUserController(queries) {
 
+  function generateHash(password) {
+    var salt = config.ENCRYPT_SALT;
+    return bcrypt.hashSync(password, salt);
+  }
+
+  function newUser(req) {
+    var hash = generateHash(req.body.password);
+    return {
+      email: req.body.email,
+      password: hash,
+    };
+  }
+
   function registerUser(req, res) {
-    queries.registNewUser(req.body, function (err, user) {
-      err ? handleResponse(err, user, res)
-          : loginUser(req, res, user);
+    var user = newUser(req);
+    queries.registNewUser(user, function (err, registeredUser) {
+      err ? handleResponse(err, null, res)
+          : loginUser(req, res, registeredUser);
     });
   }
 
