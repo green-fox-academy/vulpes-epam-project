@@ -19,6 +19,8 @@ EPAM.controller('ListUsersCtrl', function ($scope, $state, usersList, user) {
 
     usersList.fetchAllUsers();
 
+    $scope.isEdit = 0;
+
     $scope.statuses = [
       { role: 'admin', isAdmin: true, },
       { role: 'user', isAdmin: false, },
