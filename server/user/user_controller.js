@@ -4,14 +4,10 @@ var logger = require('../log.js')();
 
 function createUserController(queries) {
 
-  function registerUser(request, response) {
-    queries.registNewUser(request.body, function (err, result) {
-      if (err) {
-        handleResponse(err, result, response);
-      } else {
-        var user = result.rows[0];
-        loginUser(request, response, user);
-      }
+  function registerUser(req, res) {
+    queries.registNewUser(req.body, function (err, user) {
+      err ? handleResponse(err, user, res)
+          : loginUser(req, res, user);
     });
   }
 
@@ -25,23 +21,22 @@ function createUserController(queries) {
     });
   }
 
-  function updateUserAdmin(request, response) {
-    queries.updateUserAdminStatus(request.body, function (err, result) {
+  function updateUserAdmin(req, response) {
+    queries.updateUserAdminStatus(req.body, function (err, result) {
       handleResponse(err, result, response);
     });
   }
 
-  function getAllUser(request, response) {
+  function getAllUser(req, response) {
     queries.getUsers(function (err, result) {
       handleResponse(err, result, response);
     });
   }
 
   function findUser(email, cb) {
-    queries.findUser(email, function (err, result) {
+    queries.findUser(email, function (err, user) {
       if (err) return cb(err);
-      var foundUser = result.rows[0];
-      if (foundUser) return cb(null, foundUser);
+      if (user) return cb(null, user);
       return cb(null, null);
     });
   }
