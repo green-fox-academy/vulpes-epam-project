@@ -41,6 +41,13 @@ angular.module('myapp')
         data: {
           pageTitle: 'Users',
         },
+      })
+      .state('questions', {
+        url: '/questions',
+        templateUrl: './templates/questionsList.html',
+        data: {
+          pageTitle: 'Questions',
+        }
       });
   })
   .run(function ($rootScope, $http) {
