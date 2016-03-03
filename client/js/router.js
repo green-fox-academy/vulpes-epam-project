@@ -35,6 +35,14 @@ angular.module('myapp')
           pageTitle: 'Home',
         },
       })
+      .state('questionadd', {
+        url: '/questions/new',
+        templateUrl: './templates/questionadd.html',
+        controller: 'QuestionCtrl',
+        data: {
+          pageTitle: 'Add Question',
+        },
+      })
       .state('users', {
         url: '/users',
         templateUrl: './templates/users.html',
