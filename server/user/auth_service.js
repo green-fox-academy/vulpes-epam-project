@@ -1,8 +1,8 @@
 'use strict';
 
 var config = require('../config.js');
+var enrypt = require('./enrypt_service.js')();
 var Strategy = require('passport-local').Strategy;
-var bcrypt = require('bcryptjs');
 
 function authService(queries) {
 
@@ -15,22 +15,13 @@ function authService(queries) {
             return done(err, false, 'Connection error');
           } else if (!user) {
             return done(null, false, 'Incorrect username');
-          } else if (!isMatch(password, user.password)) {
+          } else if (!enrypt.isMatch(password, user.password)) {
             return done(null, false, 'Incorrect password');
           } else {
             return done(null, user);
           }
         });
       });
-  }
-
-  function generateHash(password) {
-    var salt = config.ENCRYPT_SALT;
-    return bcrypt.hashSync(password, salt);
-  }
-
-  function isMatch(password, hash) {
-    return bcrypt.compareSync(password, hash);
   }
 
   function serialize(user, cb) {
@@ -45,7 +36,6 @@ function authService(queries) {
 
   return {
     createStrategy: createStrategy,
-    generateHash: generateHash,
     serialize: serialize,
     deserialize: deserialize,
   };

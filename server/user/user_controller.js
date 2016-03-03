@@ -1,15 +1,13 @@
 'use strict';
 
 var logger = require('../log.js')();
-var createAuthService = require('./auth_service.js');
+var enrypt = require('./enrypt_service.js')();
 var authentication = require('./authentication.js')();
 
 function createUserController(queries) {
 
-  var authService = createAuthService(queries);
-
   function newUser(req) {
-    var hash = authService.generateHash(req.body.password);
+    var hash = enrypt.generateHash(req.body.password);
     return {
       email: req.body.email,
       password: hash,
