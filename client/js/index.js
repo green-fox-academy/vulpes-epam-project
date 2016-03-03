@@ -11,3 +11,4 @@ require('./homeCtrl.js');
 require('./navbarCtrl.js');
 require('./router.js');
 require('./authOnStateChange.js');
+require('./logOnStateChange.js');

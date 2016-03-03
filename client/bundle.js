@@ -24,7 +24,7 @@ EPAM.run(function ($rootScope, $http, $state, user) {
       });
   });
 
-},{"./main":7}],2:[function(require,module,exports){
+},{"./main":8}],2:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -35,7 +35,7 @@ EPAM.controller('FrontpageCtrl', function ($scope, $state, usersList, user) {
     }
   });
 
-},{"./main":7}],3:[function(require,module,exports){
+},{"./main":8}],3:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -48,7 +48,7 @@ EPAM.controller('HomeCtrl', function ($scope, $state, user) {
     $scope.user = user;
   });
 
-},{"./main":7}],4:[function(require,module,exports){
+},{"./main":8}],4:[function(require,module,exports){
 'use strict';
 
 require('./main.js');
@@ -62,8 +62,9 @@ require('./homeCtrl.js');
 require('./navbarCtrl.js');
 require('./router.js');
 require('./authOnStateChange.js');
+require('./logOnStateChange.js');
 
-},{"./authOnStateChange.js":1,"./frontpageCtrl.js":2,"./homeCtrl.js":3,"./listUsersCtrl.js":5,"./loginCtrl.js":6,"./main.js":7,"./navbarCtrl.js":8,"./registerCtrl.js":9,"./router.js":10,"./userFactory.js":11,"./userListFactory.js":12}],5:[function(require,module,exports){
+},{"./authOnStateChange.js":1,"./frontpageCtrl.js":2,"./homeCtrl.js":3,"./listUsersCtrl.js":5,"./logOnStateChange.js":6,"./loginCtrl.js":7,"./main.js":8,"./navbarCtrl.js":9,"./registerCtrl.js":10,"./router.js":11,"./userFactory.js":12,"./userListFactory.js":13}],5:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -86,7 +87,21 @@ EPAM.controller('ListUsersCtrl', function ($scope, $state, usersList, user) {
     usersList.fetchAllUsers();
   });
 
-},{"./main":7}],6:[function(require,module,exports){
+},{"./main":8}],6:[function(require,module,exports){
+'use strict';
+
+var EPAM = require('./main');
+
+EPAM.run(function ($rootScope, $http) {
+  $rootScope.$on('$stateChangeStart',
+    function (event, toState) {
+      window.document.title = toState.data.pageTitle;
+      var logMessage = { level: 'info', toState: toState.url };
+      $http.post('/api/log', logMessage);
+    });
+});
+
+},{"./main":8}],7:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -115,14 +130,14 @@ EPAM.controller('LogInCtrl', function ($scope, $state, user) {
     }
   });
 
-},{"./main":7}],7:[function(require,module,exports){
+},{"./main":8}],8:[function(require,module,exports){
 'use strict';
 
 var EPAM = angular.module('epamInterviewer', ['ui.router']);
 
 module.exports = EPAM;
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -145,7 +160,7 @@ EPAM.controller('NavbarCtrl', function ($scope, $state, user) {
     }
   });
 
-},{"./main":7}],9:[function(require,module,exports){
+},{"./main":8}],10:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -174,7 +189,7 @@ EPAM.controller('RegisterCtrl', function ($scope, $state, user) {
     }
   });
 
-},{"./main":7}],10:[function(require,module,exports){
+},{"./main":8}],11:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -220,17 +235,9 @@ EPAM.config(function ($stateProvider, $urlRouterProvider) {
           pageTitle: 'Users',
         },
       });
-  })
-  .run(function ($rootScope, $http) {
-    $rootScope.$on('$stateChangeStart',
-      function (event, toState) {
-        window.document.title = toState.data.pageTitle;
-        var logMessage = { level: 'info', toState: toState.url };
-        $http.post('/api/log', logMessage);
-      });
   });
 
-},{"./main":7}],11:[function(require,module,exports){
+},{"./main":8}],12:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -308,7 +315,7 @@ EPAM.factory('user', function ($http) {
     };
   });
 
-},{"./main":7}],12:[function(require,module,exports){
+},{"./main":8}],13:[function(require,module,exports){
 'use strict';
 
 var EPAM = require('./main');
@@ -332,4 +339,4 @@ EPAM.factory('usersList', function ($http) {
     };
   });
 
-},{"./main":7}]},{},[4]);
+},{"./main":8}]},{},[4]);
