@@ -14,8 +14,14 @@ angular.module('myapp')
       });
     }
 
+    function changeUserStatus(updatedUser) {
+      console.log(updatedUser);
+      $http.put('api/users', updatedUser).then(fetchAllUsers);
+    }
+
     return {
       getAllUser: getAllUser,
       fetchAllUsers: fetchAllUsers,
+      changeUserStatus: changeUserStatus,
     };
   });

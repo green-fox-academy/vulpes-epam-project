@@ -17,4 +17,16 @@ angular.module('myapp')
     };
 
     usersList.fetchAllUsers();
+
+    $scope.statuses = [
+      { role: 'admin', isAdmin: true, },
+      { role: 'user', isAdmin: false, },
+    ];
+
+    $scope.changeUserRole = function (isAdmin, email) {
+      usersList.changeUserStatus({
+        isAdmin: isAdmin,
+        email: email,
+      });
+    };
   });
