@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('myapp')
-.run(function ($rootScope, $http) {
+var EPAM = require('./main');
+
+EPAM.run(function ($rootScope, $http) {
   $rootScope.$on('$stateChangeStart',
     function (event, toState) {
       window.document.title = toState.data.pageTitle;

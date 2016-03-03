@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('myapp')
-  .config(function ($stateProvider, $urlRouterProvider) {
+var EPAM = require('./main');
+
+EPAM.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
     $stateProvider
       .state('frontpage', {

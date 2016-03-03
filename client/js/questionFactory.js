@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('myapp')
-  .factory('question', function ($http) {
+var EPAM = require('./main');
+
+EPAM.factory('question', function ($http) {
     var question = {
       content: '',
       type: '',

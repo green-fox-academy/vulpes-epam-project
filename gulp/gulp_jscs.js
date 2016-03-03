@@ -6,6 +6,7 @@ var stylish = require('jscs-stylish');
 
 var sourceFiles = [
   './client/**/*.js',
+  '!./client/bundle.js',
   './server/**/*.js',
   './spec/backendSpec/*.js',
   './spec/frontendSpec/*.js',

@@ -18,6 +18,7 @@
   "devDependencies": {
     "angular": "^1.5.0",
     "angular-mocks": "^1.5.0",
+    "browserify": "^13.0.0",
     "gulp": "^3.9.1",
     "gulp-batch": "^1.0.5",
     "gulp-jasmine": "^2.2.1",
@@ -40,6 +41,7 @@
   },
   "dependencies": {
     "angular-ui-router": "^0.2.18",
+    "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.0",
     "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
@@ -50,6 +52,7 @@
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "pg": "^4.4.4",
-    "sql-template-strings": "^1.1.2"
+    "sql-template-strings": "^1.1.2",
+    "vinyl-source-stream": "^1.1.0"
   }
 }

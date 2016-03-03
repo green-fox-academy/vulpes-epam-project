@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('myapp')
-  .controller('QuestionCtrl', function ($scope, $state, question, user) {
+var EPAM = require('./main');
+
+EPAM.controller('QuestionCtrl', function ($scope, $state, question, user) {
     if (!user.isLoggedIn() || !user.isAdmin()) {
       $state.go('login');
     }
