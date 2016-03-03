@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('myapp')
-  .controller('NavbarCtrl', function ($scope, $state, user) {
+var EPAM = require('./main');
+
+EPAM.controller('NavbarCtrl', function ($scope, $state, user) {
     $scope.user = user;
 
     $scope.logoutUser = function () {
@@ -11,13 +12,10 @@ angular.module('myapp')
     };
 
     function onSuccess() {
-      user.resetUser();
       $state.go('frontpage');
     }
 
-    function onError(res) {
-      user.resetUser();
-      window.alert(res.data);
+    function onError() {
       $state.go('frontpage');
     }
   });

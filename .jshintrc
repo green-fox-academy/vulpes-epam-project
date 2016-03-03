@@ -25,6 +25,7 @@
    "after": true,
    "beforeEach": true,
    "afterEach": true,
-   "inject": true
+   "inject": true,
+   "spyOn": true
  }
  }

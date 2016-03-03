@@ -9,26 +9,17 @@
     <link rel="stylesheet" href="./style/css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Oswald|Lato' rel='stylesheet' type='text/css'>
   </head>
-  <body ng-app="myapp">
+  <body ng-app="epamInterviewer">
     <header class="mainHeader">
       <a ui-sref="frontpage"><img class="logo" src="https://www.epam.com/content/dam/epam/global/logo_gray-blue_80px.svg" style="height: 38px; width: 107.35px"></a>
       <h1 class="title"> Interviewer </h1>
       <div class="navbar" ng-controller="NavbarCtrl">
+        <a ui-sref="questions" ng-if="user.isLoggedIn()">questions</a>
         <a ui-sref="users" ng-if="user.isAdmin()">users</a>
         <a href="" ng-if="user.isLoggedIn()" ng-click="logoutUser()">log out</a>
       </div>
     </header>
     <div ui-view></div>
-    <script src="./js/main.js"></script>
-    <script src="./js/userFactory.js"></script>
-    <script src="./js/userListFactory.js"></script>
-    <script src="./js/frontpageCtrl.js"></script>
-    <script src="./js/listUsersCtrl.js"></script>
-    <script src="./js/loginCtrl.js"></script>
-    <script src="./js/registerCtrl.js"></script>
-    <script src="./js/homeCtrl.js"></script>
-    <script src="./js/navbarCtrl.js"></script>
-    <script src="./js/router.js"></script>
-    <script src="./js/authOnStateChange.js"></script>
+    <script src="bundle.js"></script>
   </body>
 </html>

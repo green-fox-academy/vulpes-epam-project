@@ -16,6 +16,18 @@ function createQuestion(query) {
     });
   }
 
+  function putQuestion(request, response) {
+    query.putQuestion(request.body, request.params.id, function (err, result) {
+      handleResponse(err, result, response);
+    });
+  }
+
+  function deleteQuestion(request, response) {
+    query.deleteQuestion(request.params.id, function (err, result) {
+      handleResponse(err, result, response);
+    });
+  }
+
   function handleResponse(err, result, response) {
     if (err) {
       logger.message('error', 'DATABASE CONNECTION ERROR');
@@ -34,6 +46,8 @@ function createQuestion(query) {
   return {
     getAllQuestion: getAllQuestion,
     postQuestion: postQuestion,
+    putQuestion: putQuestion,
+    deleteQuestion: deleteQuestion,
     handleResponse: handleResponse,
   };
 }
