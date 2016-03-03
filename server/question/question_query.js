@@ -5,7 +5,11 @@ var SQL = require('sql-template-strings');
 function createQuestionQuery(connection) {
   return {
     getAllQuestion: function (callback) {
-      connection.sendQuery('SELECT question_id, type, content FROM questions', callback);
+      connection.sendQuery(
+        SQL`
+        SELECT question_id, type, content
+        FROM questions`,
+        callback);
     },
 
     postQuestion: function (params, callback) {

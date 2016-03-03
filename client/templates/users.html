@@ -8,6 +8,12 @@
       <td class="userEmail"> {{user.email}} </td>
       <td class="userStatus">
         <span ng-if="user.isadmin">admin</span>
+        <span>
+          <select ng-options="status as status.role for status in statuses"
+                  ng-model="options"
+                  ng-change="changeUserRole(options.isAdmin, user.email)">
+          </select>
+        </span>
       </td>
       <td><img class="pen" src="style/images/pen.svg"></td>
     </tr>

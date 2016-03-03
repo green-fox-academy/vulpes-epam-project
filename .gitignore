@@ -5,3 +5,4 @@ node_modules/*
 *.css
 *.css.map
 *.log
+bundle.js
