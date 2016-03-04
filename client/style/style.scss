@@ -137,10 +137,6 @@ input.largecontentbox::-webkit-input-placeholder {
   padding-left: 20px;
 }
 
-
-
-
-
   input {
     border: {
       radius: $borderRadius;
@@ -154,8 +150,6 @@ input.largecontentbox::-webkit-input-placeholder {
     width: 450px;
 
   }
-
-
 
   .submitButton {
     text-align: center;
@@ -184,7 +178,7 @@ input.largecontentbox::-webkit-input-placeholder {
   .middle {
     color: $darkgrey;
     font: {
-      style: $fontFamilyDefault;
+      family: $fontFamilySecondary;
       size: 18px;
     };
     order: 2;
@@ -222,13 +216,16 @@ input.largecontentbox::-webkit-input-placeholder {
   }
 
   .greeting {
-    letter-spacing: 0.2em;
+    font-size: 32px;
+    font-weight: normal;
+    color: white;
+    // letter-spacing: 0.1em;
     text-transform: uppercase;
     margin: 15px 0px 0px;
   }
 }
 
-.userListTable {
+.userListTable, .questionListTable {
   border-collapse: collapse;
   font-family: $fontFamilySecondary;
   margin-left: auto;
@@ -246,18 +243,18 @@ input.largecontentbox::-webkit-input-placeholder {
     padding-top: 10px;
   }
 
-  .userEmail, .tableHeadEmail {
+  .userEmail, .tableHeadEmail, .tableHeadQuestion, .questionContent  {
     color: $darkgrey;
     text-align: left;
   }
 
-  .userStatus, .tableHeadRole {
+  .userStatus, .tableHeadRole, .tableHeadType, .questionType {
     color: $darkgrey;
     font-size: $fontSize;
     text-align: right;
   }
 
-  .userStatus {
+  .userStatus, .questionType {
     color:  $blue;
   }
 

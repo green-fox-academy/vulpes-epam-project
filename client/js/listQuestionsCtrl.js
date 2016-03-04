@@ -7,6 +7,8 @@ EPAM.controller('ListQuestionsCtrl', function ($scope, $state, questionsList, us
       $state.go('login');
     }
 
+    $scope.isAdmin = user.isAdmin();
+
     $scope.getQuestions = function () {
       return questionsList.getAllQuestions();
     };
