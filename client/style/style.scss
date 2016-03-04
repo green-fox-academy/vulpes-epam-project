@@ -137,10 +137,6 @@ input.largecontentbox::-webkit-input-placeholder {
   padding-left: 20px;
 }
 
-
-
-
-
   input {
     border: {
       radius: $borderRadius;
@@ -154,8 +150,6 @@ input.largecontentbox::-webkit-input-placeholder {
     width: 450px;
 
   }
-
-
 
   .submitButton {
     text-align: center;
@@ -222,7 +216,10 @@ input.largecontentbox::-webkit-input-placeholder {
   }
 
   .greeting {
-    letter-spacing: 0.2em;
+    font-size: 32px;
+    font-weight: normal;
+    color: white;
+    // letter-spacing: 0.1em;
     text-transform: uppercase;
     margin: 15px 0px 0px;
   }
