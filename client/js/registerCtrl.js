@@ -21,7 +21,7 @@ EPAM.controller('RegisterCtrl', function ($scope, $state, user) {
     }
 
     function handleError(error) {
-      $scope.Error = error.data.errorMessage;
+      $scope.Error = error.data.message;
       $scope.password = '';
     }
   });
