@@ -122,22 +122,14 @@ html {
     }
   }
 
-.largecontentbox {
-  height: 151px;
-  width: 460px;
-}
 
 ::-webkit-input-placeholder {
   color: $darkgrey;
-  font-size: $fontSize;
+  font-family: $fontFamilySecondary
 }
 
-input.largecontentbox::-webkit-input-placeholder {
-  position: absolute;
-  padding-left: 20px;
-}
 
-  input {
+  input, textarea {
     border: {
       radius: $borderRadius;
       color: $blue;
@@ -145,12 +137,18 @@ input.largecontentbox::-webkit-input-placeholder {
       width: 1px;
     };
     height: $inputHeight;
+    font-size: $fontSize;
     margin: 10px;
     padding-left: 10px;
     width: 450px;
+    line-height: 1;
 
   }
 
+  textarea {
+    height: auto;
+    padding-top: 12px;
+  }
   .submitButton {
     text-align: center;
     margin-left: 30px;
