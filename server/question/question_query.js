@@ -22,7 +22,6 @@ function createQuestionQuery(connection) {
     },
 
     putQuestion: function (params, id, callback) {
-      console.log('PUTPUTPUT');
       connection.sendQuery(
         SQL`
         UPDATE questions SET type = ${params.type}, content = ${params.content}
