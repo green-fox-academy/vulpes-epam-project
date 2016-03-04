@@ -2,7 +2,7 @@
 
 var passport = require('passport');
 
-function authentication() {
+function authController() {
 
   function authenticateUser(req, res) {
     passport.authenticate('local', function (err, user) {
@@ -50,4 +50,4 @@ function authentication() {
 
 }
 
-module.exports = authentication;
+module.exports = authController;

@@ -2,7 +2,7 @@
 
 var logger = require('../log.js')();
 var encrypt = require('./encrypt_service.js')();
-var authentication = require('./authentication.js')();
+var authentication = require('./auth_controller.js')();
 
 function createUserController(queries) {
 
