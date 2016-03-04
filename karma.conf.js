@@ -21,6 +21,7 @@ module.exports = function(config) {
       './node_modules/angular-ui-router/release/angular-ui-router.min.js',
       './client/bundle.js',
       './spec/client/loginCtrlSpec.js',
+      './spec/client/registerCtrlSpec.js',
     ],
 
 
