@@ -11,14 +11,18 @@ function authService(queries) {
       config.PASSPORT_CONFIG,
       function (email, password, done) {
         queries.findUser(email, function (err, user) {
-          if (err) {
-            return done(err, false, 'Connection error');
-          } else if (!user) {
-            return done(null, false, 'Incorrect username');
-          } else if (!encrypt.isMatch(password, user.password)) {
-            return done(null, false, 'Incorrect password');
-          } else {
-            return done(null, user);
+          try {
+            if (err) {
+              throw new AuthError(503, 'error', 'Connection error');
+            } else if (!user) {
+              throw new AuthError(401, 'warn', 'Incorrect username');
+            } else if (!encrypt.isMatch(password, user.password)) {
+              throw new AuthError(401, 'warn', 'Incorrect password');
+            } else {
+              return done(null, user);
+            }
+          } catch (error) {
+            return done(error, null);
           }
         });
       });
@@ -32,6 +36,14 @@ function authService(queries) {
     queries.findUser(email, function (err, user) {
       done(err, user);
     });
+  }
+
+  function AuthError(status, level, message) {
+    return {
+      status: status,
+      level: level,
+      message: message,
+    };
   }
 
   return {

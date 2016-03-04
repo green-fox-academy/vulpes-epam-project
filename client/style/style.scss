@@ -269,6 +269,10 @@ html {
     border: none;
   }
 
+  .penButton:focus {
+    outline: none;
+  }
+  
   select {
     height: 20px;
     color: $blue;
