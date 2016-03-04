@@ -122,26 +122,14 @@ html {
     }
   }
 
-.largecontentbox {
-  height: 151px;
-  width: 460px;
-}
 
 ::-webkit-input-placeholder {
   color: $darkgrey;
-  font-size: $fontSize;
-}
-
-input.largecontentbox::-webkit-input-placeholder {
-  position: absolute;
-  padding-left: 20px;
+  font-family: $fontFamilySecondary
 }
 
 
-
-
-
-  input {
+  input, textarea {
     border: {
       radius: $borderRadius;
       color: $blue;
@@ -149,14 +137,18 @@ input.largecontentbox::-webkit-input-placeholder {
       width: 1px;
     };
     height: $inputHeight;
+    font-size: $fontSize;
     margin: 10px;
     padding-left: 10px;
     width: 450px;
+    line-height: 1;
 
   }
 
-
-
+  textarea {
+    height: auto;
+    padding-top: 12px;
+  }
   .submitButton {
     text-align: center;
     margin-left: 30px;
@@ -222,7 +214,10 @@ input.largecontentbox::-webkit-input-placeholder {
   }
 
   .greeting {
-    letter-spacing: 0.2em;
+    font-size: 32px;
+    font-weight: normal;
+    color: white;
+    // letter-spacing: 0.1em;
     text-transform: uppercase;
     margin: 15px 0px 0px;
   }
@@ -274,6 +269,10 @@ input.largecontentbox::-webkit-input-placeholder {
     border: none;
   }
 
+  .penButton:focus {
+    outline: none;
+  }
+  
   select {
     height: 20px;
     color: $blue;

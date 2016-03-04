@@ -4,6 +4,14 @@ var EPAM = require('./main');
 
 EPAM.factory('logger', function ($http) {
 
+  function createLogMessage(level, message) {
+    var logMessage = {
+      level: level,
+      message: message,
+    };
+    sendLog(logMessage);
+  }
+
   function stateChangeLogger(event, toState) {
     window.document.title = toState.data.pageTitle;
     var logMessage = { level: 'info', message: `ROUTE CHANGED TO: ${toState.url}` };
@@ -11,11 +19,21 @@ EPAM.factory('logger', function ($http) {
   }
 
   function sendLog(logMessage) {
-    $http.post('/api/log', logMessage);
+    $http.post('/api/log', logMessage)
+      .then(displayLogMessage)
+      .catch(displayError);
+  }
+
+  function displayLogMessage(response) {
+    console.log(response.data);
+  }
+
+  function displayError(err) {
+    console.log(err);
   }
 
   return {
-    sendLog: sendLog,
     stateChangeLogger: stateChangeLogger,
+    createLogMessage: createLogMessage,
   };
 });
