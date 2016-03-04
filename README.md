@@ -1,7 +1,3 @@
-# Epam Interviewer
-![Image of Epam Interviewer APP]
-(https://www.epam.com/content/dam/epam/global/logo_gray-blue_80px.svg =250px)
-
 Epam Interviewer helper APP
 ---
 An interviewer helper application for the EPAM
@@ -80,3 +76,5 @@ you can access the site through your browser with the following url
 ```
 localhost:3000
 ```
+![Image of Epam Interviewer APP]
+(https://trello-attachments.s3.amazonaws.com/56aef51031e033d3bba53c86/56c3201b2507d89930d3696b/1024x600/0964cb1960f7352769b5779326f3d074/Index.jpg)
