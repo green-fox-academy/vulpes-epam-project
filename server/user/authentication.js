@@ -5,14 +5,9 @@ var passport = require('passport');
 function authentication() {
 
   function authenticateUser(req, res) {
-    passport.authenticate('local', function (err, user, info) {
-      if (err) {
-        res.status(503).send(info);
-      } else if (user) {
-        loginUser(req, res, user);
-      } else {
-        res.status(401).send(info);
-      }
+    passport.authenticate('local', function (err, user) {
+      if (err) return res.status(err.status).json(err);
+      return loginUser(req, res, user);
     })(req, res);
   }
 
