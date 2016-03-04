@@ -55,7 +55,7 @@ describe('RegisterCtrl', function () {
     expect($state.go).not.toHaveBeenCalledWith();
   });
 
-  it('should redirect on calling log in', function (done) {
+  it('should redirect on calling addUser', function (done) {
     var $state = {
       go: function () {},
     };
