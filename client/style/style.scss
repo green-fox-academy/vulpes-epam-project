@@ -272,9 +272,12 @@ input.largecontentbox::-webkit-input-placeholder {
   .penButton {
     background-color: white;
     border: none;
-    &:hover {border: none};
   }
 
+  .penButton:focus {
+    outline: none;
+  }
+  
   select {
     height: 20px;
     color: $blue;
