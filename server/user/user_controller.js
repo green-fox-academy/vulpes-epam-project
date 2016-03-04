@@ -1,13 +1,13 @@
 'use strict';
 
 var logger = require('../log.js')();
-var enrypt = require('./enrypt_service.js')();
+var encrypt = require('./encrypt_service.js')();
 var authentication = require('./authentication.js')();
 
 function createUserController(queries) {
 
   function newUser(req) {
-    var hash = enrypt.generateHash(req.body.password);
+    var hash = encrypt.generateHash(req.body.password);
     return {
       email: req.body.email,
       password: hash,

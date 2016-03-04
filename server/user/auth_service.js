@@ -1,7 +1,7 @@
 'use strict';
 
 var config = require('../config.js');
-var enrypt = require('./enrypt_service.js')();
+var encrypt = require('./encrypt_service.js')();
 var Strategy = require('passport-local').Strategy;
 
 function authService(queries) {
@@ -15,7 +15,7 @@ function authService(queries) {
             return done(err, false, 'Connection error');
           } else if (!user) {
             return done(null, false, 'Incorrect username');
-          } else if (!enrypt.isMatch(password, user.password)) {
+          } else if (!encrypt.isMatch(password, user.password)) {
             return done(null, false, 'Incorrect password');
           } else {
             return done(null, user);
