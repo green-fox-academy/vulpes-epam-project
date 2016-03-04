@@ -1,23 +1,27 @@
 'use strict';
 
 var logger = require('../log.js')();
+var encrypt = require('./encrypt_service.js')();
+var authentication = require('./authentication.js')();
 
 function createUserController(queries) {
 
-  function registerUser(req, res) {
-    queries.registNewUser(req.body, function (err, user) {
-      err ? handleResponse(err, user, res)
-          : loginUser(req, res, user);
-    });
+  function newUser(req) {
+    var hash = encrypt.generateHash(req.body.password);
+    return {
+      email: req.body.email,
+      password: hash,
+    };
   }
 
-  function loginUser(req, res, user) {
-    req.logIn(user, function (err) {
-      if (err) return res.status(500);
-      return res.status(200).json({
-        email: user.email,
-        isadmin: user.isadmin,
-      });
+  function registerUser(req, res) {
+    var user = newUser(req);
+    queries.registNewUser(user, function (err, registeredUser) {
+      if (err) {
+        handleResponse(err, null, res);
+      } else {
+        authentication.loginUser(req, res, registeredUser);
+      }
     });
   }
 
@@ -66,7 +70,6 @@ function createUserController(queries) {
 
   return {
     registerUser: registerUser,
-    loginUser: loginUser,
     updateUserAdmin: updateUserAdmin,
     getAllUser: getAllUser,
     findUser: findUser,

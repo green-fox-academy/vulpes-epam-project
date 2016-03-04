@@ -4,11 +4,11 @@ var SQL = require('sql-template-strings');
 
 function createUserQueries(connection) {
 
-  function registNewUser(params, callback) {
+  function registNewUser(user, callback) {
     connection.sendQuery(
       SQL`
       INSERT INTO users (email, password)
-      VALUES (${params.email}, ${params.password})
+      VALUES (${user.email}, ${user.password})
       RETURNING user_id, email, isadmin`,
       getFirstItem(callback)
     );

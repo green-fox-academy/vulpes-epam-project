@@ -14,5 +14,6 @@ module.exports = {
     usernameField: 'email',
     passwordField: 'password',
   },
+  ENCRYPT_SALT: process.env.ENCRYPT_SALT,
   PUBLIC_FOLDER_NAME: 'client',
 };
