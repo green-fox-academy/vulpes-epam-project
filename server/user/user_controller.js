@@ -1,47 +1,46 @@
 'use strict';
 
 var logger = require('../log.js')();
+var encrypt = require('./encrypt_service.js')();
+var authentication = require('./authentication.js')();
 
 function createUserController(queries) {
 
-  function registerUser(request, response) {
-    queries.registNewUser(request.body, function (err, result) {
+  function newUser(req) {
+    var hash = encrypt.generateHash(req.body.password);
+    return {
+      email: req.body.email,
+      password: hash,
+    };
+  }
+
+  function registerUser(req, res) {
+    var user = newUser(req);
+    queries.registNewUser(user, function (err, registeredUser) {
       if (err) {
-        handleResponse(err, result, response);
+        handleResponse(err, null, res);
       } else {
-        var user = result.rows[0];
-        loginUser(request, response, user);
+        authentication.loginUser(req, res, registeredUser);
       }
     });
   }
 
-  function loginUser(req, res, user) {
-    req.logIn(user, function (err) {
-      if (err) return res.status(500);
-      return res.status(200).json({
-        email: user.email,
-        isadmin: user.isadmin,
-      });
-    });
-  }
-
-  function updateUserAdmin(request, response) {
-    queries.updateUserAdminStatus(request.body, function (err, result) {
+  function updateUserAdmin(req, response) {
+    queries.updateUserAdminStatus(req.body, function (err, result) {
       handleResponse(err, result, response);
     });
   }
 
-  function getAllUser(request, response) {
+  function getAllUser(req, response) {
     queries.getUsers(function (err, result) {
       handleResponse(err, result, response);
     });
   }
 
   function findUser(email, cb) {
-    queries.findUser(email, function (err, result) {
+    queries.findUser(email, function (err, user) {
       if (err) return cb(err);
-      var foundUser = result.rows[0];
-      if (foundUser) return cb(null, foundUser);
+      if (user) return cb(null, user);
       return cb(null, null);
     });
   }
@@ -71,7 +70,6 @@ function createUserController(queries) {
 
   return {
     registerUser: registerUser,
-    loginUser: loginUser,
     updateUserAdmin: updateUserAdmin,
     getAllUser: getAllUser,
     findUser: findUser,

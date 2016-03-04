@@ -81,10 +81,17 @@ html {
       }
     }
   }
+  h2 {
+    text-transform: uppercase;
+    font-family: $fontFamilyDefault;
+    color: $darkgrey;
+    font-size: $fontSize;
+    padding-right: 280px;
+  }
 }
 
 
-.frontpage, .register, .login, {
+.frontpage, .register, .login, .question {
   justify-content: center;
   left: 50%;
   position: fixed;
@@ -94,10 +101,11 @@ html {
   transform: translate(-50%, -50%);
   .button, .registerButton, .loginButton, .submitButton {
     @include buttonProperties($blue, $borderRadius, 0px, white, $fontFamilyDefault, $fontSize, $buttonHeight, $inputWidth);
+    text-transform: uppercase;
   }
 }
 
-.register, .login {
+.register, .login, .question {
   width: 500px;
 
   .error-msg-container {
@@ -114,6 +122,25 @@ html {
     }
   }
 
+.largecontentbox {
+  height: 151px;
+  width: 460px;
+}
+
+::-webkit-input-placeholder {
+  color: $darkgrey;
+  font-size: $fontSize;
+}
+
+input.largecontentbox::-webkit-input-placeholder {
+  position: absolute;
+  padding-left: 20px;
+}
+
+
+
+
+
   input {
     border: {
       radius: $borderRadius;
@@ -121,12 +148,14 @@ html {
       style: solid;
       width: 1px;
     };
-    font-size: $fontSize;
     height: $inputHeight;
     margin: 10px;
     padding-left: 10px;
     width: 450px;
+
   }
+
+
 
   .submitButton {
     text-align: center;
@@ -233,10 +262,23 @@ html {
   }
 
   .pen {
-    visibility: hidden;;
+    visibility: hidden;
   }
 
   tr:hover .pen {
     visibility: visible;
+  }
+
+  .penButton {
+    background-color: white;
+    border: none;
+  }
+
+  select {
+    height: 20px;
+    color: $blue;
+    border-color: $blue;
+    font-size: $fontSize;
+    font-family: $fontFamilySecondary;
   }
 }

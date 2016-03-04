@@ -1,58 +1,29 @@
 'use strict';
 
-var config = require('../config.js');
 var passport = require('passport');
-var Strategy = require('passport-local').Strategy;
 
-function authentication(userController) {
+function authentication() {
 
-  function createStrategy() {
-    return new Strategy(
-      config.PASSPORT_CONFIG,
-      function (email, password, done) {
-        userController.findUser(email, function (err, user) {
-          if (err) {
-            return done(err, false, 'Connection error');
-          } else if (!user) {
-            return done(null, false, 'Incorrect username');
-          } else if (user.password !== password) {
-            return done(null, false, 'Incorrect password');
-          } else {
-            return done(null, user);
-          }
-        });
-      });
-  }
-
-  function authenticateUser(req, res, next) {
+  function authenticateUser(req, res) {
     passport.authenticate('local', function (err, user, info) {
       if (err) {
         res.status(503).send(info);
       } else if (user) {
-        userController.loginUser(req, res, user);
+        loginUser(req, res, user);
       } else {
         res.status(401).send(info);
       }
-    })(req, res, next);
+    })(req, res);
   }
 
-  function serialize(user, cb) {
-    cb(null, user.email);
-  }
-
-  function deserialize(email, done) {
-    userController.findUser(email, function (err, user) {
-      done(err, user);
+  function loginUser(req, res, user) {
+    req.logIn(user, function (err) {
+      if (err) return res.status(500);
+      return res.status(200).json({
+        email: user.email,
+        isadmin: user.isadmin,
+      });
     });
-  }
-
-  function sessionLogout(req, res) {
-    if (req.isAuthenticated()) {
-      req.logout();
-      res.status(200).send('Successful logout');
-    } else {
-      res.status(500).send('Nobody logged in');
-    }
   }
 
   function getLoggedInUser(req, res) {
@@ -66,13 +37,20 @@ function authentication(userController) {
     }
   }
 
+  function sessionLogout(req, res) {
+    if (req.isAuthenticated()) {
+      req.logout();
+      res.status(200).send('Successful logout');
+    } else {
+      res.status(500).send('Nobody logged in');
+    }
+  }
+
   return {
-    createStrategy: createStrategy,
     authenticateUser: authenticateUser,
-    serialize: serialize,
-    deserialize: deserialize,
-    sessionLogout: sessionLogout,
+    loginUser: loginUser,
     getLoggedInUser: getLoggedInUser,
+    sessionLogout: sessionLogout,
   };
 
 }

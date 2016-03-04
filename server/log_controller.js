@@ -13,7 +13,7 @@ function createLogController() {
 
   function logFrontendEvent(req, res) {
     var logLevel = req.body.level;
-    var logMessage = `NEW FRONTEND EVENT, ROUTE CHANGED TO: ${req.body.toState}`;
+    var logMessage = `NEW FRONTEND EVENT, ${req.body.message}`;
     logger.message(logLevel, logMessage);
     res.status(200).json({ 'Logging:': 'Success' });
   }

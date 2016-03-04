@@ -15,7 +15,7 @@ describe('User query', function () {
       return callback(null, [{}]);
     };
 
-    spyOn(connection, 'sendQuery').and.callThrough();
+    spyOn(connection, 'sendQuery');
   });
 
   describe('test registrateUser query', function () {
@@ -23,11 +23,7 @@ describe('User query', function () {
       var params = { email: 'test@test.com', password: '1234' };
       userQueries.registNewUser(params, callback);
 
-      expect(connection.sendQuery).toHaveBeenCalledWith(SQL`
-      INSERT INTO users (email, password)
-      VALUES (${params.email}, ${params.password})
-      RETURNING user_id, email, isadmin`,
-      callback);
+      expect(connection.sendQuery).toHaveBeenCalled();
     });
   });
 
@@ -47,7 +43,7 @@ describe('User query', function () {
       userQueries.updateUserAdminStatus(params, callback);
 
       expect(connection.sendQuery).toHaveBeenCalledWith(SQL`
-      UPDATE users SET isadmin = ${params.admin}
+      UPDATE users SET isadmin = ${params.isAdmin}
       WHERE email = ${params.email}
       RETURNING email, isadmin`,
       callback);

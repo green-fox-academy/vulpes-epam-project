@@ -3,6 +3,9 @@
 require('./main.js');
 require('./userFactory.js');
 require('./userListFactory.js');
+require('./questionFactory.js');
+require('./questionListFactory.js');
+require('./logFactory.js');
 require('./frontpageCtrl.js');
 require('./listUsersCtrl.js');
 require('./questionFactory.js');

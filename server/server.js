@@ -12,7 +12,8 @@ var createHeartbeatQuery = require('./heartbeat/heartbeat_query.js');
 var createHeartbeat = require('./heartbeat/heartbeat.js');
 var createUserController = require('./user/user_controller.js');
 var createUserQueries = require('./user/user_queries.js');
-var createAuthentication = require('./user/authentication.js');
+var authentication = require('./user/authentication.js')();
+var createAuthService = require('./user/auth_service.js');
 var createQuestion = require('./question/question');
 var createQuestionQuery = require('./question/question_query');
 var logController = require('./log_controller.js')();
@@ -22,16 +23,16 @@ function createServer(connection) {
   var userQueries = createUserQueries(connection);
   var heartbeat = createHeartbeat(heartQuery);
   var userController = createUserController(userQueries);
-  var authentication = createAuthentication(userController);
+  var authService = createAuthService(userQueries);
   var questionQuery = createQuestionQuery(connection);
   var question = createQuestion(questionQuery);
   var app = express();
 
   var route = path.join(__dirname, '..', config.PUBLIC_FOLDER_NAME);
 
-  passport.use(authentication.createStrategy());
-  passport.serializeUser(authentication.serialize);
-  passport.deserializeUser(authentication.deserialize);
+  passport.use(authService.createStrategy());
+  passport.serializeUser(authService.serialize);
+  passport.deserializeUser(authService.deserialize);
 
   app.use(logController.logRequest);
   app.use(bodyParser.json());
