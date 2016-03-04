@@ -16,7 +16,6 @@ EPAM.factory('usersList', function ($http) {
     }
 
     function changeUserStatus(updatedUser) {
-      console.log(updatedUser);
       $http.put('api/users', updatedUser).then(fetchAllUsers);
     }
 

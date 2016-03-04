@@ -37,14 +37,6 @@ function createUserController(queries) {
     });
   }
 
-  function findUser(email, cb) {
-    queries.findUser(email, function (err, user) {
-      if (err) return cb(err);
-      if (user) return cb(null, user);
-      return cb(null, null);
-    });
-  }
-
   function handleResponse(err, result, response) {
     if (err) {
       logger.message('error', err.toString());
@@ -72,7 +64,6 @@ function createUserController(queries) {
     registerUser: registerUser,
     updateUserAdmin: updateUserAdmin,
     getAllUser: getAllUser,
-    findUser: findUser,
   };
 
 }

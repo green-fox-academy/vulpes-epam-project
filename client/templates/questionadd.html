@@ -2,7 +2,7 @@
   <form class="quesionForm" ng-submit="questionSend(content, type)">
     <div ng-show="Error" class="error-msg-container"><p class="error-msg">{{Error}}</p></div>
     <h2>Create question</h2>
-    <input class="largecontentbox" type="text" placeholder="Interview question" ng-model="content" required>
+    <textarea class="largecontentbox" type="text" placeholder="Interview question" ng-model="content" required  rows="6" cols="40"></textarea>
     <input type="text" placeholder="Question type" ng-model="type" required>
     <button class="submitButton" type="submit"> Create</button>
   </form>

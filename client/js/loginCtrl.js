@@ -21,7 +21,7 @@ EPAM.controller('LogInCtrl', function ($scope, $state, user, logger) {
     }
 
     function handleError(error) {
-      $scope.Error = error.data;
+      $scope.Error = error.data.message;
       $scope.password = '';
       logger.createLogMessage('error', 'Failed to log in!');
     }
