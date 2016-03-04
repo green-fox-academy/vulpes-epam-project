@@ -25,7 +25,7 @@ gulp.task('watch', function () {
     gulp.start('browserify', done);
   }));
 
-  watch('**/*.scss', batch(function (events, done) {
+  watch('./client/style/*.scss', batch(function (events, done) {
     gulp.start('sass', done);
   }));
 });
