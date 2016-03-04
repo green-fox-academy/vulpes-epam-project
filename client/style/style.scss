@@ -155,7 +155,7 @@ html {
   .middle {
     color: $darkgrey;
     font: {
-      style: $fontFamilyDefault;
+      family: $fontFamilySecondary;
       size: 18px;
     };
     order: 2;
@@ -199,7 +199,7 @@ html {
   }
 }
 
-.userListTable {
+.userListTable, .questionListTable {
   border-collapse: collapse;
   font-family: $fontFamilySecondary;
   margin-left: auto;
@@ -217,18 +217,18 @@ html {
     padding-top: 10px;
   }
 
-  .userEmail, .tableHeadEmail {
+  .userEmail, .tableHeadEmail, .tableHeadQuestion, .questionContent  {
     color: $darkgrey;
     text-align: left;
   }
 
-  .userStatus, .tableHeadRole {
+  .userStatus, .tableHeadRole, .tableHeadType, .questionType {
     color: $darkgrey;
     font-size: $fontSize;
     text-align: right;
   }
 
-  .userStatus {
+  .userStatus, .questionType {
     color:  $blue;
   }
 
