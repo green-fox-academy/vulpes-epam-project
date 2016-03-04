@@ -17,8 +17,11 @@ function createUserController(queries) {
   function registerUser(req, res) {
     var user = newUser(req);
     queries.registNewUser(user, function (err, registeredUser) {
-      err ? handleResponse(err, null, res)
-          : authentication.loginUser(req, res, registeredUser);
+      if (err) {
+        handleResponse(err, null, res);
+      } else {
+        authentication.loginUser(req, res, registeredUser);
+      }
     });
   }
 
