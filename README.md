@@ -1,6 +1,6 @@
 # Epam Interviewer
 ![Image of Epam Interviewer APP]
-(https://www.epam.com/content/dam/epam/global/logo_gray-blue_80px.svg)
+(https://www.epam.com/content/dam/epam/global/logo_gray-blue_80px.svg =250px)
 
 Epam Interviewer helper APP
 ---
