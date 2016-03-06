@@ -32,6 +32,14 @@ function authController() {
     }
   }
 
+  function checkAdminRights(req, res, next) {
+    if (req.user && req.user.isadmin) {
+      next();
+    } else {
+      res.status(401).send('You do not have permission to access this page.');
+    }
+  }
+
   function sessionLogout(req, res) {
     if (req.isAuthenticated()) {
       req.logout();
@@ -45,6 +53,7 @@ function authController() {
     authenticateUser: authenticateUser,
     loginUser: loginUser,
     getLoggedInUser: getLoggedInUser,
+    checkAdminRights: checkAdminRights,
     sessionLogout: sessionLogout,
   };
 

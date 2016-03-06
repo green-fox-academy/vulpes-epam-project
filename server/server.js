@@ -44,7 +44,7 @@ function createServer(connection) {
 
   app.get('/heartbeat', heartbeat.getStatus);
   app.post('/api/log', logController.logFrontendEvent);
-  app.get('/api/users', userController.getAllUser);
+  app.get('/api/users', authController.checkAdminRights, userController.getAllUser);
   app.put('/api/users', userController.updateUserAdmin);
   app.post('/api/register', userController.registerUser);
   app.post('/api/login', authController.authenticateUser);
