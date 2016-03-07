@@ -139,4 +139,38 @@ describe('ListUsersCtrl', function () {
     });
     expect($scope.getUsers()).toEqual([]);
   });
+
+  it('should send a put request', function (done) {
+    var $scope = {};
+    var userList = {
+      getAllUser: function () {
+        return [];
+      },
+
+      changeUserStatus: function () {
+        return Promise.resolve();
+      },
+    },
+    spyOn(userlist, 'changeUserStatus');
+    var controller = $controller('ListUsersCtrl', {
+      $scope: $scope,
+      $state: {},
+      user: {
+        isLoggedIn: function () {
+          return true;
+        },
+
+        isAdmin: function () {
+          return true;
+        },
+
+        getEmail: function () {},
+      },
+    });
+    $scope.changeUserRole(true, 'userEmail');
+    Promise.resolve().then(function () {
+      expect(userList.changeUserStatus).toHaveBeenCalled();
+      done();
+    });
+  });
 });

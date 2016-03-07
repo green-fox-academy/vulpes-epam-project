@@ -1,0 +1,12 @@
+<div class="templatesTable">
+  <table class="templatesListTable" ng-controller="ListTemplatesCtrl">
+    <tr>
+      <th class="tableHeadTemplate">Postion</th>
+    </tr>
+    <tr ng-attr-id="{{template.template_id}}" ng-repeat="template in getTemplates()">
+      <td class="templateTitle"> {{template.title}} </td>
+      <td ng-if="isAdmin"><img class="pen" src="style/images/pen.svg"></td>
+      <td ng-if="isAdmin"><img class="trashbin" src="style/images/trash.svg"></td>
+    </tr>
+  </table>
+</div>
