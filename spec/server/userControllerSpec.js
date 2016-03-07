@@ -15,16 +15,16 @@ describe('Controller', function () {
   });
 
   describe('GET /api/users', function () {
-    it('should respond with json', function (done) {
+    it('should respond with an unauthorized status, if the user is not logged in', function (done) {
       request(app)
         .get('/api/users')
-        .expect('Content-Type', /json/)
-        .expect(200)
+        .expect('Content-Type', /text\/html/)
+        .expect(401)
         .end(function (err, res) {
           if (err) {
             done.fail(err);
           } else {
-            expect(res.body).toEqual([{}]);
+            expect(res.text).toEqual('You do not have permission to access this page.');
             done();
           }
         });
