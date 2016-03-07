@@ -64,5 +64,12 @@ EPAM.config(function ($stateProvider, $urlRouterProvider) {
         data: {
           pageTitle: 'Templates',
         },
+      })
+      .state('newInterview', {
+        url: '/interview/new',
+        templateUrl: './templates/interview/new.html',
+        data: {
+          pageTitle: 'Start new interview',
+        },
       });
   });
