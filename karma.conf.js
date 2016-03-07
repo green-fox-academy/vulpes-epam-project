@@ -22,10 +22,8 @@ module.exports = function(config) {
       './client/bundle.js',
       './spec/client/loginCtrlSpec.js',
       './spec/client/homeCtrlSpec.js',
-      './spec/client/listUsersCtrlSpec.js',
       './spec/client/registerCtrlSpec.js',
     ],
-
 
     // list of files to exclude
     exclude: [
