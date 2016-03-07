@@ -272,7 +272,7 @@ html {
   .penButton:focus {
     outline: none;
   }
-  
+
   select {
     height: 20px;
     color: $blue;
@@ -280,4 +280,11 @@ html {
     font-size: $fontSize;
     font-family: $fontFamilySecondary;
   }
+}
+
+.active {
+  border: 2px;
+  border-bottom-color: $blue;
+  border-bottom-style: solid;
+  padding-bottom: 3px;
 }
