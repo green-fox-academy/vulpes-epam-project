@@ -81,6 +81,7 @@ html {
       }
     }
   }
+
   h2 {
     text-transform: uppercase;
     font-family: $fontFamilyDefault;
@@ -122,12 +123,10 @@ html {
     }
   }
 
-
-::-webkit-input-placeholder {
-  color: $darkgrey;
-  font-family: $fontFamilySecondary
-}
-
+  ::-webkit-input-placeholder {
+    color: $darkgrey;
+    font-family: $fontFamilySecondary
+  }
 
   input, textarea {
     border: {
@@ -142,21 +141,19 @@ html {
     padding-left: 10px;
     width: 450px;
     line-height: 1;
-
   }
 
   textarea {
     height: auto;
     padding-top: 12px;
   }
+
   .submitButton {
     text-align: center;
-    margin-left: 30px;
   }
 
   .formlinks {
     font-family: $fontFamilyDefault;
-    margin-left: 30px;
   }
 
   a, a:visited {
