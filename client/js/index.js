@@ -18,4 +18,5 @@ require('./navbarCtrl.js');
 require('./listQuestionsCtrl.js');
 require('./router.js');
 require('./authOnStateChange.js');
+require('./changeTitleOnStateChange.js');
 require('./logOnStateChange.js');
