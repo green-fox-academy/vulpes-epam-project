@@ -2,7 +2,7 @@
 
 var EPAM = require('./main');
 
-EPAM.controller('RegisterCtrl', function ($scope, $state, user) {
+EPAM.controller('RegisterCtrl', function ($scope, $state, user, logger) {
     if (user.isLoggedIn()) {
       $state.go('home');
     }
@@ -23,5 +23,6 @@ EPAM.controller('RegisterCtrl', function ($scope, $state, user) {
     function handleError(error) {
       $scope.Error = error.data.message;
       $scope.password = '';
+      logger.createLogMessage('error', 'Failed registration!');
     }
   });

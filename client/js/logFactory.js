@@ -19,11 +19,17 @@ EPAM.factory('logger', function ($http) {
   }
 
   function sendLog(logMessage) {
-    $http.post('/api/log', logMessage).then(function (res) {
-      console.log(res.data);
-    }).catch(function (err) {
-      console.log(err);
-    });
+    $http.post('/api/log', logMessage)
+      .then(displayLogMessage)
+      .catch(displayError);
+  }
+
+  function displayLogMessage(response) {
+    console.log(response.data);
+  }
+
+  function displayError(err) {
+    console.log(err);
   }
 
   return {
