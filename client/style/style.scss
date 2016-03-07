@@ -266,14 +266,21 @@ html {
     color:  $blue;
   }
 
-  .pen {
+  .pen, .trash {
+    margin-left: 8px;
     visibility: hidden;
+    width: 16px;
   }
 
-  tr:hover .pen {
+  tr:hover .pen, tr:hover .trash {
+    margin-left: 8px;
     visibility: visible;
+    width: 16px;
   }
 
+  .cell {
+    width: 16px;
+  }
   .penButton {
     background-color: white;
     border: none;
