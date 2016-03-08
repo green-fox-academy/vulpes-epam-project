@@ -38,26 +38,29 @@ function createUserController(queries) {
   }
 
   function handleResponse(err, result, response) {
-    if (err) {
-      logger.message('error', err.toString());
-      if (err.code === '23505') {
-        response.status(503).json({
-          errorMessage: 'This email already exists!',
-        });
-      } else {
-        response.status(503).json({
-          errorMessage: 'Database error. Please try again later.',
-        });
-      }
-    } else {
-      if (result.rows.length === 0) {
-        logger.message('warn', 'ITEM NOT FOUND IN DATABASE');
-        response.status(404).json(result.rows);
+    try {
+      if (err.code && err.code === '23505') {
+        throw userError(503, 'warn', 'This email already exists!');
+      } else if (err) {
+        throw userError(503, 'error', 'Database error. Please try again later.');
+      } else if (result.rows.length === 0) {
+        throw userError(503, 'error', 'Item not found in database');
       } else {
         logger.message('info', 'SUCCESSFUL DATABASE QUERY');
         response.status(200).json(result.rows);
       }
+    } catch (error) {
+      logger.message(error.level, error.message);
+      response.status(error.status).json(error);
     }
+  }
+
+  function userError(status, level, message) {
+    return {
+      status: status,
+      level: level,
+      message: message,
+    };
   }
 
   return {
