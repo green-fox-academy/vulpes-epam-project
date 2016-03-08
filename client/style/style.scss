@@ -79,8 +79,23 @@ html {
         text-decoration: none;
         margin-left: 30px;
       }
+
+      .active, a:hover {
+        border: 2px;
+        border-bottom-style: solid;
+        padding-bottom: 3px;
+      }
+
+      a:hover {
+        border-bottom-color: #d2d0d0;
+      }
+
+      .active {
+        border-bottom-color: $blue;
+      }
     }
   }
+
   h2 {
     text-transform: uppercase;
     font-family: $fontFamilyDefault;
@@ -89,7 +104,6 @@ html {
     padding-right: 280px;
   }
 }
-
 
 .frontpage, .register, .login, .question {
   justify-content: center;
@@ -122,12 +136,10 @@ html {
     }
   }
 
-
-::-webkit-input-placeholder {
-  color: $darkgrey;
-  font-family: $fontFamilySecondary
-}
-
+  ::-webkit-input-placeholder {
+    color: $darkgrey;
+    font-family: $fontFamilySecondary
+  }
 
   input, textarea {
     border: {
@@ -142,21 +154,19 @@ html {
     padding-left: 10px;
     width: 450px;
     line-height: 1;
-
   }
 
   textarea {
     height: auto;
     padding-top: 12px;
   }
+
   .submitButton {
     text-align: center;
-    margin-left: 30px;
   }
 
   .formlinks {
     font-family: $fontFamilyDefault;
-    margin-left: 30px;
   }
 
   a, a:visited {
@@ -256,14 +266,21 @@ html {
     color:  $blue;
   }
 
-  .pen {
+  .pen, .trash {
+    margin-left: 8px;
     visibility: hidden;
+    width: 16px;
   }
 
-  tr:hover .pen {
+  tr:hover .pen, tr:hover .trash {
+    margin-left: 8px;
     visibility: visible;
+    width: 16px;
   }
 
+  .cell {
+    width: 16px;
+  }
   .penButton {
     background-color: white;
     border: none;
@@ -272,7 +289,7 @@ html {
   .penButton:focus {
     outline: none;
   }
-  
+
   select {
     height: 20px;
     color: $blue;
