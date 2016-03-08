@@ -16,6 +16,8 @@ var authController = require('./user/auth_controller.js')();
 var createAuthService = require('./user/auth_service.js');
 var createQuestion = require('./question/question');
 var createQuestionQuery = require('./question/question_query');
+var createTemplateQuery = require('./template/template_queries.js');
+var createTemplateController = require('./template/template_controller.js');
 var logController = require('./log_controller.js')();
 
 function createServer(connection) {
@@ -26,6 +28,8 @@ function createServer(connection) {
   var authService = createAuthService(userQueries);
   var questionQuery = createQuestionQuery(connection);
   var question = createQuestion(questionQuery);
+  var templateQuery = createTemplateQuery(connection);
+  var templateController = createTemplateController(templateQuery);
   var app = express();
 
   var route = path.join(__dirname, '..', config.PUBLIC_FOLDER_NAME);
@@ -54,6 +58,7 @@ function createServer(connection) {
   app.post('/api/questions', question.postQuestion);
   app.put('/api/questions/:id', question.putQuestion);
   app.delete('/api/questions/:id', question.deleteQuestion);
+  app.get('/api/templates', templateController.getAllTemplates);
 
   return app;
 }
