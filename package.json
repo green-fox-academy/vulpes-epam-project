@@ -1,5 +1,5 @@
 {
-  "name": "epam1-project",
+  "name": "epam-interviewer",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -7,14 +7,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/greenfox-academy/epam1-project.git"
+    "url": "git+https://github.com/greenfox-academy/vulpes-epam-project"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/greenfox-academy/epam1-project/issues"
+    "url": "https://github.com/greenfox-academy/vulpes-epam-project"
   },
-  "homepage": "https://github.com/greenfox-academy/epam1-project#readme",
+  "homepage": "http://epam-interviewer.herokuapp.com/",
   "devDependencies": {
     "angular": "^1.5.0",
     "angular-mocks": "^1.5.0",
