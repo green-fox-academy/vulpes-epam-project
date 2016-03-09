@@ -72,5 +72,13 @@ EPAM.config(function ($stateProvider, $urlRouterProvider) {
         data: {
           pageTitle: 'Start new interview',
         },
+      })
+      .state('newTemplate', {
+        url: '/templates/new',
+        templateUrl: './templates/templates/newtemplate.html',
+        controller: 'NewTemplateCtrl',
+        data: {
+          pageTitle: 'Add new template',
+        },
       });
   });
