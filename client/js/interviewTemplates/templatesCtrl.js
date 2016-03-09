@@ -12,6 +12,7 @@ EPAM.controller('ListTemplatesCtrl', function ($scope, $state, templatesList, us
     $scope.isAdmin = user.isAdmin();
 
     $scope.getTemplates = function () {
+      console.log(templatesList.getAllTemplates());
       return templatesList.getAllTemplates();
     };
 

@@ -14,7 +14,7 @@ function createTemplateController(queries) {
         errorMessage: 'Database error. Please try again later.',
       });
     } else {
-      responseSchema(result);
+      response.status(200).json(responseSchema(result));
     }
   }
 
@@ -36,6 +36,7 @@ function createTemplateController(queries) {
       return temp;
     });
     console.log(resultObject);
+    return resultObject;
   }
 
   return {
