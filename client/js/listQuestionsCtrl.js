@@ -9,6 +9,10 @@ EPAM.controller('ListQuestionsCtrl', function ($scope, $state, questionsList, us
 
     $scope.isAdmin = user.isAdmin();
 
+    $scope.deleteQuestionFromQuestionsList = function (row) {
+      questionsList.deleteById(row.question_id);
+    };
+
     $scope.getQuestions = function () {
       return questionsList.getAllQuestions();
     };

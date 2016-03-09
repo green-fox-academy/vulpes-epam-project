@@ -15,8 +15,13 @@ EPAM.factory('questionsList', function ($http) {
       });
     }
 
+    function deleteById(id) {
+      $http.delete('api/questions/' + id).then(fetchAllQuestions);
+    }
+
     return {
-      getAllQuestions: getAllQuestions,
+      deleteById: deleteById,
       fetchAllQuestions: fetchAllQuestions,
+      getAllQuestions: getAllQuestions,
     };
   });
