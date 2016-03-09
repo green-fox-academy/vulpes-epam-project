@@ -24,7 +24,7 @@ describe('Controller', function () {
           if (err) {
             done.fail(err);
           } else {
-            expect(res.body).toEqual([{}]);
+            expect(res.body).toEqual({ questions: [{}], status: 'ok' });
             done();
           }
         });
