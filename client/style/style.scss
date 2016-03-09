@@ -242,9 +242,10 @@ html {
   min-width: 500px;
 
   th {
-    border-bottom: 1px solid $darkgrey;
     padding: 0px;
+    border-bottom: 0px;
     padding-bottom: 10px;
+    border-bottom: 1px solid $darkgrey;
   }
 
   td {
@@ -340,5 +341,25 @@ html {
   }
   .tableHeadTemplate {
     font-size: $fontSize;
+  }
+
+  tr {
+    text-align: left;
+  }
+
+  tr:hover .pen, tr:hover .trashbin {
+    visibility: visible;
+  }
+
+  .trashbin {
+    visibility: hidden;
+  }
+
+  td {
+    border-top: 1px solid $darkgrey;
+  }
+
+  .cell {
+    width: 16px;
   }
 }
