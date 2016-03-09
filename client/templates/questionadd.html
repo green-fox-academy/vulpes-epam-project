@@ -1,5 +1,5 @@
 <div class="question" ng-controller="QuestionCtrl">
-  <form class="quesionForm" ng-submit="questionSend(content, type)">
+  <form class="questionForm" ng-submit="questionSend(content, type)">
     <div ng-show="Error" class="error-msg-container"><p class="error-msg">{{Error}}</p></div>
     <h2>Create question</h2>
     <textarea class="largecontentbox" type="text" placeholder="Interview question" ng-model="content" required  rows="6" cols="40"></textarea>
