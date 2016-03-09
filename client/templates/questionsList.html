@@ -4,14 +4,14 @@
       <th class="tableHeadQuestion">Question</th>
       <th class="tableHeadType">type</th>
     </tr>
-    <tr ng-repeat="question in getQuestions()">
+    <tr ng-attr-id="{{question.question_id}}"ng-repeat="question in getQuestions()">
       <td class="questionContent"> {{question.content}} </td>
-      <td class="questionType"> {{question.type}} </td>
-      <td class="cell">
-        <img class="pen" src="style/images/pen.svg">
-      </td>
-      <td class="cell" ng-click="deleteQuestionFromQuestionsList(question)">
-        <img class="trash" src="style/images/trash.svg">
+      <td class="questionType">
+        {{question.type}}
+        <div class="icons">
+          <img class="pen" src="style/images/pen.svg">
+          <img ng-click="deleteQuestionFromQuestionsList(question)" class="trash" src="style/images/trash.svg">
+        </div>
       </td>
     </tr>
   </table>
