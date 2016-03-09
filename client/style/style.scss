@@ -233,7 +233,7 @@ html {
   }
 }
 
-.userListTable, .questionListTable {
+.userListTable, .questionListTable, .templatesListTable {
   border-collapse: collapse;
   font-family: $fontFamilySecondary;
   margin-left: auto;
@@ -251,7 +251,7 @@ html {
     padding-top: 10px;
   }
 
-  .userEmail, .tableHeadEmail, .tableHeadQuestion, .questionContent  {
+  .userEmail, .tableHeadEmail, .tableHeadQuestion, .questionContent, .tableHeadTemplate {
     color: $darkgrey;
     text-align: left;
   }
@@ -296,5 +296,49 @@ html {
     border-color: $blue;
     font-size: $fontSize;
     font-family: $fontFamilySecondary;
+  }
+}
+
+.templatesTable {
+  justify-content: center;
+  left: 50%;
+  position: fixed;
+  text-align: center;
+  top: 35%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  .template-header {
+    display: flex;
+    padding-bottom: 15px;
+    justify-content: space-between;
+    .template-title {
+      order: 1;
+      color: $darkgrey;
+      font-size: fontSize;
+      font-family: 'Oswald';
+      font-weight: bold;
+    }
+    .template-button {
+      order: 2;
+    }
+    .add-template-button {
+      background-color: $blue;
+      border: {
+        radius: $borderRadius;
+        width: 0px;
+      };
+      color: white;
+      font: {
+        family: $fontFamilySecondary;
+        size: $fontSize;
+      };
+      height: 30px;
+      width: 140px;
+      line-height: normal;
+      &:hover {cursor: pointer;}
+    }
+  }
+  .tableHeadTemplate {
+    font-size: $fontSize;
   }
 }

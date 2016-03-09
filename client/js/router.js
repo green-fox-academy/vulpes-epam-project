@@ -61,6 +61,7 @@ EPAM.config(function ($stateProvider, $urlRouterProvider) {
       .state('templates', {
         url: '/templates',
         templateUrl: './templates/interview/templateList.html',
+        controller: 'ListTemplatesCtrl',
         data: {
           pageTitle: 'Templates',
         },

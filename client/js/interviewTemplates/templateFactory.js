@@ -11,7 +11,7 @@ EPAM.factory('templatesList', function ($http) {
 
     function fetchAllTemplates() {
       $http.get('/api/templates').then(function (response) {
-        listOfTemplates = response.data;
+        listOfTemplates = response.data.templates;
       });
     }
 
