@@ -7,7 +7,8 @@ function createTemplateController(queries) {
       handleResponse(err, result, res);
     });
   }
-  function postTemplates(req, res) {
+
+  function postTemplate(req, res) {
     queries.postTemplate(function (err, result) {
       handleResponse(err, result, res);
     });
@@ -63,6 +64,7 @@ function createTemplateController(queries) {
 
   return {
     getAllTemplates: getAllTemplates,
+    postTemplate: postTemplate,
   };
 }
 
