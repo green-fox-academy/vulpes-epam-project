@@ -13,7 +13,7 @@ function createTemplateQueries(connection) {
       callback);
   }
 
-  function getOneTemlate(id, callback) {
+  function getOneTemplate(id, callback) {
     connection.sendQuery(
       SQL`
       SELECT * FROM templates
@@ -25,7 +25,7 @@ function createTemplateQueries(connection) {
 
   return {
     getTemplates: getTemplates,
-    getOneTemlate: getOneTemlate,
+    getOneTemplate: getOneTemplate,
   };
 }
 
