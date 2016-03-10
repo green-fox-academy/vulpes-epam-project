@@ -8,6 +8,12 @@ function createTemplateController(queries) {
     });
   }
 
+  function postTemplate(req, res) {
+    queries.postTemplate(function (err, result) {
+      handleResponse(err, result, res);
+    });
+  }
+
   function handleResponse(err, result, response) {
     if (err) {
       response.status(503).json({
@@ -58,6 +64,7 @@ function createTemplateController(queries) {
 
   return {
     getAllTemplates: getAllTemplates,
+    postTemplate: postTemplate,
   };
 }
 

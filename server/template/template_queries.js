@@ -23,9 +23,22 @@ function createTemplateQueries(connection) {
       callback);
   }
 
+  function postTemplate(params, callback) {
+    connection.sendQuery(
+      SQL`
+      INSERT INTO templates (title)
+      VALUES (${params.title});
+      INSERT INTO template_setup (templateId, type, count)
+      VALUES ((SELECT templateId FROM templates WHERE title = ${params.title}),
+      ${params.type},${params.count});
+      `,
+      callback);
+  }
+
   return {
     getTemplates: getTemplates,
     getOneTemplate: getOneTemplate,
+    postTemplate: postTemplate,
   };
 }
 
