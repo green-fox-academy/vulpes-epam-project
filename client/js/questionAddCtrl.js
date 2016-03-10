@@ -23,4 +23,10 @@ EPAM.controller('QuestionCtrl', function ($scope, $state, question, user) {
     function handleError(error) {
       $scope.Error = error.data;
     }
+
+    $scope.types = [
+      { type: 'html' },
+      { type: 'js' },
+      { type: 'css' },
+    ];
   });
