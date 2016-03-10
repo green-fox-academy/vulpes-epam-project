@@ -11,7 +11,7 @@ EPAM.factory('questionsList', function ($http) {
 
     function fetchAllQuestions() {
       $http.get('/api/questions').then(function (response) {
-        listOfQuestions = response.data;
+        listOfQuestions = response.data.questions;
       });
     }
 
