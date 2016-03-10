@@ -14,29 +14,46 @@ function createTemplateController(queries) {
         errorMessage: 'Database error. Please try again later.',
       });
     } else {
-      response.status(200).json(responseSchema(result));
+      response.status(200).json(sortResponseSchema(result));
     }
   }
 
-  function responseSchema(result) {
-    var resultObject = {
-      templates: [],
-      status:'ok',
-    };
-    result.rows.map((temp) => {
-      var template = {
-        id: temp.templateid,
-        title: temp.title,
-        questions: [],
-      };
-      if (resultObject.templates.indexOf(template) === -1) {
-        resultObject.templates.push(template);
-      }
+  function sortResponseSchema(result) {
+    let templates = [];
+    let schema = [];
+    let id = '';
+    let title = '';
 
-      return temp;
+    result.rows.forEach(function (row) {
+      if (id === '') {
+        id = row.templateid;
+        title = row.title;
+        schema.push({ type: row.type, count: row.count, });
+      } else if (id === row.templateid) {
+        schema.push({ type: row.type, count: row.count, });
+      } else {
+        templates.push({
+          id: id,
+          title: title,
+          schema: schema,
+        });
+        id = row.templateid;
+        title = row.title;
+        schema = [];
+        schema.push({ type: row.type, count: row.count, });
+      }
     });
-    console.log(resultObject);
-    return resultObject;
+
+    templates.push({
+      id: id,
+      title: title,
+      schema: schema,
+    });
+    let output = {
+      templates: templates,
+      status: 'ok',
+    };
+    return output;
   }
 
   return {
