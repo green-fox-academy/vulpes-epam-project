@@ -278,7 +278,7 @@ html {
 
   .pen, .trash {
     height: 16px;
-    margin-left: 7px;
+    margin-left: 6px;
     visibility: hidden;
     width: 16px;
   }
@@ -357,7 +357,10 @@ html {
   }
 
   .trashbin {
+    height: 16px;
+    margin-left: 6px;
     visibility: hidden;
+    width: 16px;
   }
 
   .cell {
