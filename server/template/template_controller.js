@@ -9,8 +9,16 @@ function createTemplateController(queries) {
   }
 
   function postTemplate(req, res) {
-    queries.postTemplate(function (err, result) {
-      handleResponse(err, result, res);
+    queries.postTemplate(req.body, function (err, result, response) {
+      if (err) {
+        response.status(503).json({
+          errorMessage: 'Database error. Please try again later.',
+        });
+      } else {
+        queries.postTemplateSetup(req.body, function (err, result) {
+          handleResponse(err, result, res);
+        });
+      }
     });
   }
 
