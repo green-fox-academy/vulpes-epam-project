@@ -2,7 +2,7 @@
 
 var EPAM = require('../main');
 
-EPAM.factory('templatesList', function ($http) {
+EPAM.factory('templates', function ($http) {
     var listOfTemplates = [];
 
     function getAllTemplates() {
@@ -15,8 +15,14 @@ EPAM.factory('templatesList', function ($http) {
       });
     }
 
+    function addNewTemplate(newTemplate) {
+      console.log(newTemplate);
+      return $http.post('/api/templates', newTemplate);
+    }
+
     return {
       getAllTemplates: getAllTemplates,
       fetchAllTemplates: fetchAllTemplates,
+      addNewTemplate: addNewTemplate,
     };
   });

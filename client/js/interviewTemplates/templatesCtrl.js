@@ -2,7 +2,7 @@
 
 var EPAM = require('../main');
 
-EPAM.controller('ListTemplatesCtrl', function ($scope, $state, templatesList, user) {
+EPAM.controller('ListTemplatesCtrl', function ($scope, $state, templates, user) {
     if (!user.isLoggedIn()) {
       $state.go('login');
     } else if (!user.isAdmin()) {
@@ -12,8 +12,8 @@ EPAM.controller('ListTemplatesCtrl', function ($scope, $state, templatesList, us
     $scope.isAdmin = user.isAdmin();
 
     $scope.getTemplates = function () {
-      return templatesList.getAllTemplates();
+      return templates.getAllTemplates();
     };
 
-    templatesList.fetchAllTemplates();
+    templates.fetchAllTemplates();
   });

@@ -60,17 +60,10 @@ EPAM.config(function ($stateProvider, $urlRouterProvider) {
       })
       .state('templates', {
         url: '/templates',
-        templateUrl: './templates/interview/templateList.html',
+        templateUrl: './templates/templates/templateList.html',
         controller: 'ListTemplatesCtrl',
         data: {
           pageTitle: 'Templates',
-        },
-      })
-      .state('newInterview', {
-        url: '/interview/new',
-        templateUrl: './templates/interview/new.html',
-        data: {
-          pageTitle: 'Start new interview',
         },
       })
       .state('newTemplate', {
@@ -79,6 +72,13 @@ EPAM.config(function ($stateProvider, $urlRouterProvider) {
         controller: 'NewTemplateCtrl',
         data: {
           pageTitle: 'Add new template',
+        },
+      })
+      .state('newInterview', {
+        url: '/interview/new',
+        templateUrl: './templates/interview/new.html',
+        data: {
+          pageTitle: 'Start new interview',
         },
       });
   });

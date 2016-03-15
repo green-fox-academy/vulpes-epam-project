@@ -18,6 +18,7 @@ require('./homeCtrl.js');
 require('./navbarCtrl.js');
 require('./listQuestionsCtrl.js');
 require('./interviewTemplates/templatesCtrl.js');
+require('./interviewTemplates/newTemplateCtrl.js');
 require('./router.js');
 require('./authOnStateChange.js');
 require('./changeTitleOnStateChange.js');
