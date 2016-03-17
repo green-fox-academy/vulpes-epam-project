@@ -9,15 +9,21 @@ function createTemplateController(queries) {
   }
 
   function postTemplate(req, res) {
+    var errorMessage = false;
     queries.postTemplate(req.body, function (err, result, response) {
       if (err) {
         response.status(503).json({
           errorMessage: 'Database error. Please try again later.',
         });
       } else {
-        queries.postTemplateSetup(req.body, function (err, result) {
-          handleResponse(err, result, res);
+        req.body.schema.forEach(function (elem) {
+          queries.postTemplateSetup(elem, req.body.title, function (err) {
+            if (err)
+              errorMessage = true;
+          });
         });
+
+        postHandleResponse(errorMessage, 'Post ok', res);
       }
     });
   }
@@ -29,6 +35,16 @@ function createTemplateController(queries) {
       });
     } else {
       response.status(200).json(sortResponseSchema(result));
+    }
+  }
+
+  function postHandleResponse(err, result, response) {
+    if (err) {
+      response.status(503).json({
+        errorMessage: 'Database error. Please try again later.',
+      });
+    } else {
+      response.status(200).json(result);
     }
   }
 

@@ -9,19 +9,27 @@ EPAM.controller('NewTemplateCtrl', function ($scope, $state, templates, user) {
       $state.go('home');
     }
 
+    $scope.isVisible = false;
+
+    $scope.setVisible = function () {
+      $scope.isVisible = true;
+      return $scope.isVisible;
+    };
+
     $scope.types = [
       { type: 'html' },
       { type: 'js' },
       { type: 'css' },
     ];
 
-    $scope.sendNewTemplate = function (templateName, type, count) {
-      console.log(templateName + type + count);
-      templates.addNewTemplate({
-        title: templateName,
-        type: type,
-        count: count,
-      })
+    $scope.sendNewTemplate = function (templateName, type, count, type2, count2) {
+      var newTemplate = { title: templateName, schema:[] };
+      var newSchema = [
+                        { type: type, count: count },
+                        { type: type2, count: count2 },
+                     ];
+      newTemplate.schema = newSchema;
+      templates.addNewTemplate(newTemplate)
       .then(handleSuccess)
       .catch(handleError);
     };
