@@ -16,4 +16,9 @@ EPAM.controller('ListTemplatesCtrl', function ($scope, $state, templates, user) 
     };
 
     templates.fetchAllTemplates();
+
+    $scope.deleteTemplateFromTemplateList = function (row) {
+      templates.deleteTemplateById(row.id);
+    };
+
   });

@@ -53,7 +53,7 @@ EPAM.config(function ($stateProvider, $urlRouterProvider) {
       })
       .state('questions', {
         url: '/questions',
-        templateUrl: './templates/questionsList.html',
+        templateUrl: './templates/questions/questionsList.html',
         data: {
           pageTitle: 'Questions',
         },
