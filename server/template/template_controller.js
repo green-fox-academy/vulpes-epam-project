@@ -9,6 +9,8 @@ function createTemplateController(queries) {
   }
 
   function postTemplate(req, res) {
+    var errorMessage = false;
+    var resultOutput = [];
     queries.postTemplate(req.body, function (err, result, response) {
       if (err) {
         response.status(503).json({
@@ -17,9 +19,15 @@ function createTemplateController(queries) {
       } else {
         req.body.schema.forEach(function (elem) {
           queries.postTemplateSetup(elem, req.body.title, function (err, result) {
-            handleResponse(err, result, res);
+            if (err) {
+              errorMessage = err;
+            } else {
+              resultOutput.push(result);
+            }
           });
         });
+
+        handleResponse(errorMessage, resultOutput, res);
       }
     });
   }
