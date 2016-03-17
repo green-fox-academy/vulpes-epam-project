@@ -28,6 +28,20 @@ function createTemplateController(queries) {
     });
   }
 
+  function deleteTemplate(req, res) {
+    queries.deleteTemplate(req.params.id, function (err, result, response) {
+      if (err) {
+        response.status(503).json({
+          errorMessage: 'Database error. Please try again later.',
+        });
+      } else {
+        queries.deleteTemplateSetup(req.params.id, function (err, result) {
+          handleResponse(err, result, res);
+        });
+      }
+    });
+  }
+
   function handleResponse(err, result, response) {
     if (err) {
       response.status(503).json({
@@ -89,6 +103,7 @@ function createTemplateController(queries) {
   return {
     getAllTemplates: getAllTemplates,
     postTemplate: postTemplate,
+    deleteTemplate: deleteTemplate,
   };
 }
 
