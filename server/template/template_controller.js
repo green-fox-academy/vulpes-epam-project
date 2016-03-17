@@ -44,8 +44,8 @@ function createTemplateController(queries) {
       if (err) {
         dbErrorResponse(res);
       } else {
-        var generatedQuestions = generateQuestions(result.rows);
-        Promise.all(generatedQuestions)
+        var questions = getQuestions(result.rows);
+        Promise.all(questions)
         .then(schema.questionsSchema)
         .then((questions) => {
           res.status(200).json(questions);
@@ -54,15 +54,15 @@ function createTemplateController(queries) {
     });
   }
 
-  function generateQuestions(types) {
+  function getQuestions(types) {
     var questions = [];
-    types.forEach((questionTypes) => {
+    types.forEach((type) => {
       questions.push(
         new Promise((resolve) => {
-          queries.getQuestions(questionTypes.type, questionTypes.count,
-            (err, qResult) => {
+          queries.getQuestions(type.type, type.count,
+            (err, result) => {
               if (err) throw err;
-              resolve(qResult.rows);
+              resolve(result.rows);
             });
         }));
     });
