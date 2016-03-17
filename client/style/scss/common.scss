@@ -1,3 +1,24 @@
+@mixin buttonProperties($bGroundColor, $brdRadius, $brdWidth, $fColor, $fFamily, $fSize, $height, $width) {
+  background-color: $bGroundColor;
+  border: {
+    radius: $brdRadius;
+    width: $brdWidth;
+  };
+  color: $fColor;
+  font: {
+    family: $fFamily;
+    size: $fSize;
+  };
+  height: $height;
+  width: $width;
+  &:hover {cursor: pointer;}
+}
+
+.button-primary {
+  @include buttonProperties($blue, $borderRadius, 0px, white, $fontFamilyDefault, $fontSize, $buttonHeight, $inputWidth);
+  text-transform: uppercase;
+}
+
 .title-main {
   color: $darkgrey;
   font-family: $fontFamilyDefault;
