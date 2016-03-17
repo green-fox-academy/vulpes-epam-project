@@ -7,7 +7,8 @@ function createTemplateQueries(connection) {
   function getTemplates(callback) {
     connection.sendQuery(
       SQL`
-      SELECT * FROM templates
+      SELECT templates.templateId, templates.title, template_setup.type, template_setup.count
+      FROM templates
       inner join template_setup on
       (templates.templateId=template_setup.templateId);`,
       callback);
@@ -16,7 +17,8 @@ function createTemplateQueries(connection) {
   function getOneTemplate(id, callback) {
     connection.sendQuery(
       SQL`
-      SELECT * FROM templates
+      SELECT templates.templateId, templates.title, template_setup.type, template_setup.count
+      FROM templates
       inner join template_setup on
       (templates.templateId=template_setup.templateId)
       where templates.templateId=${id};`,
@@ -43,31 +45,11 @@ function createTemplateQueries(connection) {
       callback);
   }
 
-  // function putTemplate(params, id, callback) {
-  //   connection.sendQuery(
-  //     SQL`
-  //     UPDATE questions SET type = ${params.type}, content = ${params.content}
-  //     WHERE question_id= ${id}
-  //     RETURNING question_id, type, content`,
-  //     callback);
-  // }
-  //
-  // function deleteTemplate(id, callback) {
-  //   connection.sendQuery(
-  //     SQL`
-  //     DELETE FROM questions WHERE question_id= ${id}
-  //     RETURNING question_id`,
-  //     callback);
-  // }
-
   return {
     getTemplates: getTemplates,
     getOneTemplate: getOneTemplate,
     postTemplate: postTemplate,
     postTemplateSetup: postTemplateSetup,
-
-    // putTemplate: putTemplate,
-    // deleteTemplate: deleteTemplate,
   };
 }
 
