@@ -6,6 +6,9 @@
 // Parts
 @import "parts/header";
 
+// Components
+@import "components/errorHandler"
+
 // Pages
 @import "pages/home";
 @import "pages/frontpage";

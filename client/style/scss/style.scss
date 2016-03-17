@@ -19,20 +19,6 @@ body {
 .register, .login, .question, .new-template {
   width: 500px;
 
-  .error-msg-container {
-    background-color: #ED4040;
-    border-radius: $borderRadius;
-    margin: 0px 20px 10px 20px;
-    height: 50px;
-    width: 460px;
-
-    .error-msg {
-      color: white;
-      font-family: $fontFamilyDefault;
-      padding-top: 10px;
-    }
-  }
-
   ::-webkit-input-placeholder {
     color: $darkgrey;
     font-family: $fontFamilySecondary
@@ -57,10 +43,6 @@ body {
   textarea {
     height: auto;
     padding-top: 12px;
-  }
-
-  .submitButton {
-    text-align: center;
   }
 
   .formlinks {
