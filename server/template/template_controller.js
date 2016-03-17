@@ -1,10 +1,11 @@
 'use strict';
 
 function createTemplateController(queries) {
+  var schema = require('./schemas.js')();
 
   function getAllTemplates(req, res) {
     queries.getTemplates(function (err, result) {
-      handleResponse(err, result, res);
+      handleResponse(err, schema.allTemplatesSchema(result), res);
     });
   }
 
@@ -12,9 +13,7 @@ function createTemplateController(queries) {
     var errorMessage = false;
     queries.postTemplate(req.body, function (err, result, response) {
       if (err) {
-        response.status(503).json({
-          errorMessage: 'Database error. Please try again later.',
-        });
+        dbErrorResponse(response);
       } else {
         req.body.schema.forEach(function (elem) {
           queries.postTemplateSetup(elem, req.body.title, function (err) {
@@ -23,7 +22,7 @@ function createTemplateController(queries) {
           });
         });
 
-        postHandleResponse(errorMessage, 'Post ok', res);
+        handleResponse(errorMessage, 'Post ok', res);
       }
     });
   }
@@ -31,12 +30,10 @@ function createTemplateController(queries) {
   function deleteTemplate(req, res) {
     queries.deleteTemplate(req.params.id, function (err, result, response) {
       if (err) {
-        response.status(503).json({
-          errorMessage: 'Database error. Please try again later.',
-        });
+        dbErrorResponse(response);
       } else {
-        queries.deleteTemplateSetup(req.params.id, function (err, result) {
-          handleResponse(err, result, res);
+        queries.deleteTemplateSetup(req.params.id, function (err) {
+          handleResponse(err, 'Delete ok', res);
         });
       }
     });
@@ -45,23 +42,11 @@ function createTemplateController(queries) {
   function getTemplateQuestions(req, res) {
     queries.getTemplateSetup(req.params.id, function (err, result) {
       if (err) {
-        res.status(503).json({
-          errorMessage: 'Database error. Please try again later.',
-        });
+        dbErrorResponse(res);
       } else {
-        var generatedQuestions = [];
-        result.rows.forEach((questionTypes) => {
-          generatedQuestions.push(
-            new Promise((resolve) => {
-              queries.getQuestions(questionTypes.type, questionTypes.count,
-                (err, qResult) => {
-                  if (err) throw err;
-                  resolve(qResult.rows);
-                });
-            }));
-        });
-        Promise.all(generatedQuestions)
-        .then(sortQuestionsSchema)
+        var questions = getQuestions(result.rows);
+        Promise.all(questions)
+        .then(schema.questionsSchema)
         .then((questions) => {
           res.status(200).json(questions);
         });
@@ -69,75 +54,33 @@ function createTemplateController(queries) {
     });
   }
 
-  function sortQuestionsSchema(result) {
-    var schema = {
-      questions: [],
-      status: 'ok',
-    };
-    result.forEach((type) => {
-      type.forEach((question) => {
-        schema.questions.push(question);
-      });
+  function getQuestions(types) {
+    var questions = [];
+    types.forEach((type) => {
+      questions.push(
+        new Promise((resolve) => {
+          queries.getQuestions(type.type, type.count,
+            (err, result) => {
+              if (err) throw err;
+              resolve(result.rows);
+            });
+        }));
     });
-    return schema;
+    return questions;
   }
 
   function handleResponse(err, result, response) {
     if (err) {
-      response.status(503).json({
-        errorMessage: 'Database error. Please try again later.',
-      });
-    } else {
-      response.status(200).json(sortResponseSchema(result));
-    }
-  }
-
-  function postHandleResponse(err, result, response) {
-    if (err) {
-      response.status(503).json({
-        errorMessage: 'Database error. Please try again later.',
-      });
+      dbErrorResponse(response);
     } else {
       response.status(200).json(result);
     }
   }
 
-  function sortResponseSchema(result) {
-    let templates = [];
-    let schema = [];
-    let id = '';
-    let title = '';
-
-    result.rows.forEach(function (row) {
-      if (id === '') {
-        id = row.templateid;
-        title = row.title;
-        schema.push({ type: row.type, count: row.count, });
-      } else if (id === row.templateid) {
-        schema.push({ type: row.type, count: row.count, });
-      } else {
-        templates.push({
-          id: id,
-          title: title,
-          schema: schema,
-        });
-        id = row.templateid;
-        title = row.title;
-        schema = [];
-        schema.push({ type: row.type, count: row.count, });
-      }
+  function dbErrorResponse(response) {
+    response.status(503).json({
+      errorMessage: 'Database error. Please try again later.',
     });
-
-    templates.push({
-      id: id,
-      title: title,
-      schema: schema,
-    });
-    let output = {
-      templates: templates,
-      status: 'ok',
-    };
-    return output;
   }
 
   return {

@@ -38,7 +38,7 @@ EPAM.config(function ($stateProvider, $urlRouterProvider) {
       })
       .state('questionadd', {
         url: '/questions/new',
-        templateUrl: './templates/questionadd.html',
+        templateUrl: './templates/questions/questionadd.html',
         controller: 'QuestionCtrl',
         data: {
           pageTitle: 'Add Question',
@@ -53,7 +53,7 @@ EPAM.config(function ($stateProvider, $urlRouterProvider) {
       })
       .state('questions', {
         url: '/questions',
-        templateUrl: './templates/questionsList.html',
+        templateUrl: './templates/questions/questionsList.html',
         data: {
           pageTitle: 'Questions',
         },

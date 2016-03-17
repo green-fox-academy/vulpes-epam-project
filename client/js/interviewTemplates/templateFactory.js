@@ -16,13 +16,17 @@ EPAM.factory('templates', function ($http) {
     }
 
     function addNewTemplate(newTemplate) {
-      console.log(newTemplate);
       return $http.post('/api/templates', newTemplate);
+    }
+
+    function deleteTemplateById(id) {
+      $http.delete('/api/templates/' + id).then(fetchAllTemplates);
     }
 
     return {
       getAllTemplates: getAllTemplates,
       fetchAllTemplates: fetchAllTemplates,
       addNewTemplate: addNewTemplate,
+      deleteTemplateById: deleteTemplateById,
     };
   });
