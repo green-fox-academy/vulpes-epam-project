@@ -37,6 +37,7 @@ function createRouter(connection) {
   router.delete('/api/questions/:id', question.deleteQuestion);
   router.get('/api/templates', templateController.getAllTemplates);
   router.post('/api/templates', templateController.postTemplate);
+  router.delete('/api/templates/:id', templateController.deleteTemplate);
 
   return router;
 }
