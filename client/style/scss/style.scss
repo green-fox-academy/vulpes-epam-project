@@ -222,24 +222,8 @@ html {
     .title-main {
       order: 1;
     }
-    .template-button {
+    .button-secondary {
       order: 2;
-    }
-    .add-template-button {
-      background-color: $blue;
-      border: {
-        radius: $borderRadius;
-        width: 0px;
-      };
-      color: white;
-      font: {
-        family: $fontFamilySecondary;
-        size: $fontSize;
-      };
-      height: 30px;
-      width: 140px;
-      line-height: normal;
-      &:hover {cursor: pointer;}
     }
   }
   .tableHeadTemplate {
@@ -348,22 +332,6 @@ html {
       font-family: $fontFamilySecondary;
       margin: 0px 0px 15px;
     }
-  }
-  .add-row-button {
-    background-color: $blue;
-    border: {
-      radius: $borderRadius;
-      width: 0px;
-    };
-    color: white;
-    font: {
-      family: $fontFamilySecondary;
-      size: $fontSize;
-    };
-    height: 30px;
-    width: 140px;
-    line-height: normal;
-    &:hover {cursor: pointer;}
   }
   .button-holder{
     display: flex;

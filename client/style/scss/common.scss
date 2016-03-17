@@ -19,6 +19,23 @@
   text-transform: uppercase;
 }
 
+.button-secondary {
+  background-color: $blue;
+  border: {
+    radius: $borderRadius;
+    width: 0px;
+  };
+  color: white;
+  font: {
+    family: $fontFamilySecondary;
+    size: $fontSize;
+  };
+  height: 30px;
+  width: 140px;
+  line-height: normal;
+  &:hover {cursor: pointer;}
+}
+
 .title-main {
   color: $darkgrey;
   font-family: $fontFamilyDefault;
