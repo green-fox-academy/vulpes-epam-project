@@ -16,7 +16,7 @@ EPAM.factory('questionsList', function ($http) {
     }
 
     function deleteById(id) {
-      $http.delete('api/questions/' + id).then(fetchAllQuestions);
+      $http.delete('/api/questions/' + id).then(fetchAllQuestions);
     }
 
     return {
