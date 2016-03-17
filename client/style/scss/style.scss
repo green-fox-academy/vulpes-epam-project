@@ -44,15 +44,6 @@ body {
     height: auto;
     padding-top: 12px;
   }
-
-  .formlinks {
-    font-family: $fontFamilyDefault;
-  }
-
-  a, a:visited {
-    color: $blue;
-    text-decoration: none;
-  }
 }
 
 .userListTable, .questionListTable, .templatesListTable, .new-template {
