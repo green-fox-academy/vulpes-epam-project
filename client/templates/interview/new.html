@@ -1,5 +1,5 @@
 <div>
-  <h1>Start new interview</h1>
+  <h1 class="title-main">Start new interview</h1>
   <form ng-if="isLoaded">
     <select ng-model="selectedValue" ng-change="selectTemplate(selectedValue)" required>
       <option ng-repeat="template in templatesList" value="{{template.id}}">{{template.title}}</option>

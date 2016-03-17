@@ -80,11 +80,7 @@ html {
     }
   }
 
-  h2 {
-    text-transform: uppercase;
-    font-family: $fontFamilyDefault;
-    color: $darkgrey;
-    font-size: $fontSize;
+  .title-main {
     padding-right: 280px;
   }
 }
@@ -301,12 +297,8 @@ html {
     display: flex;
     padding-bottom: 15px;
     justify-content: space-between;
-    .template-title {
+    .title-main {
       order: 1;
-      color: $darkgrey;
-      font-size: fontSize;
-      font-family: 'Oswald';
-      font-weight: bold;
     }
     .template-button {
       order: 2;
@@ -379,9 +371,6 @@ html {
 }
 
 .new-template {
-  h2 {
-    margin-left: 10px;
-  }
   .new-template-input {
     margin: 0px 0px 15px;
   }

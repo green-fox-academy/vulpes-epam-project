@@ -1,7 +1,7 @@
 <div class="new-template" ng-controller="NewTemplateCtrl">
   <form class="newTemplateForm" ng-submit="sendNewTemplate(templateName)">
     <div ng-show="Error" class="error-msg-container"><p class="error-msg">{{Error}}</p></div>
-    <h2>Create Template</h2>
+    <h2 class="title-main">Create Template</h2>
     <input class="new-template-input" type="text" placeholder="Template name" ng-model="templateName" required>
 
     <div class="add-schema-form" ng-repeat="form in forms">
