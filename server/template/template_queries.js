@@ -14,14 +14,21 @@ function createTemplateQueries(connection) {
       callback);
   }
 
-  function getOneTemplate(id, callback) {
+  function getTemplateSetup(id, callback) {
     connection.sendQuery(
       SQL`
-      SELECT templates.templateId, templates.title, template_setup.type, template_setup.count
-      FROM templates
-      inner join template_setup on
-      (templates.templateId=template_setup.templateId)
-      where templates.templateId=${id};`,
+      SELECT type, count
+      FROM template_setup
+      WHERE templateId=${id};`,
+      callback);
+  }
+
+  function getQuestions(type, count, callback) {
+    connection.sendQuery(
+      SQL`
+      SELECT question_id, type, content FROM questions
+      WHERE type=${type}
+      ORDER BY RANDOM() LIMIT ${count};`,
       callback);
   }
 
@@ -47,9 +54,10 @@ function createTemplateQueries(connection) {
 
   return {
     getTemplates: getTemplates,
-    getOneTemplate: getOneTemplate,
+    getTemplateSetup: getTemplateSetup,
     postTemplate: postTemplate,
     postTemplateSetup: postTemplateSetup,
+    getQuestions: getQuestions,
   };
 }
 
