@@ -1,6 +1,7 @@
 'use strict';
 
 function createTemplateController(queries) {
+  var schema = require('./schemas.js')();
 
   function getAllTemplates(req, res) {
     queries.getTemplates(function (err, result) {
@@ -61,25 +62,12 @@ function createTemplateController(queries) {
             }));
         });
         Promise.all(generatedQuestions)
-        .then(sortQuestionsSchema)
+        .then(schema.questionsSchema)
         .then((questions) => {
           res.status(200).json(questions);
         });
       }
     });
-  }
-
-  function sortQuestionsSchema(result) {
-    var schema = {
-      questions: [],
-      status: 'ok',
-    };
-    result.forEach((type) => {
-      type.forEach((question) => {
-        schema.questions.push(question);
-      });
-    });
-    return schema;
   }
 
   function handleResponse(err, result, response) {
@@ -88,7 +76,7 @@ function createTemplateController(queries) {
         errorMessage: 'Database error. Please try again later.',
       });
     } else {
-      response.status(200).json(sortResponseSchema(result));
+      response.status(200).json(schema.allTemplatesSchema(result));
     }
   }
 
@@ -100,44 +88,6 @@ function createTemplateController(queries) {
     } else {
       response.status(200).json(result);
     }
-  }
-
-  function sortResponseSchema(result) {
-    let templates = [];
-    let schema = [];
-    let id = '';
-    let title = '';
-
-    result.rows.forEach(function (row) {
-      if (id === '') {
-        id = row.templateid;
-        title = row.title;
-        schema.push({ type: row.type, count: row.count, });
-      } else if (id === row.templateid) {
-        schema.push({ type: row.type, count: row.count, });
-      } else {
-        templates.push({
-          id: id,
-          title: title,
-          schema: schema,
-        });
-        id = row.templateid;
-        title = row.title;
-        schema = [];
-        schema.push({ type: row.type, count: row.count, });
-      }
-    });
-
-    templates.push({
-      id: id,
-      title: title,
-      schema: schema,
-    });
-    let output = {
-      templates: templates,
-      status: 'ok',
-    };
-    return output;
   }
 
   return {
