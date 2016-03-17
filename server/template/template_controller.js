@@ -10,7 +10,6 @@ function createTemplateController(queries) {
 
   function postTemplate(req, res) {
     var errorMessage = false;
-    var resultOutput = [];
     queries.postTemplate(req.body, function (err, result, response) {
       if (err) {
         response.status(503).json({
@@ -18,16 +17,13 @@ function createTemplateController(queries) {
         });
       } else {
         req.body.schema.forEach(function (elem) {
-          queries.postTemplateSetup(elem, req.body.title, function (err, result) {
-            if (err) {
-              errorMessage = err;
-            } else {
-              resultOutput.push(result);
-            }
+          queries.postTemplateSetup(elem, req.body.title, function (err) {
+            if (err)
+              errorMessage = true;
           });
         });
 
-        handleResponse(errorMessage, resultOutput, res);
+        postHandleResponse(errorMessage, 'Post ok', res);
       }
     });
   }
@@ -39,6 +35,16 @@ function createTemplateController(queries) {
       });
     } else {
       response.status(200).json(sortResponseSchema(result));
+    }
+  }
+
+  function postHandleResponse(err, result, response) {
+    if (err) {
+      response.status(503).json({
+        errorMessage: 'Database error. Please try again later.',
+      });
+    } else {
+      response.status(200).json(result);
     }
   }
 
