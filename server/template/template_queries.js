@@ -45,11 +45,27 @@ function createTemplateQueries(connection) {
       callback);
   }
 
+  function deleteTemplate(id, callback) {
+    connection.sendQuery(
+      SQL`
+      DELETE FROM templates WHERE templateId= ${id};`,
+      callback);
+  }
+
+  function deleteTemplateSetup(id, callback) {
+    connection.sendQuery(
+      SQL`
+      DELETE FROM template_setup WHERE templateId= ${id};`,
+      callback);
+  }
+
   return {
     getTemplates: getTemplates,
     getOneTemplate: getOneTemplate,
     postTemplate: postTemplate,
     postTemplateSetup: postTemplateSetup,
+    deleteTemplate: deleteTemplate,
+    deleteTemplateSetup: deleteTemplateSetup,
   };
 }
 
