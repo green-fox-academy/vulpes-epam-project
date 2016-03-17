@@ -16,8 +16,10 @@ EPAM.factory('interview', function ($http) {
     }
 
     function getInterview() {
-      var url = '/api/templates/' + templateId;
-      return $http.get(url);
+      var url = '/api/interview/' + templateId;
+      return $http.get(url).then(function (response) {
+        questions = response.data.questions;
+      });
     }
 
     function getQuestions() {
