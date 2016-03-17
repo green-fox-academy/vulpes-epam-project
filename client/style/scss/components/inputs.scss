@@ -1,0 +1,33 @@
+.input-field {
+  border: {
+    radius: $borderRadius;
+    color: red;
+    style: solid;
+    width: 1px;
+  };
+  height: $inputHeight;
+  font-family: $fontFamilySecondary;
+  font-size: $fontSize;
+}
+
+.input-text {
+  @extend .input-field
+  // margin: 10px;
+  padding-left: 10px;
+  // width: 450px;
+  // line-height: 1;
+}
+
+.input-select {
+  @extend .input-field
+}
+
+::-webkit-input-placeholder {
+  color: $darkgrey;
+  font-family: $fontFamilySecondary
+}
+
+textarea {
+  height: auto;
+  padding-top: 12px;
+}
