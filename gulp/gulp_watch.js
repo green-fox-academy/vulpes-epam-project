@@ -21,7 +21,7 @@ gulp.task('watch', function () {
     gulp.start('jscsLint', done);
   }));
 
-  watch('./client/js/*.js', batch(function (events, done) {
+  watch('./client/js/**/*.js', batch(function (events, done) {
     gulp.start('browserify', done);
   }));
 

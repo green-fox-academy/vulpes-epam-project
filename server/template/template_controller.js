@@ -9,13 +9,33 @@ function createTemplateController(queries) {
   }
 
   function postTemplate(req, res) {
+    var errorMessage = false;
     queries.postTemplate(req.body, function (err, result, response) {
       if (err) {
         response.status(503).json({
           errorMessage: 'Database error. Please try again later.',
         });
       } else {
-        queries.postTemplateSetup(req.body, function (err, result) {
+        req.body.schema.forEach(function (elem) {
+          queries.postTemplateSetup(elem, req.body.title, function (err) {
+            if (err)
+              errorMessage = true;
+          });
+        });
+
+        postHandleResponse(errorMessage, 'Post ok', res);
+      }
+    });
+  }
+
+  function deleteTemplate(req, res) {
+    queries.deleteTemplate(req.params.id, function (err, result, response) {
+      if (err) {
+        response.status(503).json({
+          errorMessage: 'Database error. Please try again later.',
+        });
+      } else {
+        queries.deleteTemplateSetup(req.params.id, function (err, result) {
           handleResponse(err, result, res);
         });
       }
@@ -72,6 +92,16 @@ function createTemplateController(queries) {
     }
   }
 
+  function postHandleResponse(err, result, response) {
+    if (err) {
+      response.status(503).json({
+        errorMessage: 'Database error. Please try again later.',
+      });
+    } else {
+      response.status(200).json(result);
+    }
+  }
+
   function sortResponseSchema(result) {
     let templates = [];
     let schema = [];
@@ -114,6 +144,7 @@ function createTemplateController(queries) {
     getAllTemplates: getAllTemplates,
     postTemplate: postTemplate,
     getTemplateQuestions: getTemplateQuestions,
+    deleteTemplate: deleteTemplate,
   };
 }
 

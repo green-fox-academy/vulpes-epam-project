@@ -1,7 +1,7 @@
 <div>
   <h1>Start new interview</h1>
-  <select>
-    <option>Pick a template</option>
+  <select ng-model="selectedValue" ng-change="selectTemplate(selectedValue)">
+    <option ng-repeat="template in templatesList" value="{{template.id}}">{{template.title}}</option>
   </select>
-  <button>GO</button>
+  <button ng-click="startInterview()">GO</button>
 </div>

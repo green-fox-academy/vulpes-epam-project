@@ -1,16 +1,27 @@
-<div class="newTemplate" ng-controller="NewTemplateCtrl">
-  <form class="newTemplateForm" ng-submit="sendNewTemplate(templateName, options.type, count)">
+<div class="new-template" ng-controller="NewTemplateCtrl">
+  <form class="newTemplateForm" ng-submit="sendNewTemplate(templateName, options.type, count, options2.type, count2)">
     <div ng-show="Error" class="error-msg-container"><p class="error-msg">{{Error}}</p></div>
     <h2>Create Template</h2>
-    <input type="text" placeholder="Template name" ng-model="templateName" required>
-    <div>
-      <select ng-init="options=types[0]"
+    <input class="new-template-input" type="text" placeholder="Template name" ng-model="templateName" required>
+    <div class="add-schema-form">
+      <select class="template-type-select" ng-init="options=types[0]"
               ng-options="type as type.type for type in types"
               ng-model="options">
       </select>
       <p>x</p>
-      <input type="number" placeholder="count" ng-model="count" required>
+      <input class="template-count-input" type="number" placeholder="count" ng-model="count" required>
     </div>
-    <button class="submitButton" type="submit">Create</button>
+    <div class="add-schema-form" ng-show="isVisible">
+      <select class="template-type-select" ng-init="options2=types[0]"
+              ng-options="type as type.type for type in types"
+              ng-model="options2">
+      </select>
+      <p>x</p>
+      <input class="template-count-input" type="number" placeholder="count" ng-model="count2" required>
+    </div>
+    <div ng-show="!isVisible" class="template-button"><button class="add-row-button" type="button" ng-click="setVisible()">+ add row</button></div>
+    <div class="button-holder">
+      <button class="submitButton" type="submit">Create</button>
+    </div>
   </form>
 </div>
