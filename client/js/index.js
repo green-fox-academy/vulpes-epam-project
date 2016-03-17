@@ -21,6 +21,7 @@ require('./listQuestionsCtrl.js');
 require('./interviewTemplates/templatesCtrl.js');
 require('./interviewTemplates/newTemplateCtrl.js');
 require('./interview/newInterviewCtrl.js');
+require('./interview/interviewCtrl.js');
 require('./router.js');
 require('./authOnStateChange.js');
 require('./changeTitleOnStateChange.js');
