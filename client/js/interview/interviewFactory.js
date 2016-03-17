@@ -4,12 +4,7 @@ var EPAM = require('../main');
 
 EPAM.factory('interview', function ($http) {
     var templateId;
-    var questions = [
-      'What is the difference between call and apply?',
-      'What is the difference between inline and block level elements?',
-      'What is a closure in Javascript?',
-      'What is love?',
-    ];
+    var questions;
 
     function setTemplateById(id) {
       templateId = id;
