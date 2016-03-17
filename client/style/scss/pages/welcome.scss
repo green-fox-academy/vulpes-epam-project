@@ -1,0 +1,34 @@
+.welcome-page {
+  background: {
+    image: url('https://www.epam.com/content/dam/epam/careers/locations/Hungary_A-Spot.jpg.transform/resize_w_1200/image.jpg');
+    size: cover;
+    repeat: no-repeat;
+  };
+  height: calc(100vh - 81px);
+  width: 100%;
+
+  .msg-container {
+    color: white;
+    font: {
+      family: $fontFamilyDefault;
+      size: $fontSizeLarge;
+    };
+    left: 20%;
+    position: absolute;
+    top: 25%;
+  }
+
+  .email {
+    font-family: $fontFamilySecondary;
+    margin: 0px 0px 15px;
+  }
+
+  .greeting {
+    font-size: 32px;
+    font-weight: normal;
+    color: white;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 15px 0px 0px;
+  }
+}
