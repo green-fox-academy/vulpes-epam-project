@@ -5,12 +5,12 @@
   </div>
   <table class="templatesListTable" ng-controller="ListTemplatesCtrl">
     <tr>
-      <th class="tableHeadTemplate" colspan="3">Postion</th>
+      <th class="tableHeadTemplate" colspan="3">Position</th>
     </tr>
-    <tr ng-attr-id="{{template.template_id}}" ng-repeat="template in getTemplates()">
+    <tr ng-attr-id="{{template.id}}" ng-repeat="template in getTemplates()">
       <td class="templateTitle"> {{template.title}} </td>
-      <td ng-if="isAdmin" class="cell"><img class="pen" src="style/images/pen.svg"></td>
-      <td ng-if="isAdmin" class="cell"><img class="trashbin" src="style/images/trash.svg"></td>
+      <td class="cell"><img class="pen" src="style/images/pen.svg"></td>
+      <td ng-click="deleteTemplateFromTemplateList(template)" class="cell"><img class="trashbin" src="style/images/trash.svg"></td>
     </tr>
   </table>
 </div>
