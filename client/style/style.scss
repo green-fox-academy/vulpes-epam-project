@@ -119,7 +119,7 @@ html {
   }
 }
 
-.register, .login, .question {
+.register, .login, .question, .new-template {
   width: 500px;
 
   .error-msg-container {
@@ -234,7 +234,7 @@ html {
   }
 }
 
-.userListTable, .questionListTable, .templatesListTable {
+.userListTable, .questionListTable, .templatesListTable, .new-template {
   border-collapse: collapse;
   font-family: $fontFamilySecondary;
   margin-left: auto;
@@ -391,5 +391,73 @@ html {
     padding: 10px;
     width: 450px;
 
+  }
+}
+
+.new-template {
+  display: block;
+  h2 {
+    margin-left: 10px;
+  }
+  .new-template-input {
+    margin: 0px 0px 15px;
+  }
+  .add-schema-form {
+    display: flex;
+
+    .template-type-select {
+      order: 1;
+      box-sizing: border-box;
+      padding: 10px;
+      height: $inputHeight;
+      width: 300px;
+      color: $darkgrey;
+      border-color: $blue;
+      border-radius: $borderRadius;
+      font-size: $fontSize;
+      font-family: $fontFamilySecondary;
+      margin-bottom: 15px;
+    }
+
+    p {
+      order: 2;
+      margin: 17px;
+    }
+
+    .template-count-input {
+      order: 3;
+      box-sizing: border-box;
+      padding: 10px;
+      height: $inputHeight;
+      width: 120px;
+      color: $darkgrey;
+      border-color: $blue;
+      border-radius: $borderRadius;
+      font-size: $fontSize;
+      font-family: $fontFamilySecondary;
+      margin: 0px 0px 15px;
+    }
+  }
+  .add-row-button {
+    background-color: $blue;
+    border: {
+      radius: $borderRadius;
+      width: 0px;
+    };
+    color: white;
+    font: {
+      family: $fontFamilySecondary;
+      size: $fontSize;
+    };
+    height: 30px;
+    width: 140px;
+    line-height: normal;
+    &:hover {cursor: pointer;}
+  }
+  .submitButton {
+    position: relative;
+    @include buttonProperties($blue, $borderRadius, 0px, white, $fontFamilyDefault, $fontSize, $buttonHeight, $inputWidth);
+    text-transform: uppercase;
+    margin: auto;
   }
 }
