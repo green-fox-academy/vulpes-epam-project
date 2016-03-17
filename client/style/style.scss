@@ -403,6 +403,23 @@ html {
   }
   .add-schema-form {
     display: flex;
+    .icon-holder {
+      order: 4;
+
+      .trash {
+        margin-top: 16px;
+        height: 19px;
+        margin-left: 6px;
+        visibility: hidden;
+        width: 19px;
+      }
+    }
+    &:hover {
+      .trash {
+        visibility: visible;
+      }
+    }
+
 
     .template-type-select {
       order: 1;

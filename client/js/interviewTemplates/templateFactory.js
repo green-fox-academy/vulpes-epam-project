@@ -16,7 +16,6 @@ EPAM.factory('templates', function ($http) {
     }
 
     function addNewTemplate(newTemplate) {
-      console.log(newTemplate);
       return $http.post('/api/templates', newTemplate);
     }
 
