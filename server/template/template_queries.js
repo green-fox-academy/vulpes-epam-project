@@ -34,12 +34,12 @@ function createTemplateQueries(connection) {
       callback);
   }
 
-  function postTemplateSetup(params, callback) {
+  function postTemplateSetup(params, title, callback) {
     connection.sendQuery(
       SQL`
       INSERT INTO template_setup (templateId, type, count)
       VALUES ((SELECT templateId
-      FROM templates WHERE title = ${params.title}),
+      FROM templates WHERE title = ${title}),
       ${params.type},${params.count});
       `,
       callback);

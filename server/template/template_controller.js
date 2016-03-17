@@ -15,8 +15,10 @@ function createTemplateController(queries) {
           errorMessage: 'Database error. Please try again later.',
         });
       } else {
-        queries.postTemplateSetup(req.body, function (err, result) {
-          handleResponse(err, result, res);
+        req.body.schema.forEach(function (elem) {
+          queries.postTemplateSetup(elem, req.body.title, function (err, result) {
+            handleResponse(err, result, res);
+          });
         });
       }
     });
