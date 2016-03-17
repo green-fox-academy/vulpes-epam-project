@@ -395,7 +395,6 @@ html {
 }
 
 .new-template {
-  display: block;
   h2 {
     margin-left: 10px;
   }
@@ -454,10 +453,13 @@ html {
     line-height: normal;
     &:hover {cursor: pointer;}
   }
-  .submitButton {
-    position: relative;
-    @include buttonProperties($blue, $borderRadius, 0px, white, $fontFamilyDefault, $fontSize, $buttonHeight, $inputWidth);
-    text-transform: uppercase;
-    margin: auto;
+  .button-holder{
+    display: flex;
+    justify-content: center;
+    .submitButton {
+      @include buttonProperties($blue, $borderRadius, 0px, white, $fontFamilyDefault, $fontSize, $buttonHeight, $inputWidth);
+      margin-top: 70px;
+      text-transform: uppercase;
+    }
   }
 }
