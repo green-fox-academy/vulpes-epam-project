@@ -2,7 +2,11 @@
 
 var EPAM = require('../main');
 
-EPAM.controller('NewInterviewCtrl', function ($scope, $state, templates, interview) {
+EPAM.controller('NewInterviewCtrl', function ($scope, $state, user, templates, interview) {
+  if (!user.isLoggedIn()) {
+    $state.go('login');
+  }
+
   $scope.isLoaded = false;
   $scope.templatesList = [];
 
