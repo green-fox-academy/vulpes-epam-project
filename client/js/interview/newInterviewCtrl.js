@@ -2,7 +2,7 @@
 
 var EPAM = require('../main');
 
-EPAM.controller('NewInterviewCtrl', function ($scope, templates, interview) {
+EPAM.controller('NewInterviewCtrl', function ($scope, $state, templates, interview) {
   $scope.templatesList = [];
 
   templates.fetchAllTemplates()
@@ -15,6 +15,8 @@ EPAM.controller('NewInterviewCtrl', function ($scope, templates, interview) {
   };
 
   $scope.startInterview = function () {
-    interview.getInterview();
+    interview.getInterview().then(function () {
+      $state.go('interview');
+    });
   };
 });
