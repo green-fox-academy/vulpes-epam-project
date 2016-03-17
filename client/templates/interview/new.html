@@ -1,7 +1,9 @@
 <div>
   <h1>Start new interview</h1>
-  <select ng-model="selectedValue" ng-change="selectTemplate(selectedValue)">
-    <option ng-repeat="template in templatesList" value="{{template.id}}">{{template.title}}</option>
-  </select>
-  <button ng-click="startInterview()">GO</button>
+  <form ng-if="isLoaded">
+    <select ng-model="selectedValue" ng-change="selectTemplate(selectedValue)" required>
+      <option ng-repeat="template in templatesList" value="{{template.id}}">{{template.title}}</option>
+    </select>
+    <button ng-click="startInterview()" ng-disabled="!selectedValue">GO</button>
+  <form>
 </div>
