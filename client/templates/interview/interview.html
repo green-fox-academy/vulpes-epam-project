@@ -1,14 +1,16 @@
-<div class="wrapper-center">
-  <table>
+<div class="wrapper-center interview">
+  <table class="table">
     <tr>
-      <th>question</th>
-      <th>type</th>
+      <th class="pos-left">question</th>
+      <th class="pos-right">type</th>
     </tr>
     <tr ng-repeat="question in questions">
-      <td>{{question.content}}</td>
-      <td>{{question.type}}</td>
+      <td class="pos-left">{{question.content}}</td>
+      <td class="pos-right colored">{{question.type}}</td>
     </tr>
   </table>
-  <button class="button-secondary" ui-sref="newInterview">new interview</button>
-  <button class="button-secondary" ng-click="generateNewQuestions()">new questions</button>
+  <div>
+    <button class="button-secondary" ui-sref="newInterview">new interview</button>
+    <button class="button-secondary" ng-click="generateNewQuestions()">new questions</button>
+  </div>
 </div>
