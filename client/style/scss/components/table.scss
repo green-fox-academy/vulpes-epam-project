@@ -22,9 +22,27 @@
   td {
     padding-top: 8px;
     padding-bottom: 8px;
+    position: relative;
   }
 
   .colored {
     color: $blue;
+  }
+
+  .icon-container {
+    position: absolute;
+    top: 8px;
+    right: 0px;
+    visibility: hidden;
+  }
+
+  tr:hover .icon-container {
+    visibility: visible;
+  }
+
+  .icon {
+    height: 16px;
+    margin-left: 6px;
+    width: 16px;
   }
 }

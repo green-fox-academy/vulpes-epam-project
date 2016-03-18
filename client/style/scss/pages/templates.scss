@@ -1,0 +1,14 @@
+.templates {
+  margin-top: 50px;
+
+  .title-main {
+    padding-left: 0px;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

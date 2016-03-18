@@ -1,16 +1,19 @@
-<div class="templatesTable">
-  <div class="template-header">
+<div class="wrapper-center templates">
+  <div class="header">
     <h2 class="title-main">TEMPLATES</h2>
     <button class="button-secondary" ui-sref="newTemplate">+ new template</button>
   </div>
-  <table class="templatesListTable" ng-controller="ListTemplatesCtrl">
+  <table class="table" ng-controller="ListTemplatesCtrl">
     <tr>
-      <th class="tableHeadTemplate" colspan="3">Position</th>
+      <th class="pos-left">Position</th>
     </tr>
     <tr ng-attr-id="{{template.id}}" ng-repeat="template in getTemplates()">
-      <td class="templateTitle"> {{template.title}} </td>
-      <td class="cell"><img class="pen" src="style/images/pen.svg"></td>
-      <td ng-click="deleteTemplateFromTemplateList(template)" class="cell"><img class="trashbin" src="style/images/trash.svg"></td>
+      <td>{{template.title}}
+        <div class="icon-container">
+          <img class="icon" src="style/images/pen.svg">
+          <img ng-click="deleteTemplateFromTemplateList(template)" class="icon" src="style/images/trash.svg">
+        </div>
+      </td>
     </tr>
   </table>
 </div>
