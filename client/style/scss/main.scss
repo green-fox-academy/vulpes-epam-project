@@ -9,6 +9,7 @@
 // Components
 @import "components/buttons";
 @import "components/inputs";
+@import "components/table";
 @import "components/errorHandler";
 
 // Pages
@@ -18,6 +19,7 @@
 @import "pages/newQuestion";
 @import "pages/newTemplate";
 @import "pages/newInterview";
+@import "pages/interview";
 
 // Others
 @import "style";
