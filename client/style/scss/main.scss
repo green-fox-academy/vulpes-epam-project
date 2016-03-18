@@ -7,14 +7,17 @@
 @import "parts/header";
 
 // Components
-@import "components/errorHandler";
 @import "components/buttons";
+@import "components/inputs";
+@import "components/errorHandler";
 
 // Pages
 @import "pages/home";
+@import "pages/registerAndLogin";
 @import "pages/frontpage";
-@import "pages/questions";
+@import "pages/newQuestion";
 @import "pages/newTemplate";
+@import "pages/newInterview";
 
 // Others
 @import "style";

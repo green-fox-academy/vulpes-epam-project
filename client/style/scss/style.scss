@@ -6,47 +6,23 @@ body {
   margin: auto;
 }
 
-.frontpage, .register, .login, .question {
-  justify-content: center;
+.wrapper-center {
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
+}
+
+.wrapper-center-center {
   left: 50%;
+  top: 50%;
   position: fixed;
   text-align: center;
-  top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-}
-
-.register, .login, .question, .new-template {
   width: 500px;
-
-  ::-webkit-input-placeholder {
-    color: $darkgrey;
-    font-family: $fontFamilySecondary
-  }
-
-  input, textarea {
-    border: {
-      radius: $borderRadius;
-      color: $blue;
-      style: solid;
-      width: 1px;
-    };
-    height: $inputHeight;
-    font-family: $fontFamilySecondary;
-    font-size: $fontSize;
-    margin: 10px;
-    padding-left: 10px;
-    width: 450px;
-    line-height: 1;
-  }
-
-  textarea {
-    height: auto;
-    padding-top: 12px;
-  }
 }
 
-.userListTable, .questionListTable, .templatesListTable, .new-template {
+.userListTable, .questionListTable, .templatesListTable {
   border-collapse: collapse;
   font-family: $fontFamilySecondary;
   margin-left: auto;

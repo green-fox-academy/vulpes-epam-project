@@ -1,6 +1,10 @@
 .frontpage {
-  font-style: $fontFamilyDefault;
-  display: flex;
+
+  form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
 
   .registerButton {
     order: 1;

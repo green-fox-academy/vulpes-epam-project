@@ -1,26 +1,28 @@
-<div class="new-template" ng-controller="NewTemplateCtrl">
-  <form class="newTemplateForm" ng-submit="sendNewTemplate(templateName)">
+<div class="wrapper-center new-template" ng-controller="NewTemplateCtrl">
+  <h2 class="title-main">Create Template</h2>
+  <form ng-submit="sendNewTemplate(templateName)">
     <div ng-show="Error" class="error-msg-container"><p class="error-msg">{{Error}}</p></div>
-    <h2 class="title-main">Create Template</h2>
-    <input class="new-template-input" type="text" placeholder="Template name" ng-model="templateName" required>
 
-    <div class="add-schema-form" ng-repeat="form in forms">
-      <select class="template-type-select" ng-model="selectedType" ng-change="form.type = selectedType">
-        <option value="" disabled selected>Question type</option>
-        <option ng-repeat="type in types" value="{{type}}" required>{{type}}</option>
-      </select>
-      <p>x</p>
-      <input class="template-count-input" type="number" placeholder="count" ng-model="form.count" required>
+    <input class="input-field name" type="text" placeholder="Template name" ng-model="templateName" required>
+
+    <div class="setup-row" ng-repeat="form in forms">
+      <div class="setup-inputs">
+        <select class="input-select type" ng-model="selectedType" ng-change="form.type = selectedType">
+          <option value="" disabled selected>Question type</option>
+          <option ng-repeat="type in types" value="{{type}}" required>{{type}}</option>
+        </select>
+        <p>x</p>
+        <input class="input-field count" type="number" placeholder="count" ng-model="form.count" min="1" required>
+      </div>
       <div class="icon-holder">
         <img class="trash" src="style/images/trash.svg">
       </div>
     </div>
-    <div class="template-button">
-      <button class="button-secondary" type="button" ng-click="addRow()">+ add row</button>
-    </div>
 
-    <div class="button-holder">
+    <div class="button-container">
+      <button class="button-secondary" type="button" ng-click="addRow()">+ add row</button>
       <button class="button-primary" type="submit">Create</button>
     </div>
+
   </form>
 </div>

@@ -1,9 +1,9 @@
-<div class="register" ng-controller="RegisterCtrl">
-  <form class="registerForm" ng-submit="addUser(email, password)">
+<div class="wrapper-center-center register" ng-controller="RegisterCtrl">
+  <form ng-submit="addUser(email, password)">
     <div ng-show="Error" class="error-msg-container"><p class="error-msg">{{Error}}</p></div>
-    <input type="email" placeholder="Type your email address" ng-model="email" required>
-    <input type="password" placeholder="Pick a password" ng-model="password" required>
-    <button class="button-primary" type="submit"> REGISTER </button>
-    <p class="button-text"><a ui-sref="login"> Log in </a></p>
+    <input class="input-field" type="email" placeholder="Type your email address" ng-model="email" required>
+    <input class="input-field" type="password" placeholder="Pick a password" ng-model="password" required>
+    <button class="button-primary" type="submit">Register</button>
+    <p class="button-text"><a ui-sref="login">Log in</a></p>
   </form>
 </div>

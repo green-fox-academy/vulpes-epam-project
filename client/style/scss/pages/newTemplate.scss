@@ -1,65 +1,68 @@
 .new-template {
-  .new-template-input {
-    margin: 0px 0px 15px;
-  }
-  .add-schema-form {
-    display: flex;
-    .icon-holder {
-      order: 4;
+  margin-top: 50px;
 
-      .trash {
-        margin-top: 16px;
-        height: 19px;
-        margin-left: 6px;
-        visibility: hidden;
-        width: 19px;
-      }
-    }
+  .input-field {
+    margin: 8px 0px;
+    width: 100%;
+  }
+
+  .setup-row {
+    position: relative;
     &:hover {
       .trash {
         visibility: visible;
       }
     }
+  }
 
+  .icon-holder {
+    position: absolute;
+    top: 23px;
+    right: -25px;
+  }
 
-    .template-type-select {
+  .trash {
+    height: 19px;
+    margin-left: 6px;
+    visibility: hidden;
+    width: 19px;
+  }
+
+  .setup-inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .type {
       order: 1;
-      box-sizing: border-box;
-      padding: 10px;
-      height: $inputHeight;
-      width: 300px;
-      color: $darkgrey;
-      border-color: $blue;
-      border-radius: $borderRadius;
-      font-size: $fontSize;
-      font-family: $fontFamilySecondary;
-      margin-bottom: 15px;
+      width: 350px;
     }
 
     p {
       order: 2;
-      margin: 17px;
+      font-family: $fontFamilySecondary;
+      margin: 14px 17px 17px;
     }
 
-    .template-count-input {
+    .count {
       order: 3;
-      box-sizing: border-box;
-      padding: 10px;
-      height: $inputHeight;
-      width: 120px;
-      color: $darkgrey;
-      border-color: $blue;
-      border-radius: $borderRadius;
-      font-size: $fontSize;
-      font-family: $fontFamilySecondary;
-      margin: 0px 0px 15px;
+      width: 100px;
+      text-align: center;
     }
   }
-  .button-holder{
+
+  .button-container {
     display: flex;
-    justify-content: center;
-    .button-primary {
-      margin-top: 70px;
-    }
+    flex-direction: column;
+  }
+
+  .button-secondary {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .button-primary {
+    margin: 40px auto 25px;
   }
 }
