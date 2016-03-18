@@ -12,7 +12,7 @@
       <p>x</p>
       <input class="template-count-input" type="number" placeholder="count" ng-model="form.count" required>
       <div class="icon-holder">
-        <img class="trash" src="style/images/trash.svg">
+        <img ng-click="deleteRow($index)" class="trash" src="style/images/trash.svg">
       </div>
     </div>
     <div class="template-button">
