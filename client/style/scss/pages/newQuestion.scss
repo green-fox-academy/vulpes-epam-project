@@ -1,0 +1,15 @@
+.new-question {
+  margin-top: 80px;
+
+  .inputfields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .input-select, .input-textarea {
+    width: 450px;
+  }
+  .input-select {
+    margin-bottom: 15px;
+  }
+}
