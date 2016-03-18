@@ -31,10 +31,9 @@
 
   .icon-container {
     position: absolute;
-    visibility: hidden;
   }
 
-  tr:hover .icon-container {
+  tr:hover .icon, .icon-container:hover .icon {
     visibility: visible;
   }
 
@@ -43,5 +42,6 @@
     margin-left: 6px;
     width: 16px;
     cursor: pointer;
+    visibility: hidden;
   }
 }
