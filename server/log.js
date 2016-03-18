@@ -6,7 +6,7 @@ function createLog(loggingLevel, loggerFunction, InnerDate) {
   loggingLevel = loggingLevel || config.DEFAULT_LOGGING_LEVEL;
   loggerFunction = loggerFunction || console.log;
   InnerDate = InnerDate || Date;
-  var levels = ['debug', 'info', 'warn', 'error'];
+  var levels = config.LOGGING_LEVELS;
 
   function message(level, message) {
     createLogEntry({
