@@ -16,7 +16,6 @@
       <div class="navbar" ng-controller="NavbarCtrl">
         <a ui-sref="interview" ui-sref-active="active" ng-if="user.isLoggedIn()">interview</a>
         <a ui-sref="templates" ui-sref-active="active" ng-if="user.isAdmin()">templates</a>
-        <a ui-sref="questionadd" ui-sref-active="active" ng-if="user.isAdmin()">add question</a>
         <a ui-sref="questions" ui-sref-active="active" ng-if="user.isAdmin()">questions</a>
         <a ui-sref="users" ui-sref-active="active" ng-if="user.isAdmin()">users</a>
         <a href="" ng-if="user.isLoggedIn()" ng-click="logoutUser()">log out</a>

@@ -31,8 +31,6 @@
 
   .icon-container {
     position: absolute;
-    top: 8px;
-    right: 0px;
     visibility: hidden;
   }
 
@@ -44,5 +42,6 @@
     height: 16px;
     margin-left: 6px;
     width: 16px;
+    cursor: pointer;
   }
 }

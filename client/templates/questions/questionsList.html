@@ -1,16 +1,20 @@
-<div class="questionsTable">
-  <table class="questionListTable" ng-controller="ListQuestionsCtrl">
+<div class="wrapper-center questions">
+  <div class="header">
+    <h2 class="title-main">Questions</h2>
+    <button class="button-secondary" ui-sref="questionadd">+ new question</button>
+  </div>
+  <table class="table" ng-controller="ListQuestionsCtrl">
     <tr>
-      <th class="tableHeadQuestion">question</th>
-      <th class="tableHeadType">type</th>
+      <th class="pos-left">question</th>
+      <th class="pos-right">type</th>
     </tr>
     <tr ng-attr-id="{{question.question_id}}" ng-repeat="question in getQuestions()">
-      <td class="questionContent"> {{question.content}} </td>
-      <td class="questionType">
+      <td>{{question.content}}</td>
+      <td class="colored pos-right">
         {{question.type}}
-        <div class="icons">
-          <img class="pen" src="style/images/pen.svg">
-          <img ng-click="deleteQuestionFromQuestionsList(question)" class="trash" src="style/images/trash.svg">
+        <div class="icon-container">
+          <img class="icon" src="style/images/pen.svg">
+          <img ng-click="deleteQuestionFromQuestionsList(question)" class="icon" src="style/images/trash.svg">
         </div>
       </td>
     </tr>
