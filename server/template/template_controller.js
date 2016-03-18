@@ -17,8 +17,7 @@ function createTemplateController(queries) {
       } else {
         req.body.schema.forEach(function (elem) {
           queries.postTemplateSetup(elem, req.body.title, function (err) {
-            if (err)
-              errorMessage = true;
+            if (err) errorMessage = true;
           });
         });
 
