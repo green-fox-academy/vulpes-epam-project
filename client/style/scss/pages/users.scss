@@ -1,0 +1,21 @@
+.users {
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  .icon-container {
+    top: 8px;
+    right: -24px;
+  }
+
+  select {
+    position: absolute;
+    top: 8px;
+    right: 0px;
+    height: 25px;
+    border: 1px solid $blue;
+    border-radius: 3px;
+    color: $blue;
+    font-size: $fontSize;
+    font-family: $fontFamilySecondary;
+  }
+}

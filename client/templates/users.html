@@ -1,22 +1,21 @@
-<div class="usersTable">
-  <table class="userListTable" ng-controller='ListUsersCtrl'>
+<div class="wrapper-center users">
+  <table class="table" ng-controller='ListUsersCtrl'>
     <tr>
-      <th class="tableHeadEmail">email address</th>
-      <th class="tableHeadRole">role</th>
+      <th class="pos-left">email address</th>
+      <th class="pos-right">role</th>
     </tr>
-    <tr ng-if="!(currentUser.email === user.email)"
-        ng-repeat="user in getUsers() | orderBy:'email'">
-      <td class="userEmail"> {{user.email}} </td>
+    <tr ng-if="!(currentUser.email === user.email)" ng-repeat="user in getUsers() | orderBy:'email'">
+      <td> {{user.email}} </td>
       <td class="userStatus">
-        <span ng-if="user.isadmin" ng-show="!isEdit">admin</span>
-        <span ng-show="isEdit">
-          <select ng-options="status as status.role for status in statuses"
-                  ng-model="options"
-                  ng-change="changeUserRole(options.isAdmin, user.email)">
-          </select>
-        </span>
+        <div class="pos-right colored" ng-if="user.isadmin" ng-show="!isEdit">admin</div>
+        <select class="pos-right colored" ng-show="isEdit" ng-options="status as status.role for status in statuses"
+                ng-model="options"
+                ng-change="changeUserRole(options.isAdmin, user.email)">
+        </select>
+        <div class="icon-container">
+          <img ng-click="isEdit = 1" ng-show="!isEdit" class="icon" src="style/images/pen.svg">
+        </div>
       </td>
-      <td><button class="penButton" ng-click="isEdit = 1"><img class="pen" ng-show="!isEdit" src="style/images/pen.svg"></button></td>
     </tr>
   </table>
 </div>
