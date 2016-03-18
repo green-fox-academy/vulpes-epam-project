@@ -5,6 +5,8 @@ var EPAM = require('../main');
 EPAM.controller('NewInterviewCtrl', function ($scope, $state, user, templates, interview) {
   if (!user.isLoggedIn()) {
     $state.go('login');
+  } else if (user.isAdmin()) {
+    $state.go('home');
   }
 
   $scope.isLoaded = false;
