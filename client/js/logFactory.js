@@ -24,7 +24,7 @@ EPAM.factory('logger', function ($http) {
   }
 
   function displayLogMessage(response) {
-    console.log(response.data);
+    console.log(JSON.stringify(response.data));
   }
 
   function displayError(err) {

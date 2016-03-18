@@ -17,6 +17,10 @@ EPAM.controller('NewTemplateCtrl', function ($scope, $state, templates, user) {
       $scope.forms.push({});
     };
 
+    $scope.deleteRow = function (row) {
+      $scope.forms.splice(row, 1);
+    };
+
     $scope.sendNewTemplate = function (templateName) {
       var newTemplate = { title: templateName, schema: $scope.forms };
       templates.addNewTemplate(newTemplate)

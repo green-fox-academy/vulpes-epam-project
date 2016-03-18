@@ -15,7 +15,7 @@
         <input class="input-field count" type="number" placeholder="count" ng-model="form.count" min="1" required>
       </div>
       <div class="icon-holder">
-        <img class="trash" src="style/images/trash.svg">
+        <img ng-click="deleteRow($index)" class="trash" src="style/images/trash.svg">
       </div>
     </div>
 
