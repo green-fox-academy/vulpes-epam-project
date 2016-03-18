@@ -1,25 +1,4 @@
-@mixin buttonProperties($bGroundColor, $brdRadius, $brdWidth, $fColor, $fFamily, $fSize, $height, $width) {
-  background-color: $bGroundColor;
-  border: {
-    radius: $brdRadius;
-    width: $brdWidth;
-  };
-  color: $fColor;
-  font: {
-    family: $fFamily;
-    size: $fSize;
-  };
-  height: $height;
-  width: $width;
-  &:hover {cursor: pointer;}
-}
-
-.button-primary {
-  @include buttonProperties($blue, $borderRadius, 0px, white, $fontFamilyDefault, $fontSize, $buttonHeight, $inputWidth);
-  text-transform: uppercase;
-}
-
-.button-secondary {
+button {
   background-color: $blue;
   border: {
     radius: $borderRadius;
@@ -27,13 +6,24 @@
   };
   color: white;
   font: {
-    family: $fontFamilySecondary;
+    family: $fontFamilyDefault;
     size: $fontSize;
   };
-  height: 30px;
-  width: 140px;
-  line-height: normal;
+  height: $buttonHeight;
+  text-transform: uppercase;
+  width: $inputWidth;
   &:hover {cursor: pointer;}
+}
+
+.button-secondary {
+  @extend button;
+  font: {
+    family: $fontFamilySecondary;
+  };
+  height: 30px;
+  line-height: normal;
+  text-transform: lowercase;
+  width: 140px;
 }
 
 .button-text {
