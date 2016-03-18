@@ -1,14 +1,14 @@
-<div class="question" ng-controller="QuestionCtrl">
-  <form class="questionForm" ng-submit="questionSend(content, options.type)">
+<div class="wrapper-center new-question" ng-controller="QuestionCtrl">
+  <form ng-submit="questionSend(content, options.type)">
     <div ng-show="Error" class="error-msg-container"><p class="error-msg">{{Error}}</p></div>
-    <h2>Create question</h2>
-    <div class="question-inputfields">
-      <textarea class="largecontentbox" type="text" placeholder="Interview question" ng-model="content" required  rows="6" cols="40"></textarea>
-      <select class="question-select" ng-init="options=types[0]"
+    <h2 class="title-main">Create question</h2>
+    <div class="inputfields">
+      <textarea class="input-textarea" type="text" placeholder="Interview question" ng-model="content" required  rows="6" cols="40"></textarea>
+      <select class="input-select" ng-init="options=types[0]"
               ng-options="type as type.type for type in types"
               ng-model="options">
       </select>
-      <button class="submitButton" type="submit">Create</button>
+      <button class="button-primary" type="submit">Create</button>
     </div>
   </form>
 </div>

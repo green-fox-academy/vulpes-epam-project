@@ -1,0 +1,26 @@
+.frontpage {
+
+  form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .registerButton {
+    order: 1;
+  }
+
+  .middle {
+    color: $darkgrey;
+    font: {
+      family: $fontFamilySecondary;
+      size: 18px;
+    };
+    order: 2;
+    padding: 15px 30px;
+  }
+
+  .loginButton {
+    order: 3;
+  }
+}

@@ -1,10 +1,11 @@
 'use strict';
 
 var logger = require('./log.js')();
+var config = require('./config.js');
 
 function createLogController() {
-  var frontendLogLevel = 'info';
-  var levels = ['debug', 'info', 'warn', 'error'];
+  var frontendLogLevel = config.DEFAULT_FRONTEND_LOGGING_LEVEL;
+  var levels = config.LOGGING_LEVELS;
 
   function logRequest(req, res, next) {
     var logLevel = 'info';
@@ -25,7 +26,7 @@ function createLogController() {
       });
     }
 
-    res.status(200).json({ 'Logging:': 'Faild' });
+    res.status(200).json({ 'Logging:': 'Not allowed' });
   }
 
   function isValidLevel(level) {

@@ -1,0 +1,30 @@
+.table {
+  border-collapse: collapse;
+  font-family: $fontFamilySecondary;
+  margin: 5px auto 15px;
+  min-width: 500px;
+
+  .pos-left {
+    text-align: left;
+  }
+
+  .pos-right {
+    text-align: right;
+  }
+
+  th {
+    color: $darkgrey;
+    border-bottom: 1px solid $darkgrey;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  td {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .colored {
+    color: $blue;
+  }
+}

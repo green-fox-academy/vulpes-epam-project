@@ -1,0 +1,25 @@
+@import "variables";
+
+// Common
+@import "common";
+
+// Parts
+@import "parts/header";
+
+// Components
+@import "components/buttons";
+@import "components/inputs";
+@import "components/table";
+@import "components/errorHandler";
+
+// Pages
+@import "pages/home";
+@import "pages/registerAndLogin";
+@import "pages/frontpage";
+@import "pages/newQuestion";
+@import "pages/newTemplate";
+@import "pages/newInterview";
+@import "pages/interview";
+
+// Others
+@import "style";

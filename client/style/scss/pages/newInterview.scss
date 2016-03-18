@@ -1,0 +1,15 @@
+.new-interview {
+  margin-top: 80px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .input-select {
+    width: 450px;
+    margin-bottom: 25px;
+  }
+}

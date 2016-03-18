@@ -1,0 +1,68 @@
+.new-template {
+  margin-top: 50px;
+
+  .input-field {
+    margin: 8px 0px;
+    width: 100%;
+  }
+
+  .setup-row {
+    position: relative;
+    &:hover {
+      .trash {
+        visibility: visible;
+      }
+    }
+  }
+
+  .icon-holder {
+    position: absolute;
+    top: 23px;
+    right: -25px;
+  }
+
+  .trash {
+    height: 19px;
+    margin-left: 6px;
+    visibility: hidden;
+    width: 19px;
+  }
+
+  .setup-inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .type {
+      order: 1;
+      width: 350px;
+    }
+
+    p {
+      order: 2;
+      font-family: $fontFamilySecondary;
+      margin: 14px 17px 17px;
+    }
+
+    .count {
+      order: 3;
+      width: 100px;
+      text-align: center;
+    }
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .button-secondary {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .button-primary {
+    margin: 40px auto 25px;
+  }
+}
