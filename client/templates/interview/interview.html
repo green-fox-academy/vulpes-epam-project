@@ -1,7 +1,14 @@
-<div>
-  <ul>
-    <li ng-repeat="question in questions">{{question.content}}</li>
-  </ul>
+<div class="wrapper-center">
+  <table>
+    <tr>
+      <th>question</th>
+      <th>type</th>
+    </tr>
+    <tr ng-repeat="question in questions">
+      <td>{{question.content}}</td>
+      <td>{{question.type}}</td>
+    </tr>
+  </table>
   <button class="button-secondary" ui-sref="newInterview">new interview</button>
   <button class="button-secondary" ng-click="generateNewQuestions()">new questions</button>
 </div>
