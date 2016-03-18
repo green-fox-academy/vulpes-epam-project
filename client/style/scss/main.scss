@@ -1,5 +1,8 @@
 @import "variables";
 
+// Layout
+@import "layout";
+
 // Common
 @import "common";
 
@@ -23,6 +26,3 @@
 @import "pages/templates";
 @import "pages/newInterview";
 @import "pages/interview";
-
-// Others
-@import "style";
