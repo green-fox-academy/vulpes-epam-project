@@ -76,5 +76,11 @@ you can access the site through your browser with the following url
 ```
 localhost:3000
 ```
+
+Some useful terminal command
+---
+```
+ curl --data '{"title": "curl put something","schema": [{"type": "test", "count": 1}]}' -H 'content-type:application/json' -X PUT http://localhost:3000/api/templates/:id
+```
 ![Image of Epam Interviewer APP]
 (https://trello-attachments.s3.amazonaws.com/56aef51031e033d3bba53c86/56c3201b2507d89930d3696b/1024x600/0964cb1960f7352769b5779326f3d074/Index.jpg)
