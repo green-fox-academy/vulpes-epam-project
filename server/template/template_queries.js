@@ -52,6 +52,25 @@ function createTemplateQueries(connection) {
       callback);
   }
 
+  function putTemplate(id, params, callback) {
+    connection.sendQuery(
+      SQL`
+      UPDATE templates SET title = ${params.title}
+      WHERE templateId = ${id};
+      `,
+      callback);
+  }
+
+  function putTemplateSetup(id, params, callback) {
+    connection.sendQuery(
+      SQL`
+      UPDATE template_setup SET
+      type = ${params.type}, count = ${params.count}
+      WHERE templateId = ${id};
+      `,
+      callback);
+  }
+
   function deleteTemplate(id, callback) {
     connection.sendQuery(
       SQL`
@@ -71,6 +90,8 @@ function createTemplateQueries(connection) {
     getTemplateSetup: getTemplateSetup,
     postTemplate: postTemplate,
     postTemplateSetup: postTemplateSetup,
+    putTemplate: putTemplate,
+    putTemplateSetup: putTemplateSetup,
     getQuestions: getQuestions,
     deleteTemplate: deleteTemplate,
     deleteTemplateSetup: deleteTemplateSetup,

@@ -26,6 +26,24 @@ function createTemplateController(queries) {
     });
   }
 
+  function putTemplate(req, res) {
+    var errorMessage = false;
+    queries.putTemplate(req.params.id, req.body, function (err, result, response) {
+      if (err) {
+        dbErrorResponse(response);
+      } else {
+        req.body.schema.forEach(function (elem) {
+          console.log(elem);
+          queries.putTemplateSetup(req.params.id, elem, function (err) {
+            if (err) errorMessage = true;
+          });
+        });
+
+        handleResponse(errorMessage, 'Put ok', res);
+      }
+    });
+  }
+
   function deleteTemplate(req, res) {
     queries.deleteTemplate(req.params.id, function (err, result, response) {
       if (err) {
@@ -85,6 +103,7 @@ function createTemplateController(queries) {
   return {
     getAllTemplates: getAllTemplates,
     postTemplate: postTemplate,
+    putTemplate: putTemplate,
     getTemplateQuestions: getTemplateQuestions,
     deleteTemplate: deleteTemplate,
   };
